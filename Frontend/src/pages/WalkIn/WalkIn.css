@@ -1,0 +1,50 @@
+/* ================================================================
+   Walk-In drives page — HireVerse-style design
+   (shared navbar/footer/hero/search/section/listing-kit chrome
+   lives in components/marketing/site.css)
+   ================================================================ */
+
+.wi-search { max-width: 480px; margin: 0 0 1.25rem; }
+.hv-page-hero .hv-popular { justify-content: flex-start; margin-top: 0; }
+
+.wi-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem;
+}
+
+.wi-card {
+  border: 1px solid #f1f0f4; border-radius: 18px; padding: 1.5rem;
+  display: flex; flex-direction: column; gap: 0.75rem;
+  transition: box-shadow 0.15s, border-color 0.15s;
+}
+.wi-card:hover { border-color: #e9d5ff; box-shadow: 0 8px 24px rgba(120, 60, 180, 0.08); }
+
+.wi-card-top { display: flex; align-items: flex-start; gap: 0.85rem; margin-bottom: 0.4rem; }
+.wi-avatar {
+  width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: #f5e9ff; color: #9333ea; font-weight: 700; font-size: 1.05rem;
+}
+.wi-card-top h3 { font-size: 1rem; font-weight: 700; margin: 0; }
+.wi-company { font-size: 0.82rem; color: #9ca3af; margin: 0.15rem 0 0; }
+.wi-spots {
+  margin-left: auto; font-size: 0.7rem; font-weight: 700; color: #16a34a;
+  background: #dcfce7; border-radius: 999px; padding: 0.25rem 0.6rem; white-space: nowrap;
+}
+
+.wi-detail {
+  display: flex; align-items: center; gap: 0.5rem;
+  font-size: 0.85rem; color: #52525b;
+}
+.wi-detail svg { color: #a1a1aa; flex-shrink: 0; }
+
+.wi-cal-btn {
+  margin-top: 0.5rem; align-self: flex-start;
+  border: 1px solid #e9d5ff; background: #fff; color: #9333ea;
+  border-radius: 999px; padding: 0.45rem 1.1rem; font-size: 0.82rem; font-weight: 600;
+}
+.wi-cal-btn:hover { background: #f5e9ff; }
+
+@media (max-width: 700px) {
+  .wi-grid { grid-template-columns: 1fr; }
+  .wi-search { flex-direction: column; align-items: stretch; border-radius: 20px; padding: 0.9rem; gap: 0.6rem; }
+}

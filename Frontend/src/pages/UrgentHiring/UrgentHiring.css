@@ -1,0 +1,50 @@
+/* ================================================================
+   Urgent Hiring page — HireVerse-style design, dark/orange accent
+   (shared navbar/footer/search/section/listing-kit chrome lives in
+   components/marketing/site.css)
+   ================================================================ */
+
+.uh-hero {
+  background: transparent;
+  padding: 0 0 1.5rem 0;
+  border-bottom: 1px solid #f1f0f4;
+  margin-bottom: 1.5rem;
+}
+.uh-hero .hv-page-hero-inner h1 { color: #111827; }
+.uh-hero .hv-page-hero-inner > p { color: #6b7280; }
+
+.uh-badge {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  background: rgba(251, 146, 60, 0.15); color: #fb923c;
+  padding: 0.4rem 0.9rem; border-radius: 999px;
+  font-size: 0.78rem; font-weight: 600; margin-bottom: 1.25rem;
+}
+
+.uh-search { max-width: 480px; margin: 0 0 1.25rem; }
+.uh-hero .hv-popular { justify-content: flex-start; margin-top: 0; }
+.uh-hero .hv-popular button {
+  background: rgba(255, 255, 255, 0.06); border-color: rgba(255, 255, 255, 0.12); color: #d4d4d8;
+}
+.uh-hero .hv-popular button:hover { border-color: #fb923c; color: #fb923c; }
+.uh-hero .hv-popular-active {
+  background: linear-gradient(90deg, #f97316, #ec4899) !important;
+  border-color: transparent !important; color: #fff !important;
+}
+
+.uh-card { border-color: #fde3cb; }
+.uh-avatar { background: #ffedd5; color: #ea580c; }
+.uh-tag-accent { color: #ea580c; background: #ffedd5; }
+
+.uh-title-row { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
+.uh-countdown {
+  font-size: 0.7rem; font-weight: 700; color: #ea580c;
+  background: #ffedd5; border-radius: 999px; padding: 0.2rem 0.6rem; white-space: nowrap;
+}
+
+.uh-apply-btn {
+  border: none !important; background: linear-gradient(90deg, #f97316, #ec4899) !important; color: #fff !important;
+}
+
+@media (max-width: 860px) {
+  .uh-search { flex-direction: column; align-items: stretch; border-radius: 20px; padding: 0.9rem; gap: 0.6rem; }
+}

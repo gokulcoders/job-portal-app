@@ -1,0 +1,66 @@
+/* ================================================================
+   Companies directory page — HireVerse-style design
+   (shared navbar/footer/hero/search/section chrome lives in
+   components/marketing/site.css)
+   ================================================================ */
+
+.cmp-search { max-width: 480px; margin: 0 0 1.25rem; }
+.hv-page-hero .hv-popular { justify-content: flex-start; margin-top: 0; margin-bottom: 0.9rem; }
+
+.cmp-remote-check {
+  display: flex; align-items: center; gap: 0.55rem;
+  font-size: 0.85rem; color: #3f3f46; font-weight: 500;
+}
+.cmp-remote-check input { accent-color: #a855f7; width: 15px; height: 15px; }
+
+.cmp-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem;
+}
+
+.cmp-card {
+  border: 1px solid #f1f0f4; border-radius: 18px; padding: 1.5rem;
+  display: flex; flex-direction: column; gap: 1.1rem;
+  transition: box-shadow 0.15s, border-color 0.15s;
+}
+.cmp-card:hover { border-color: #e9d5ff; box-shadow: 0 8px 24px rgba(120, 60, 180, 0.08); }
+
+.cmp-top { display: flex; align-items: center; gap: 0.85rem; }
+.cmp-avatar {
+  width: 48px; height: 48px; border-radius: 12px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, #a855f7, #ec4899); color: #fff; font-weight: 700; font-size: 1.2rem;
+}
+.cmp-top h3 { font-size: 1rem; font-weight: 700; margin: 0; }
+.cmp-meta { display: flex; align-items: center; gap: 0.3rem; font-size: 0.8rem; color: #9ca3af; margin: 0.2rem 0 0; }
+
+.cmp-info-row {
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 0.8rem; color: #6b7280;
+  padding: 0.9rem 0; border-top: 1px solid #f5f4f7; border-bottom: 1px solid #f5f4f7;
+}
+.cmp-info-row span { display: flex; align-items: center; gap: 0.35rem; }
+.cmp-rating { color: #18181b; font-weight: 700; }
+.cmp-rating svg { color: #f59e0b; }
+
+.cmp-footer { display: flex; align-items: center; justify-content: space-between; }
+.cmp-roles { font-size: 0.85rem; font-weight: 700; color: #18181b; }
+.cmp-footer button {
+  border: 1px solid #e9d5ff; background: #fff; color: #9333ea;
+  border-radius: 999px; padding: 0.4rem 1rem; font-size: 0.8rem; font-weight: 600;
+}
+.cmp-footer button:hover { background: #f5e9ff; }
+
+.cmp-empty {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 0.75rem; padding: 4rem 2rem; text-align: center;
+  border: 1px solid #f1f0f4; border-radius: 16px; color: #a1a1aa;
+}
+.cmp-empty svg { color: #d1d5db; }
+.cmp-empty p { margin: 0; font-size: 0.9rem; }
+
+@media (max-width: 900px) {
+  .cmp-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .cmp-grid { grid-template-columns: 1fr; }
+}

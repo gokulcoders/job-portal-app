@@ -1,0 +1,65 @@
+/* ================================================================
+   Courses page — HireVerse-style design
+   (shared navbar/footer/hero/search/section chrome lives in
+   components/marketing/site.css)
+   ================================================================ */
+
+.crs-search { max-width: 480px; margin: 0 0 1.25rem; }
+.hv-page-hero .hv-popular { justify-content: flex-start; margin-top: 0; }
+
+.crs-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem;
+}
+
+.crs-card {
+  border: 1px solid #f1f0f4; border-radius: 18px; overflow: hidden;
+  display: flex; flex-direction: column;
+  transition: box-shadow 0.15s, border-color 0.15s;
+}
+.crs-card:hover { border-color: #e9d5ff; box-shadow: 0 8px 24px rgba(120, 60, 180, 0.08); }
+
+.crs-thumb {
+  height: 110px; position: relative;
+  display: flex; align-items: center; justify-content: center; color: #fff;
+}
+.crs-level {
+  position: absolute; top: 0.75rem; right: 0.75rem;
+  background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(4px);
+  font-size: 0.68rem; font-weight: 700; padding: 0.25rem 0.6rem; border-radius: 999px;
+}
+
+.crs-body { padding: 1.25rem; display: flex; flex-direction: column; gap: 0.4rem; }
+.crs-category { font-size: 0.7rem; font-weight: 700; color: #9333ea; text-transform: uppercase; letter-spacing: 0.04em; }
+.crs-body h3 { font-size: 1rem; font-weight: 700; margin: 0.15rem 0; }
+.crs-instructor { font-size: 0.8rem; color: #9ca3af; margin: 0 0 0.5rem; }
+
+.crs-meta { display: flex; align-items: center; gap: 1rem; font-size: 0.78rem; color: #6b7280; margin-bottom: 0.9rem; }
+.crs-rating, .crs-duration { display: flex; align-items: center; gap: 0.3rem; }
+.crs-rating svg { color: #f59e0b; }
+.crs-rating em { font-style: normal; color: #a1a1aa; }
+
+.crs-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: 0.9rem; border-top: 1px solid #f5f4f7;
+}
+.crs-price { font-size: 0.9rem; font-weight: 700; color: #18181b; }
+.crs-footer button {
+  border: 1px solid #e9d5ff; background: #fff; color: #9333ea;
+  border-radius: 999px; padding: 0.4rem 1rem; font-size: 0.8rem; font-weight: 600;
+}
+.crs-footer button:hover { background: #f5e9ff; }
+
+.crs-empty {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 0.75rem; padding: 4rem 2rem; text-align: center;
+  border: 1px solid #f1f0f4; border-radius: 16px; color: #a1a1aa;
+}
+.crs-empty svg { color: #d1d5db; }
+.crs-empty p { margin: 0; font-size: 0.9rem; }
+
+@media (max-width: 900px) {
+  .crs-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .crs-grid { grid-template-columns: 1fr; }
+}

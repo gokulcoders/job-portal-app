@@ -1,0 +1,11 @@
+/* ================================================================
+   Internships page — HireVerse-style design
+   (shared navbar/footer/hero/search/section/listing-kit chrome
+   lives in components/marketing/site.css)
+   ================================================================ */
+
+.int-search { max-width: 480px; margin: 0; }
+
+@media (max-width: 860px) {
+  .int-search { flex-direction: column; align-items: stretch; border-radius: 20px; padding: 0.9rem; gap: 0.6rem; }
+}

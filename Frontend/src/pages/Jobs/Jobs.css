@@ -1,0 +1,176 @@
+/* ================================================================
+   Jobs page — premium overrides
+   ================================================================ */
+
+/* ── Hero ──────────────────────────────────────────────────────── */
+.jb-hero {
+  background: radial-gradient(circle at top right, #fdf4ff 0%, #f3f4f6 100%);
+  border: 1px solid #e5e7eb;
+  border-radius: 24px;
+  padding: 2.5rem 2rem;
+  margin: 1.5rem 1.5rem 0 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.jb-hero::before { display: none; }
+.jb-hero-inner { max-width: 1140px; margin: 0 auto; position: relative; }
+.jb-hero-eyebrow { 
+  display: inline-flex; align-items: center; gap: 0.45rem;
+  background: #f5f3ff; color: #7c3aed; border: 1px solid #ede9fe;
+  border-radius: 99px; padding: 0.3rem 0.9rem; font-size: 0.75rem; font-weight: 700;
+  letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem;
+}
+.jb-hero-inner h1 {
+  font-size: 1.8rem; font-weight: 800; color: #111827; letter-spacing: -0.01em; margin: 0 0 0.5rem;
+}
+.jb-hero-inner h1 span { 
+  background: linear-gradient(90deg, #9333ea, #db2777); 
+  -webkit-background-clip: text; background-clip: text; color: transparent; 
+}
+.jb-hero-sub { font-size: 0.95rem; color: #4b5563; margin: 0 0 1.75rem; }
+.jb-hero-sub strong { color: #111827; }
+
+/* Search bar override for attractive hero */
+.jb-search-wrap {
+  max-width: 700px;
+}
+.jb-search {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 999px;
+  padding: 0.4rem 0.4rem 0.4rem 1.25rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+}
+.jb-search .hv-search-field { color: #6b7280; flex: 1; }
+.jb-search .hv-search-field input { color: #111827; }
+.jb-search-divider { width: 1px; height: 22px; background: #e5e7eb; margin: 0 0.75rem; }
+.jb-search-btn {
+  display: flex; align-items: center; gap: 0.4rem;
+  background: linear-gradient(90deg, #7c3aed, #a855f7);
+  color: #fff; border: none; border-radius: 999px;
+  padding: 0.7rem 1.5rem; font-size: 0.85rem; font-weight: 700;
+  white-space: nowrap; cursor: pointer; font-family: inherit;
+  transition: transform 0.15s, filter 0.15s;
+}
+.jb-search-btn:hover { filter: brightness(1.08); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(124,58,237,0.2); }
+
+/* ── Body layout ───────────────────────────────────────────────── */
+.jb-body {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 4rem;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 1.75rem;
+  align-items: start;
+}
+
+/* ── Filter sidebar ────────────────────────────────────────────── */
+.jb-filters {
+  background: #fff;
+  border: 1.5px solid #ede9fe;
+  border-radius: 20px;
+  padding: 1.5rem;
+  position: sticky;
+  top: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+.jb-filters-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: #111827;
+}
+.jb-filters-header-icon {
+  width: 30px; height: 30px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  display: flex; align-items: center; justify-content: center;
+  color: #fff;
+}
+
+.jb-filter-group { display: flex; flex-direction: column; gap: 0.65rem; }
+.jb-filter-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #9ca3af;
+}
+.jb-pill-row { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+.jb-pill {
+  border: 1.5px solid #e5e7eb;
+  background: #f9fafb;
+  color: #6b7280;
+  border-radius: 99px;
+  padding: 0.32rem 0.85rem;
+  font-size: 0.77rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.14s;
+  font-family: inherit;
+}
+.jb-pill:hover { border-color: #c4b5fd; color: #7c3aed; background: #faf5ff; }
+.jb-pill-active {
+  background: linear-gradient(90deg, #7c3aed, #a855f7);
+  border-color: transparent;
+  color: #fff;
+  box-shadow: 0 3px 10px rgba(124,58,237,0.28);
+}
+
+/* ── Results area ──────────────────────────────────────────────── */
+.jb-results-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+.jb-results-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #374151;
+}
+.jb-results-count-badge {
+  background: linear-gradient(90deg, #7c3aed, #a855f7);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.18rem 0.65rem;
+  border-radius: 99px;
+}
+
+/* ── Empty state ───────────────────────────────────────────────── */
+.jb-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 4rem 2rem;
+  text-align: center;
+  border: 1.5px dashed #ddd6fe;
+  border-radius: 20px;
+  background: #faf9ff;
+  color: #9ca3af;
+}
+.jb-empty-icon { font-size: 2.5rem; }
+.jb-empty p { margin: 0; font-size: 0.9rem; }
+
+/* ── Responsive ────────────────────────────────────────────────── */
+@media (max-width: 860px) {
+  .jb-body { grid-template-columns: 1fr; }
+  .jb-filters { position: static; }
+  .jb-hero-inner h1 { font-size: 1.8rem; }
+  .jb-search { flex-direction: column; border-radius: 20px; padding: 0.9rem; gap: 0.6rem; }
+  .jb-search-divider { display: none; }
+  .jb-search-btn { justify-content: center; }
+}

@@ -1,0 +1,233 @@
+/* ================================================================
+   Register Page Styles
+   ================================================================ */
+
+/* ── Layout root ── */
+.register-root {
+  display: flex;
+  min-height: 100vh;
+  background: #ffffff;
+}
+
+/* ── Left panel ── */
+.register-left {
+  flex: 0 0 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 0 2rem 2rem;
+  background: #ffffff;
+}
+
+.register-art-card {
+  width: 100%;
+  height: calc(100vh - 4rem);
+  max-height: 800px;
+  border-radius: 20px;
+  background-color: #2b84f9; /* the vibrant blue from the screenshot */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.08);
+}
+
+.register-art-image-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.register-art-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.register-art-content {
+  padding: 3rem;
+  text-align: center;
+  color: white;
+  z-index: 10;
+}
+
+.register-art-content h2 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin: 0 0 1rem;
+  line-height: 1.2;
+}
+
+.register-art-content p {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin: 0;
+  opacity: 0.9;
+  max-width: 450px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ── Right panel ── */
+.register-right {
+  flex: 0 0 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+}
+
+.register-form-wrap {
+  width: 100%;
+  max-width: 420px;
+}
+
+/* ── Logo ── */
+.register-logo {
+  margin-bottom: 2rem;
+}
+
+/* ── Heading ── */
+.register-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.register-subtitle {
+  font-size: 0.95rem;
+  color: #111827; /* Darker than login subtitle based on screenshot */
+  margin: 0 0 2rem;
+  font-weight: 500;
+}
+
+/* ── Form fields (reused conceptually from login but adjusted for screenshot) ── */
+.field-group {
+  margin-bottom: 1.25rem;
+}
+
+.field-label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #6b7280; /* Lighter label color in screenshot */
+  margin-bottom: 0.5rem;
+}
+
+.field-input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1.5px solid transparent;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  color: #111827;
+  background: #f3f4f6; /* Gray background for inputs */
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.field-input::placeholder {
+  color: #9ca3af;
+}
+
+.field-input:focus {
+  border-color: #3b82f6;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+}
+
+.field-input--error {
+  border-color: #f87171;
+}
+
+.field-error {
+  font-size: 0.78rem;
+  color: #ef4444;
+  margin: 0.3rem 0 0;
+}
+
+/* ── Sign Up button ── */
+.signup-btn {
+  width: 100%;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 10px;
+  background: #2b84f9; /* Solid blue from screenshot */
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  letter-spacing: 0.01em;
+  transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  margin-top: 1.5rem;
+}
+
+.signup-btn:hover:not(:disabled) {
+  opacity: 0.92;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(43, 132, 249, 0.35);
+}
+
+.signup-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.signup-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* spinner */
+.signup-btn-spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+/* ── Sign in ── */
+.signin-row {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin: 1.5rem 0 0;
+}
+
+.signin-link {
+  color: #111827;
+  font-weight: 700;
+  text-decoration: none;
+  margin-left: 0.2rem;
+  transition: color 0.15s;
+}
+
+.signin-link:hover {
+  color: #2b84f9;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .register-left {
+    display: none;
+  }
+  .register-right {
+    flex: 1;
+    padding: 2rem 1.25rem;
+  }
+}

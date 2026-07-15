@@ -1,0 +1,33 @@
+/* ================================================================
+   Career growth / roadmap page — HireVerse-style design
+   (shared navbar/footer/hero/section/feature/testimonial/cta kit
+   lives in components/marketing/site.css)
+   ================================================================ */
+
+.crr-cta-btn { margin: 0 auto; }
+
+.crr-steps {
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem;
+}
+
+.hv-why .crr-paths {
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem;
+}
+.crr-path-card {
+  background: #fff; border: 1px solid #ececf1; border-radius: 18px; overflow: hidden;
+}
+.crr-path-strip { height: 8px; }
+.crr-path-body { padding: 1.4rem 1.5rem; display: flex; flex-direction: column; gap: 0.6rem; }
+.crr-path-route { font-size: 0.95rem; color: #52525b; margin: 0; display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+.crr-path-route strong { color: #18181b; }
+.crr-path-route svg { color: #c026d3; flex-shrink: 0; }
+.crr-path-milestones { font-size: 0.78rem; color: #9ca3af; font-weight: 600; }
+
+.crr-testimonial-grid { margin-top: 0; }
+
+@media (max-width: 900px) {
+  .crr-steps { grid-template-columns: 1fr; }
+  .hv-why .crr-paths { grid-template-columns: 1fr; }
+}
