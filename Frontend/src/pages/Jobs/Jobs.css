@@ -4,8 +4,8 @@
 
 /* ── Hero ──────────────────────────────────────────────────────── */
 .jb-hero {
-  background: radial-gradient(circle at top right, #fdf4ff 0%, #f3f4f6 100%);
-  border: 1px solid #e5e7eb;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
   border-radius: 24px;
   padding: 2.5rem 2rem;
   margin: 1.5rem 1.5rem 0 1.5rem;
@@ -16,19 +16,19 @@
 .jb-hero-inner { max-width: 1140px; margin: 0 auto; position: relative; }
 .jb-hero-eyebrow { 
   display: inline-flex; align-items: center; gap: 0.45rem;
-  background: #f5f3ff; color: #7c3aed; border: 1px solid #ede9fe;
+  background: var(--color-primary-light); color: var(--color-primary); border: 1px solid var(--border-color);
   border-radius: 99px; padding: 0.3rem 0.9rem; font-size: 0.75rem; font-weight: 700;
   letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem;
 }
 .jb-hero-inner h1 {
-  font-size: 1.8rem; font-weight: 800; color: #111827; letter-spacing: -0.01em; margin: 0 0 0.5rem;
+  font-size: 1.8rem; font-weight: 800; color: var(--text-base); letter-spacing: -0.01em; margin: 0 0 0.5rem;
 }
 .jb-hero-inner h1 span { 
-  background: linear-gradient(90deg, #9333ea, #db2777); 
+  background: linear-gradient(90deg, var(--color-primary), #db2777); 
   -webkit-background-clip: text; background-clip: text; color: transparent; 
 }
-.jb-hero-sub { font-size: 0.95rem; color: #4b5563; margin: 0 0 1.75rem; }
-.jb-hero-sub strong { color: #111827; }
+.jb-hero-sub { font-size: 0.95rem; color: var(--text-muted); margin: 0 0 1.75rem; }
+.jb-hero-sub strong { color: var(--text-base); }
 
 /* Search bar override for attractive hero */
 .jb-search-wrap {
@@ -37,24 +37,24 @@
 .jb-search {
   display: flex;
   align-items: center;
-  background: #fff;
-  border: 1px solid #e5e7eb;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
   border-radius: 999px;
   padding: 0.4rem 0.4rem 0.4rem 1.25rem;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+  box-shadow: var(--shadow-sm);
 }
-.jb-search .hv-search-field { color: #6b7280; flex: 1; }
-.jb-search .hv-search-field input { color: #111827; }
-.jb-search-divider { width: 1px; height: 22px; background: #e5e7eb; margin: 0 0.75rem; }
+.jb-search .hv-search-field { color: var(--text-muted); flex: 1; }
+.jb-search .hv-search-field input { color: var(--text-base); }
+.jb-search-divider { width: 1px; height: 22px; background: var(--border-color); margin: 0 0.75rem; }
 .jb-search-btn {
   display: flex; align-items: center; gap: 0.4rem;
-  background: linear-gradient(90deg, #7c3aed, #a855f7);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover));
   color: #fff; border: none; border-radius: 999px;
   padding: 0.7rem 1.5rem; font-size: 0.85rem; font-weight: 700;
   white-space: nowrap; cursor: pointer; font-family: inherit;
   transition: transform 0.15s, filter 0.15s;
 }
-.jb-search-btn:hover { filter: brightness(1.08); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(124,58,237,0.2); }
+.jb-search-btn:hover { filter: brightness(1.08); transform: translateY(-1px); box-shadow: var(--shadow-sm); }
 
 /* ── Body layout ───────────────────────────────────────────────── */
 .jb-body {
@@ -69,8 +69,8 @@
 
 /* ── Filter sidebar ────────────────────────────────────────────── */
 .jb-filters {
-  background: #fff;
-  border: 1.5px solid #ede9fe;
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-color);
   border-radius: 20px;
   padding: 1.5rem;
   position: sticky;
@@ -85,12 +85,12 @@
   gap: 0.5rem;
   font-size: 0.92rem;
   font-weight: 800;
-  color: #111827;
+  color: var(--text-base);
 }
 .jb-filters-header-icon {
   width: 30px; height: 30px;
   border-radius: 8px;
-  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover));
   display: flex; align-items: center; justify-content: center;
   color: #fff;
 }
@@ -101,13 +101,13 @@
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #9ca3af;
+  color: var(--text-subtle);
 }
 .jb-pill-row { display: flex; flex-wrap: wrap; gap: 0.45rem; }
 .jb-pill {
-  border: 1.5px solid #e5e7eb;
-  background: #f9fafb;
-  color: #6b7280;
+  border: 1.5px solid var(--border-color);
+  background: var(--bg-page);
+  color: var(--text-muted);
   border-radius: 99px;
   padding: 0.32rem 0.85rem;
   font-size: 0.77rem;
@@ -116,12 +116,12 @@
   transition: all 0.14s;
   font-family: inherit;
 }
-.jb-pill:hover { border-color: #c4b5fd; color: #7c3aed; background: #faf5ff; }
+.jb-pill:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--bg-page); }
 .jb-pill-active {
-  background: linear-gradient(90deg, #7c3aed, #a855f7);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover));
   border-color: transparent;
   color: #fff;
-  box-shadow: 0 3px 10px rgba(124,58,237,0.28);
+  box-shadow: var(--shadow-sm);
 }
 
 /* ── Results area ──────────────────────────────────────────────── */
@@ -137,10 +137,10 @@
   gap: 0.55rem;
   font-size: 0.88rem;
   font-weight: 700;
-  color: #374151;
+  color: var(--text-base);
 }
 .jb-results-count-badge {
-  background: linear-gradient(90deg, #7c3aed, #a855f7);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover));
   color: #fff;
   font-size: 0.75rem;
   font-weight: 700;
@@ -157,10 +157,10 @@
   gap: 0.75rem;
   padding: 4rem 2rem;
   text-align: center;
-  border: 1.5px dashed #ddd6fe;
+  border: 1.5px dashed var(--border-color);
   border-radius: 20px;
-  background: #faf9ff;
-  color: #9ca3af;
+  background: var(--bg-page);
+  color: var(--text-muted);
 }
 .jb-empty-icon { font-size: 2.5rem; }
 .jb-empty p { margin: 0; font-size: 0.9rem; }

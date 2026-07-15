@@ -61,7 +61,7 @@ body {
   margin: 0;
   background: var(--bg-page);
   color: var(--text-base);
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
   transition: background var(--transition), color var(--transition);
 }
 

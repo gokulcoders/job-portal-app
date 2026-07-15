@@ -2,8 +2,8 @@
    JobCard  — premium redesign
    ================================================================ */
 .jc-card {
-  background: #fff;
-  border: 1.5px solid #ede9fe;
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-color);
   border-radius: 20px;
   padding: 1.35rem 1.4rem 1.2rem;
   display: flex;
@@ -21,15 +21,15 @@
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 3px;
-  background: linear-gradient(90deg, #8b5cf6, #a855f7, #ec4899);
+  background: linear-gradient(90deg, var(--color-primary), var(--color-primary-hover));
   opacity: 0;
   transition: opacity 0.18s ease;
 }
 .jc-card:hover::before { opacity: 1; }
 .jc-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 16px 40px rgba(139, 92, 246, 0.14);
-  border-color: #c4b5fd;
+  box-shadow: var(--shadow-lg);
+  border-color: var(--color-primary);
 }
 
 /* ── Top row ─────────────────────────────────────────────────── */
@@ -44,12 +44,12 @@
   width: 54px;
   height: 54px;
   border-radius: 14px;
-  border: 1.5px solid #ede9fe;
+  border: 1.5px solid var(--border-color);
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #faf9ff;
+  background: var(--bg-page);
   flex-shrink: 0;
 }
 .jc-logo {
@@ -66,13 +66,14 @@
   font-size: 1.25rem;
   font-weight: 800;
   letter-spacing: -0.02em;
+  color: var(--text-base);
 }
 
 .jc-header { flex: 1; min-width: 0; }
 .jc-title {
   font-size: 0.97rem;
   font-weight: 700;
-  color: #111827;
+  color: var(--text-base);
   margin: 0 0 0.2rem;
   line-height: 1.35;
   display: -webkit-box;
@@ -82,7 +83,7 @@
 }
 .jc-company {
   font-size: 0.82rem;
-  color: #8b5cf6;
+  color: var(--color-primary);
   font-weight: 600;
   text-decoration: none;
   display: block;
@@ -99,8 +100,8 @@
   gap: 0.3rem;
   font-size: 0.67rem;
   font-weight: 700;
-  color: #0a66c2;
-  background: #e8f0fe;
+  color: var(--color-primary);
+  background: var(--color-primary-light);
   border-radius: 99px;
   padding: 0.22rem 0.55rem;
   flex-shrink: 0;
@@ -111,7 +112,7 @@
 /* ── Divider ──────────────────────────────────────────────────── */
 .jc-divider {
   height: 1px;
-  background: linear-gradient(90deg, #ede9fe, transparent);
+  background: linear-gradient(90deg, var(--border-color), transparent);
   margin-bottom: 0.85rem;
 }
 
@@ -128,10 +129,10 @@
   align-items: center;
   gap: 0.3rem;
   font-size: 0.77rem;
-  color: #6b7280;
+  color: var(--text-muted);
   font-weight: 500;
 }
-.jc-meta-item svg { color: #a78bfa; flex-shrink: 0; }
+.jc-meta-item svg { color: var(--color-primary); flex-shrink: 0; }
 
 /* ── Tags ─────────────────────────────────────────────────────── */
 .jc-tags {
@@ -150,12 +151,12 @@
   padding: 0.2rem 0.65rem;
 }
 .jc-tag-keyword {
-  color: #7c3aed;
-  background: #ede9fe;
+  color: var(--color-primary);
+  background: var(--color-primary-light);
 }
 .jc-tag-type {
-  color: #0891b2;
-  background: #e0f7fa;
+  color: var(--color-primary);
+  background: var(--color-primary-light);
 }
 
 /* ── Footer ───────────────────────────────────────────────────── */
@@ -169,7 +170,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover));
   color: #fff;
   font-size: 0.82rem;
   font-weight: 700;
@@ -177,21 +178,21 @@
   border-radius: 999px;
   text-decoration: none;
   transition: all 0.15s;
-  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.28);
+  box-shadow: var(--shadow-sm);
 }
 .jc-apply-btn:hover {
-  box-shadow: 0 6px 20px rgba(124, 58, 237, 0.38);
+  box-shadow: var(--shadow-md);
   transform: translateY(-1px);
 }
 .jc-view-link {
   font-size: 0.79rem;
   font-weight: 600;
-  color: #9ca3af;
+  color: var(--text-subtle);
   text-decoration: none;
   margin-left: auto;
   transition: color 0.15s;
 }
-.jc-view-link:hover { color: #8b5cf6; }
+.jc-view-link:hover { color: var(--color-primary); }
 
 /* ── Responsive ───────────────────────────────────────────────── */
 @media (max-width: 480px) {
