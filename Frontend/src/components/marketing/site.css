@@ -152,11 +152,10 @@
    ================================================================ */
 
 .hv-badge {
-  display: inline-flex; align-items: center; gap: 0.4rem;
-  background: #f5e9ff; color: #9333ea;
-  padding: 0.4rem 0.9rem; border-radius: 999px;
-  font-size: 0.78rem; font-weight: 600;
-  margin-bottom: 1.5rem;
+  display: inline-flex; align-items: center; gap: 0.45rem;
+  background: #f5f3ff; color: #7c3aed; border: 1px solid #ede9fe;
+  border-radius: 99px; padding: 0.3rem 0.9rem; font-size: 0.75rem; font-weight: 700;
+  letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem;
 }
 .hv-badge svg { color: #c026d3; }
 
@@ -168,10 +167,10 @@
 /* ── Search bar ── */
 .hv-search {
   display: flex; align-items: center;
-  background: #fff; border: 1px solid #ececf1; border-radius: 999px;
-  padding: 0.4rem 0.4rem 0.4rem 1.1rem;
-  box-shadow: 0 8px 24px rgba(120, 60, 180, 0.08);
-  max-width: 640px; margin: 0 auto;
+  background: #fff; border: 1px solid #e5e7eb; border-radius: 999px;
+  padding: 0.4rem 0.4rem 0.4rem 1.25rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+  max-width: 700px; margin: 0;
 }
 .hv-search-field {
   flex: 1; display: flex; align-items: center; gap: 0.5rem;
@@ -185,12 +184,12 @@
 .hv-search-divider { width: 1px; height: 22px; background: #ececf1; margin: 0 0.75rem; }
 .hv-search-btn {
   display: flex; align-items: center; gap: 0.4rem;
-  background: linear-gradient(90deg, #a855f7, #d946ef);
+  background: linear-gradient(90deg, #7c3aed, #a855f7);
   color: #fff; border: none; border-radius: 999px;
-  padding: 0.65rem 1.3rem; font-size: 0.85rem; font-weight: 600;
-  white-space: nowrap;
+  padding: 0.7rem 1.5rem; font-size: 0.85rem; font-weight: 700;
+  white-space: nowrap; cursor: pointer; transition: transform 0.15s, filter 0.15s;
 }
-.hv-search-btn:hover { filter: brightness(1.06); }
+.hv-search-btn:hover { filter: brightness(1.08); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(124,58,237,0.2); }
 
 /* ── Popular / filter pill row ── */
 .hv-popular {
@@ -333,14 +332,17 @@
 
 /* ── Generic page hero (left-aligned, gradient backdrop) ── */
 .hv-page-hero {
-  background: transparent;
-  padding: 0 0 1.5rem 0;
-  border-bottom: 1px solid #f1f0f4;
-  margin-bottom: 1.5rem;
+  background: radial-gradient(circle at top right, #fdf4ff 0%, #f3f4f6 100%);
+  border: 1px solid #e5e7eb;
+  border-radius: 24px;
+  padding: 2.5rem 2rem;
+  margin: 1.5rem 1.5rem 0 1.5rem;
+  position: relative;
+  overflow: hidden;
 }
-.hv-page-hero-inner { max-width: 1100px; margin: 0; }
-.hv-page-hero-inner h1 { font-size: 1.4rem; font-weight: 700; letter-spacing: -0.01em; margin: 0 0 0.2rem; color: #111827; }
-.hv-page-hero-inner > p { font-size: 0.85rem; color: #6b7280; margin: 0 0 1.5rem; }
+.hv-page-hero-inner { max-width: 1140px; margin: 0 auto; }
+.hv-page-hero-inner h1 { font-size: 1.8rem; font-weight: 800; color: #111827; letter-spacing: -0.01em; margin: 0 0 0.5rem; }
+.hv-page-hero-inner > p { font-size: 0.95rem; color: #4b5563; margin: 0 0 1.75rem; }
 
 @media (max-width: 900px) {
   .hv-search { flex-direction: column; align-items: stretch; border-radius: 20px; padding: 0.9rem; gap: 0.6rem; }

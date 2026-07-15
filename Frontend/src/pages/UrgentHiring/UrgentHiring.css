@@ -5,20 +5,24 @@
    ================================================================ */
 
 .uh-hero {
-  background: transparent;
-  padding: 0 0 1.5rem 0;
-  border-bottom: 1px solid #f1f0f4;
-  margin-bottom: 1.5rem;
+  background: radial-gradient(circle at top right, #fff4f2 0%, #f3f4f6 100%);
+  border: 1px solid #e5e7eb;
+  border-radius: 24px;
+  padding: 2.5rem 2rem;
+  margin: 1.5rem 1.5rem 0 1.5rem;
+  position: relative;
+  overflow: hidden;
 }
-.uh-hero .hv-page-hero-inner h1 { color: #111827; }
-.uh-hero .hv-page-hero-inner > p { color: #6b7280; }
+.uh-hero .hv-page-hero-inner h1 { color: #111827; font-size: 1.8rem; font-weight: 800; margin: 0 0 0.5rem; }
+.uh-hero .hv-page-hero-inner > p { color: #4b5563; font-size: 0.95rem; margin: 0 0 1.75rem; }
 
 .uh-badge {
-  display: inline-flex; align-items: center; gap: 0.4rem;
-  background: rgba(251, 146, 60, 0.15); color: #fb923c;
-  padding: 0.4rem 0.9rem; border-radius: 999px;
-  font-size: 0.78rem; font-weight: 600; margin-bottom: 1.25rem;
+  display: inline-flex; align-items: center; gap: 0.45rem;
+  background: #fff7ed; color: #ea580c; border: 1px solid #ffedd5;
+  border-radius: 99px; padding: 0.3rem 0.9rem; font-size: 0.75rem; font-weight: 700;
+  letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem;
 }
+.uh-badge svg { color: #f97316; }
 
 .uh-search { max-width: 480px; margin: 0 0 1.25rem; }
 .uh-hero .hv-popular { justify-content: flex-start; margin-top: 0; }
