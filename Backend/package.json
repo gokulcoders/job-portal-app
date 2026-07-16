@@ -8,6 +8,8 @@
     "dev": "nodemon src/server.js",
     "start": "node src/server.js",
     "scraper": "node scraper/jobscrapper.js",
+    "walkin": "node scraper/walkinScraper.js",
+    "naukri": "node scraper/naukriScraper.js",
     "cron": "node scheduler.js"
   },
   "dependencies": {

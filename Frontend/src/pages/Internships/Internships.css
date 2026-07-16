@@ -1,11 +1,112 @@
-/* ================================================================
-   Internships page — HireVerse-style design
-   (shared navbar/footer/hero/search/section/listing-kit chrome
-   lives in components/marketing/site.css)
-   ================================================================ */
+.in-hero {
+  background: linear-gradient(135deg, #faf5ff 0%, #f5f3ff 40%, #fdf4ff 100%);
+  border: 1px solid #ddd6fe;
+  border-radius: 28px;
+  padding: 4rem 2rem 3rem;
+  margin: 1.5rem 1.5rem 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.in-hero::before {
+  content: '';
+  position: absolute;
+  top: -60%; left: -20%; width: 140%; height: 160%;
+  background: radial-gradient(ellipse at 30% 20%, rgba(139,92,246,0.09) 0%, transparent 55%);
+  pointer-events: none;
+}
+.in-hero-inner {
+  position: relative;
+  max-width: 700px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+.in-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #ede9fe;
+  color: #7c3aed;
+  border: 1px solid #ddd6fe;
+  border-radius: 99px;
+  padding: 0.35rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+.in-hero h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--text-base);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin: 0;
+}
+.in-hero h1 span {
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.in-hero p { font-size: 1rem; color: var(--text-muted); margin: 0; }
+.in-hero p strong { color: var(--text-base); font-weight: 700; }
 
-.int-search { max-width: 480px; margin: 0; }
+.in-search-bar {
+  width: 100%;
+  max-width: 520px;
+  background: #fff;
+  border: 1.5px solid #ddd6fe;
+  border-radius: 999px;
+  padding: 0.5rem 0.5rem 0.5rem 1.25rem;
+  box-shadow: 0 4px 20px rgba(139,92,246,0.08);
+  display: flex;
+  align-items: center;
+}
+.in-search-field {
+  display: flex; align-items: center; gap: 0.6rem; flex: 1; color: #a78bfa;
+}
+.in-search-field input {
+  border: none; outline: none; background: transparent;
+  font-size: 0.92rem; font-family: inherit; color: var(--text-base); width: 100%;
+}
+.in-search-field input::placeholder { color: #d1d5db; }
 
-@media (max-width: 860px) {
-  .int-search { flex-direction: column; align-items: stretch; border-radius: 20px; padding: 0.9rem; gap: 0.6rem; }
+.in-loc-row {
+  display: flex; flex-wrap: wrap; align-items: center;
+  justify-content: center; gap: 0.45rem; color: #7c3aed;
+}
+.in-loc-pill {
+  border: 1.5px solid #ddd6fe; background: #fff; color: var(--text-muted);
+  border-radius: 99px; padding: 0.3rem 0.85rem;
+  font-size: 0.78rem; font-weight: 600; cursor: pointer; font-family: inherit; transition: all 0.18s;
+}
+.in-loc-pill:hover { border-color: #7c3aed; color: #7c3aed; }
+.in-loc-active {
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  border-color: transparent; color: #fff !important;
+  box-shadow: 0 3px 10px rgba(124,58,237,0.25);
+}
+
+.in-body { max-width: 1200px; margin: 0 auto; padding: 3rem 2rem 5rem; }
+
+.in-results-head {
+  display: flex; align-items: center; gap: 0.7rem;
+  font-size: 1rem; font-weight: 700; color: var(--text-base); margin-bottom: 1.75rem;
+}
+.in-count-badge {
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  color: #fff; font-size: 0.78rem; font-weight: 800;
+  padding: 0.18rem 0.7rem; border-radius: 99px;
+}
+.in-loc-label { color: var(--text-muted); font-size: 0.85rem; font-weight: 600; }
+.in-empty { text-align: center; padding: 5rem 2rem; color: var(--text-muted); border: 2px dashed #ddd6fe; border-radius: 20px; }
+
+@media (max-width: 768px) {
+  .in-hero { padding: 2.5rem 1.25rem 2rem; margin: 1rem; border-radius: 20px; }
+  .in-hero h1 { font-size: 1.8rem; }
+  .in-body { padding: 2rem 1rem 3rem; }
 }

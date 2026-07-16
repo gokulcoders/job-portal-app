@@ -13,14 +13,6 @@ async function fetchPublicIP() {
   }
 }
 
-// Hardcoded admin login used while the real backend is being built separately.
-const ADMIN_MOCK = {
-  email: 'admin@admin.com',
-  password: 'admin@123',
-  accessToken: 'mock-admin-token',
-  user: { name: 'Admin', email: 'admin@admin.com', role: 'super_admin' },
-}
-
 class AuthStore {
   user        = null
   accessToken = localStorage.getItem('accessToken') || null
@@ -138,20 +130,6 @@ class AuthStore {
   async login({ email, password }) {
     this.loading = true
     this.error   = null
-
-    // Local mock login — no backend yet, lets the UI be exercised standalone.
-    if (email === ADMIN_MOCK.email && password === ADMIN_MOCK.password) {
-      runInAction(() => {
-        this.user        = ADMIN_MOCK.user
-        this.accessToken = ADMIN_MOCK.accessToken
-        localStorage.setItem('accessToken',  ADMIN_MOCK.accessToken)
-        localStorage.setItem('refreshToken', ADMIN_MOCK.accessToken)
-        localStorage.setItem('authUser',     JSON.stringify(ADMIN_MOCK.user))
-        this.loading = false
-      })
-      return
-    }
-
     try {
       const { data } = await axiosInstance.post(ENDPOINTS.LOGIN, { email, password })
 

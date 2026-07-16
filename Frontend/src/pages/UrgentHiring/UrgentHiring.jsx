@@ -1,96 +1,109 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
+import { fetchJobs } from '@services/api'
+import JobList from '@components/jobs/JobList'
+import Pagination from '@components/jobs/Pagination'
 import './UrgentHiring.css'
 
 const BoltIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z" />
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/>
   </svg>
 )
 const SearchIcon = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="11" cy="11" r="7" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
+    <circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+  </svg>
+)
+const PinIcon = () => (
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
   </svg>
 )
 
-const JOB_TYPES = ['All', 'Full-time', 'Contract']
-
-const URGENT_JOBS = [
-  { id: 1, title: 'On-call Site Reliability Engineer', company: 'Stripe', location: 'Remote', jobType: 'Full-time', closesInDays: 2, tags: ['SRE', 'Kubernetes'] },
-  { id: 2, title: 'Trust & Safety Specialist', company: 'Airbnb', location: 'Remote', jobType: 'Contract', closesInDays: 1, tags: ['Policy', 'Investigations'] },
-  { id: 3, title: 'Launch Support Engineer', company: 'Notion', location: 'San Francisco', jobType: 'Full-time', closesInDays: 3, tags: ['Support', 'API'] },
-  { id: 4, title: 'Payments Fraud Analyst', company: 'Shopify', location: 'Remote', jobType: 'Full-time', closesInDays: 2, tags: ['Risk', 'SQL'] },
-  { id: 5, title: 'Contract Recruiter — Q3 Surge', company: 'Figma', location: 'Remote', jobType: 'Contract', closesInDays: 4, tags: ['Sourcing', 'ATS'] },
+const LOCATIONS = [
+  'All', 'Chennai', 'Coimbatore', 'Bangalore', 'Hyderabad',
+  'Mumbai', 'Pune', 'Delhi', 'Kolkata', 'Remote',
 ]
 
 export default function UrgentHiring() {
-  const [keyword, setKeyword] = useState('')
-  const [jobType, setJobType] = useState('All')
+  const [keyword,  setKeyword]  = useState('')
+  const [location, setLocation] = useState('All')
+  const [page,     setPage]     = useState(1)
+  const [jobs,     setJobs]     = useState([])
+  const [total,    setTotal]    = useState(0)
+  const [pages,    setPages]    = useState(0)
+  const [loading,  setLoading]  = useState(true)
+  const [error,    setError]    = useState(null)
 
-  const filtered = useMemo(() => {
-    const kw = keyword.trim().toLowerCase()
-    return URGENT_JOBS.filter((j) => {
-      const matchesType = jobType === 'All' || j.jobType === jobType
-      const matchesKeyword = !kw || j.title.toLowerCase().includes(kw) || j.company.toLowerCase().includes(kw)
-      return matchesType && matchesKeyword
-    }).sort((a, b) => a.closesInDays - b.closesInDays)
-  }, [keyword, jobType])
+  useEffect(() => {
+    const controller = new AbortController()
+    setLoading(true)
+    setError(null)
+    const params = { jobType: 'urgent', page, limit: 20, signal: controller.signal }
+    if (keyword.trim())      params.q     = keyword.trim()
+    if (location !== 'All')  params.place = location
+
+    fetchJobs(params)
+      .then(data => { setJobs(data.jobs); setTotal(data.total); setPages(data.pages) })
+      .catch(err => { if (err.name !== 'CanceledError') setError('Could not load jobs.') })
+      .finally(() => setLoading(false))
+
+    return () => controller.abort()
+  }, [keyword, location, page])
 
   return (
     <div className="hv-root">
 
       <section className="uh-hero">
-        <div className="hv-page-hero-inner">
-          <span className="uh-badge"><BoltIcon /> Closing fast</span>
-          <h1>Roles closing fast — apply before the window shuts.</h1>
-          <p>Company-verified urgent roles with one-click apply. {URGENT_JOBS.length} open right now.</p>
+        <div className="uh-hero-inner">
+          <span className="uh-badge"><BoltIcon /> Urgent Hiring</span>
+          <h1>Companies hiring <span>right now</span></h1>
+          <p>
+            <strong>{total}</strong> urgent position{total !== 1 ? 's' : ''} open — apply before slots fill up.
+          </p>
 
-          <form className="hv-search uh-search" onSubmit={(e) => e.preventDefault()}>
-            <div className="hv-search-field">
+          <div className="uh-search-bar">
+            <div className="uh-search-field">
               <SearchIcon />
-              <input type="text" placeholder="Role or company" value={keyword} onChange={(e) => setKeyword(e.target.value)} />
+              <input
+                type="text"
+                placeholder="Role or company…"
+                value={keyword}
+                onChange={e => { setKeyword(e.target.value); setPage(1) }}
+              />
             </div>
-          </form>
+          </div>
 
-          <div className="hv-popular">
-            {JOB_TYPES.map((t) => (
-              <button key={t} type="button" className={jobType === t ? 'hv-popular-active' : ''} onClick={() => setJobType(t)}>{t}</button>
+          {/* Location pills */}
+          <div className="uh-loc-row">
+            <PinIcon />
+            {LOCATIONS.map(loc => (
+              <button
+                key={loc}
+                type="button"
+                className={location === loc ? 'uh-loc-pill uh-loc-active' : 'uh-loc-pill'}
+                onClick={() => { setLocation(loc); setPage(1) }}
+              >
+                {loc}
+              </button>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="hv-section">
-        <div className="jb-results-head">
-          <span>{filtered.length} urgent role{filtered.length === 1 ? '' : 's'}</span>
-        </div>
-
-        {filtered.length === 0 ? (
-          <div className="jb-empty">
-            <BoltIcon />
-            <p>No urgent roles match your search right now.</p>
-          </div>
+      <section className="uh-body">
+        {error ? (
+          <div className="uh-empty"><p>{error}</p></div>
         ) : (
-          <div className="jb-list">
-            {filtered.map((j) => (
-              <div className="jb-card uh-card" key={j.id}>
-                <span className="jb-avatar uh-avatar">{j.company[0]}</span>
-                <div className="jb-card-main">
-                  <div className="uh-title-row">
-                    <h3>{j.title}</h3>
-                    <span className="uh-countdown">Closes in {j.closesInDays}d</span>
-                  </div>
-                  <p className="jb-card-meta">{j.company} · {j.location}</p>
-                  <div className="jb-card-tags">
-                    <span className="jb-tag uh-tag-accent">{j.jobType}</span>
-                    {j.tags.map((t) => <span className="jb-tag" key={t}>{t}</span>)}
-                  </div>
-                </div>
-                <div className="jb-card-side">
-                  <button type="button" className="uh-apply-btn">One-click apply</button>
-                </div>
-              </div>
-            ))}
-          </div>
+          <>
+            <div className="uh-results-head">
+              <span className="uh-count-badge">{total}</span>
+              urgent position{total !== 1 ? 's' : ''} found
+              {location !== 'All' && <span className="uh-loc-label"> in {location}</span>}
+            </div>
+            <JobList jobs={jobs} loading={loading} />
+            {!loading && <Pagination page={page} pages={pages} onPageChange={setPage} />}
+          </>
         )}
       </section>
 

@@ -6,29 +6,28 @@ import { toast } from 'sonner'
 import './site.css'
 
 const NAV_LINKS = [
-  { label: 'Home',            to: '/' },
-  { label: 'Blog',            to: '/blog' },
-  { label: 'Contact',         to: '/contact' },
+  // { label: 'Home', to: '/' },
+
 ]
 
 const ChevronIcon = () => (
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-    <polyline points="6 9 12 15 18 9"/>
+    <polyline points="6 9 12 15 18 9" />
   </svg>
 )
 
 const MenuIcon = () => (
   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <line x1="3" y1="6"  x2="21" y2="6"/>
-    <line x1="3" y1="12" x2="21" y2="12"/>
-    <line x1="3" y1="18" x2="21" y2="18"/>
+    <line x1="3" y1="6" x2="21" y2="6" />
+    <line x1="3" y1="12" x2="21" y2="12" />
+    <line x1="3" y1="18" x2="21" y2="18" />
   </svg>
 )
 
 const SiteNavbar = observer(({ active }) => {
-  const { authStore }     = useStores()
-  const navigate          = useNavigate()
-  const [menuOpen, setMenuOpen]   = useState(false)
+  const { authStore } = useStores()
+  const navigate = useNavigate()
+  const [menuOpen, setMenuOpen] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const dropRef = useRef(null)
 
@@ -99,9 +98,9 @@ const SiteNavbar = observer(({ active }) => {
                     <span className="hv-dropdown-email">{authStore.user?.email}</span>
                   </div>
                   <div className="hv-dropdown-divider" />
-                  <Link to="/jobs"               className="hv-dropdown-item" onClick={() => setMenuOpen(false)}>Browse Jobs</Link>
-                  <Link to="/dashboard"          className="hv-dropdown-item" onClick={() => setMenuOpen(false)}>Dashboard</Link>
-                  <Link to="/dashboard/profile"  className="hv-dropdown-item" onClick={() => setMenuOpen(false)}>My Profile</Link>
+                  <Link to="/jobs" className="hv-dropdown-item" onClick={() => setMenuOpen(false)}>Browse Jobs</Link>
+                  <Link to="/dashboard" className="hv-dropdown-item" onClick={() => setMenuOpen(false)}>Dashboard</Link>
+                  <Link to="/dashboard/profile" className="hv-dropdown-item" onClick={() => setMenuOpen(false)}>My Profile</Link>
                   <div className="hv-dropdown-divider" />
                   <button type="button" className="hv-dropdown-item hv-dropdown-logout" onClick={handleLogout}>
                     Sign out
@@ -111,7 +110,7 @@ const SiteNavbar = observer(({ active }) => {
             </div>
           ) : (
             <>
-              <Link to="/login"    className="hv-signin-link">Sign in</Link>
+              <Link to="/login" className="hv-signin-link">Sign in</Link>
               <Link to="/register" className="hv-btn-dark">Get started</Link>
             </>
           )}
@@ -145,7 +144,7 @@ const SiteNavbar = observer(({ active }) => {
             </>
           ) : (
             <>
-              <Link to="/login"    className="hv-mobile-link" onClick={() => setMobileOpen(false)}>Sign in</Link>
+              <Link to="/login" className="hv-mobile-link" onClick={() => setMobileOpen(false)}>Sign in</Link>
               <Link to="/register" className="hv-mobile-link hv-mobile-cta" onClick={() => setMobileOpen(false)}>Get started</Link>
             </>
           )}

@@ -3,8 +3,8 @@ import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import puppeteer from 'puppeteer'
-import { connectDB }       from '../src/config/db.js'
-import { upsertJob, cleanupOldJobs } from '../src/modules/jobs/jobs.service.js'
+import { connectDB } from '../src/config/db.js'
+import { upsertJob } from '../src/modules/jobs/jobs.service.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname  = path.dirname(__filename)
@@ -13,65 +13,10 @@ const __dirname  = path.dirname(__filename)
 dotenv.config({ path: path.join(__dirname, '../.env') })
 
 const AUTH_FILE          = path.join(__dirname, 'auth.json')
-const CLOSE_AFTER_MINUTES = Number(process.env.SCRAPER_CLOSE_AFTER_MINUTES) || 120
-
-// Keywords — override via SCRAPER_KEYWORDS env (comma-separated)
-const KEYWORDS = process.env.SCRAPER_KEYWORDS
+const KEYWORDS           = process.env.SCRAPER_KEYWORDS
   ? process.env.SCRAPER_KEYWORDS.split(',').map(k => k.trim()).filter(Boolean)
-  : [
-      'software developer',
-      'node js developer',
-      'react developer',
-      'java developer',
-      'python developer',
-      'full stack developer',
-      'frontend developer',
-      'backend developer',
-      'data analyst',
-      'devops engineer',
-      'android developer',
-      'software engineer',
-    ]
-
-// Indian cities — LinkedIn uses full city+country strings for geo search
-// Override via SCRAPER_LOCATIONS env (comma-separated)
-const LOCATIONS = process.env.SCRAPER_LOCATIONS
-  ? process.env.SCRAPER_LOCATIONS.split(',').map(l => l.trim()).filter(Boolean)
-  : [
-      // Tamil Nadu
-      'Chennai, Tamil Nadu, India',
-      'Coimbatore, Tamil Nadu, India',
-      'Madurai, Tamil Nadu, India',
-      'Trichy, Tamil Nadu, India',
-      'Salem, Tamil Nadu, India',
-      'Tirunelveli, Tamil Nadu, India',
-      'Vellore, Tamil Nadu, India',
-      'Erode, Tamil Nadu, India',
-      'Tiruppur, Tamil Nadu, India',
-      'Pondicherry, India',
-      // Karnataka
-      'Bengaluru, Karnataka, India',
-      'Mysore, Karnataka, India',
-      'Mangalore, Karnataka, India',
-      // Andhra & Telangana
-      'Hyderabad, Telangana, India',
-      'Visakhapatnam, Andhra Pradesh, India',
-      'Vijayawada, Andhra Pradesh, India',
-      // Maharashtra
-      'Mumbai, Maharashtra, India',
-      'Pune, Maharashtra, India',
-      // Delhi NCR
-      'New Delhi, Delhi, India',
-      'Noida, Uttar Pradesh, India',
-      'Gurgaon, Haryana, India',
-      // Other metros
-      'Kolkata, West Bengal, India',
-      'Ahmedabad, Gujarat, India',
-      'Jaipur, Rajasthan, India',
-      'Kochi, Kerala, India',
-      // Remote
-      'India',
-    ]
+  : ['node', 'java', 'javascript']
+const CLOSE_AFTER_MINUTES = Number(process.env.SCRAPER_CLOSE_AFTER_MINUTES) || 20
 
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
 
@@ -380,12 +325,10 @@ async function captureExternalApplyLink(page, browser) {
   }
 }
 
-// ── Scrape jobs for a keyword + location ──────────────────────────────────
-async function scrapeKeyword(browser, page, keyword, location) {
-  const params = new URLSearchParams({ keywords: keyword, f_TPR: 'r86400' })
-  if (location) params.set('location', location)
-  const searchUrl = `https://www.linkedin.com/jobs/search/?${params.toString()}`
-  console.log(`\nSearching: ${keyword} | ${location || 'All India'}`)
+// ── Scrape all jobs for a keyword ─────────────────────────────────────────
+async function scrapeKeyword(browser, page, keyword) {
+  const searchUrl = `https://www.linkedin.com/jobs/search/?keywords=${encodeURIComponent(keyword)}&f_TPR=r86400`
+  console.log(`\n🔍 Searching: ${keyword}`)
   await page.goto(searchUrl, { waitUntil: 'domcontentloaded' })
   await delay(4000)
 
@@ -432,7 +375,7 @@ async function scrapeKeyword(browser, page, keyword, location) {
         company:      jobData.company,
         companyLink:  jobData.companyLink,
         companyImage: jobData.companyImage,
-        place:        jobData.place || (location ? location.split(',')[0] : ''),
+        place:        jobData.place,
         jobLink:      link,
         applyLink:    jobData.applyLink,
         lastDate:     jobData.lastDate,
@@ -477,27 +420,12 @@ async function runScraper() {
       await loadAuth(page)
     }
 
-    // Clean expired jobs before adding new ones
-    try {
-      const deleted = await cleanupOldJobs(24)
-      if (deleted > 0) console.log(`Cleanup: removed ${deleted} expired job(s).`)
-    } catch {}
-
-    console.log(`\n--- LinkedIn scrape ---`)
-    console.log(`Keywords  : ${KEYWORDS.length}`)
-    console.log(`Locations : ${LOCATIONS.length}`)
-    console.log(`Total combos: ${KEYWORDS.length * LOCATIONS.length}`)
-    console.log('----------------------\n')
-
     for (const keyword of KEYWORDS) {
       if (!keyword) continue
-      for (const location of LOCATIONS) {
-        await scrapeKeyword(browser, page, keyword, location)
-        await delay(2000)
-      }
+      await scrapeKeyword(browser, page, keyword)
     }
 
-    console.log('\nLinkedIn scraper finished successfully!')
+    console.log('\n✅ Scraper finished successfully!')
   } catch (err) {
     console.error('⚠️ Scraper error:', err)
     throw err

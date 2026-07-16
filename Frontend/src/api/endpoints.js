@@ -11,4 +11,11 @@ export const ENDPOINTS = {
   CHANGE_PASSWORD: '/auth/change-password',
   FORGOT_PASSWORD: '/auth/forgot-password',
   RESET_PASSWORD:  '/auth/reset-password',
+
+  // Admin
+  ADMIN_USERS:        '/api/admin/users',
+
+  // Separate collections
+  WALKIN_JOBS:        '/api/walkin-jobs',
+  INTERNSHIP_JOBS:    '/api/internship-jobs',
 }

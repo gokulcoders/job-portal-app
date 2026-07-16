@@ -1,54 +1,162 @@
-/* ================================================================
-   Urgent Hiring page — HireVerse-style design, dark/orange accent
-   (shared navbar/footer/search/section/listing-kit chrome lives in
-   components/marketing/site.css)
-   ================================================================ */
-
 .uh-hero {
-  background: radial-gradient(circle at top right, #fff4f2 0%, #f3f4f6 100%);
-  border: 1px solid #e5e7eb;
-  border-radius: 24px;
-  padding: 2.5rem 2rem;
-  margin: 1.5rem 1.5rem 0 1.5rem;
+  background: linear-gradient(135deg, #fff4f2 0%, #fef2f2 40%, #fff7f0 100%);
+  border: 1px solid #fecaca;
+  border-radius: 28px;
+  padding: 4rem 2rem 3rem;
+  margin: 1.5rem 1.5rem 0;
+  text-align: center;
   position: relative;
   overflow: hidden;
 }
-.uh-hero .hv-page-hero-inner h1 { color: #111827; font-size: 1.8rem; font-weight: 800; margin: 0 0 0.5rem; }
-.uh-hero .hv-page-hero-inner > p { color: #4b5563; font-size: 0.95rem; margin: 0 0 1.75rem; }
+.uh-hero::before {
+  content: '';
+  position: absolute;
+  top: -60%; left: -30%; width: 160%; height: 160%;
+  background: radial-gradient(ellipse at 70% 30%, rgba(239,68,68,0.09) 0%, transparent 55%);
+  pointer-events: none;
+}
+
+.uh-hero-inner {
+  position: relative;
+  max-width: 700px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
 
 .uh-badge {
-  display: inline-flex; align-items: center; gap: 0.45rem;
-  background: #fff7ed; color: #ea580c; border: 1px solid #ffedd5;
-  border-radius: 99px; padding: 0.3rem 0.9rem; font-size: 0.75rem; font-weight: 700;
-  letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem;
-}
-.uh-badge svg { color: #f97316; }
-
-.uh-search { max-width: 480px; margin: 0 0 1.25rem; }
-.uh-hero .hv-popular { justify-content: flex-start; margin-top: 0; }
-.uh-hero .hv-popular button {
-  background: rgba(255, 255, 255, 0.06); border-color: rgba(255, 255, 255, 0.12); color: #d4d4d8;
-}
-.uh-hero .hv-popular button:hover { border-color: #fb923c; color: #fb923c; }
-.uh-hero .hv-popular-active {
-  background: linear-gradient(90deg, #f97316, #ec4899) !important;
-  border-color: transparent !important; color: #fff !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #fef2f2;
+  color: #ef4444;
+  border: 1px solid #fecaca;
+  border-radius: 99px;
+  padding: 0.35rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
 }
 
-.uh-card { border-color: #fde3cb; }
-.uh-avatar { background: #ffedd5; color: #ea580c; }
-.uh-tag-accent { color: #ea580c; background: #ffedd5; }
+.uh-hero h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--text-base);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin: 0;
+}
+.uh-hero h1 span {
+  background: linear-gradient(135deg, #ef4444, #f97316);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.uh-hero p {
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+.uh-hero p strong { color: var(--text-base); font-weight: 700; }
 
-.uh-title-row { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
-.uh-countdown {
-  font-size: 0.7rem; font-weight: 700; color: #ea580c;
-  background: #ffedd5; border-radius: 999px; padding: 0.2rem 0.6rem; white-space: nowrap;
+/* Search */
+.uh-search-bar {
+  width: 100%;
+  max-width: 520px;
+  background: #fff;
+  border: 1.5px solid #fecaca;
+  border-radius: 999px;
+  padding: 0.5rem 0.5rem 0.5rem 1.25rem;
+  box-shadow: 0 4px 20px rgba(239,68,68,0.08);
+  display: flex;
+  align-items: center;
+}
+.uh-search-field {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex: 1;
+  color: #f87171;
+}
+.uh-search-field input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 0.92rem;
+  font-family: inherit;
+  color: var(--text-base);
+  width: 100%;
+}
+.uh-search-field input::placeholder { color: #d1d5db; }
+
+/* Location pills */
+.uh-loc-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  color: #ef4444;
+}
+.uh-loc-pill {
+  border: 1.5px solid #fecaca;
+  background: #fff;
+  color: var(--text-muted);
+  border-radius: 99px;
+  padding: 0.3rem 0.85rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.18s;
+}
+.uh-loc-pill:hover { border-color: #ef4444; color: #ef4444; }
+.uh-loc-active {
+  background: linear-gradient(135deg, #ef4444, #f97316);
+  border-color: transparent;
+  color: #fff !important;
+  box-shadow: 0 3px 10px rgba(239,68,68,0.25);
 }
 
-.uh-apply-btn {
-  border: none !important; background: linear-gradient(90deg, #f97316, #ec4899) !important; color: #fff !important;
+/* Body */
+.uh-body {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 2rem 5rem;
 }
 
-@media (max-width: 860px) {
-  .uh-search { flex-direction: column; align-items: stretch; border-radius: 20px; padding: 0.9rem; gap: 0.6rem; }
+.uh-results-head {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-base);
+  margin-bottom: 1.75rem;
+}
+.uh-count-badge {
+  background: linear-gradient(135deg, #ef4444, #f97316);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 0.18rem 0.7rem;
+  border-radius: 99px;
+}
+.uh-loc-label { color: var(--text-muted); font-size: 0.85rem; font-weight: 600; }
+
+.uh-empty {
+  text-align: center;
+  padding: 5rem 2rem;
+  color: var(--text-muted);
+  border: 2px dashed #fecaca;
+  border-radius: 20px;
+}
+
+@media (max-width: 768px) {
+  .uh-hero { padding: 2.5rem 1.25rem 2rem; margin: 1rem; border-radius: 20px; }
+  .uh-hero h1 { font-size: 1.8rem; }
+  .uh-body { padding: 2rem 1rem 3rem; }
 }

@@ -7,29 +7,30 @@ import { useStores } from '@hooks/useStores'
 import AppLayout from '@components/layout/AppLayout'
 
 // Eagerly loaded (critical path)
-import Home         from '@pages/Home/Home'
-import Jobs         from '@pages/Jobs/Jobs'
-import Login        from '@pages/Login/Login'
-import Register     from '@pages/Register/Register'
-import OTP          from '@pages/OTP/OTP'
-import NotFound     from '@pages/NotFound/NotFound'
+import Home from '@pages/Home/Home'
+import Jobs from '@pages/Jobs/Jobs'
+import Login from '@pages/Login/Login'
+import Register from '@pages/Register/Register'
+import OTP from '@pages/OTP/OTP'
+import NotFound from '@pages/NotFound/NotFound'
 
 // Lazy loaded (non-critical)
-const UrgentHiring    = lazy(() => import('@pages/UrgentHiring/UrgentHiring'))
-const WalkIn          = lazy(() => import('@pages/WalkIn/WalkIn'))
-const Internships     = lazy(() => import('@pages/Internships/Internships'))
-const Companies       = lazy(() => import('@pages/Companies/Companies'))
-const Courses         = lazy(() => import('@pages/Courses/Courses'))
-const Career          = lazy(() => import('@pages/Career/Career'))
-const ForgotPassword  = lazy(() => import('@pages/ForgotPassword/ForgotPassword'))
-const ResetPassword   = lazy(() => import('@pages/ResetPassword/ResetPassword'))
-const Dashboard       = lazy(() => import('@pages/Dashboard/Dashboard'))
-const Profile         = lazy(() => import('@pages/Dashboard/Profile'))
-const About           = lazy(() => import('@pages/About/About'))
-const Pricing         = lazy(() => import('@pages/Pricing/Pricing'))
-const Contact         = lazy(() => import('@pages/Contact/Contact'))
-const Privacy         = lazy(() => import('@pages/Legal/Privacy'))
-const Terms           = lazy(() => import('@pages/Legal/Terms'))
+const UrgentHiring = lazy(() => import('@pages/UrgentHiring/UrgentHiring'))
+const WalkIn = lazy(() => import('@pages/WalkIn/WalkIn'))
+const Internships = lazy(() => import('@pages/Internships/Internships'))
+const UserManagement = lazy(() => import('@pages/Dashboard/UserManagement'))
+const Companies = lazy(() => import('@pages/Companies/Companies'))
+const Courses = lazy(() => import('@pages/Courses/Courses'))
+const Career = lazy(() => import('@pages/Career/Career'))
+const ForgotPassword = lazy(() => import('@pages/ForgotPassword/ForgotPassword'))
+const ResetPassword = lazy(() => import('@pages/ResetPassword/ResetPassword'))
+const Dashboard = lazy(() => import('@pages/Dashboard/Dashboard'))
+const Profile = lazy(() => import('@pages/Dashboard/Profile'))
+const About = lazy(() => import('@pages/About/About'))
+const Pricing = lazy(() => import('@pages/Pricing/Pricing'))
+const Contact = lazy(() => import('@pages/Contact/Contact'))
+const Privacy = lazy(() => import('@pages/Legal/Privacy'))
+const Terms = lazy(() => import('@pages/Legal/Terms'))
 
 function PageLoader() {
   return (
@@ -82,34 +83,34 @@ export default function AppRoutes() {
     <Suspense fallback={<PageLoader />}>
       <Routes>
         {/* ── Public marketing pages ── */}
-        <Route path="/"             element={<Home />} />
-        <Route path="/jobs"         element={<RequireAuth><AppLayout><Jobs /></AppLayout></RequireAuth>} />
+        <Route path="/" element={<Home />} />
+        <Route path="/jobs" element={<RequireAuth><AppLayout><Jobs /></AppLayout></RequireAuth>} />
         <Route path="/urgent-hiring" element={<RequireAuth><AppLayout><UrgentHiring /></AppLayout></RequireAuth>} />
-        <Route path="/walk-in"      element={<RequireAuth><AppLayout><WalkIn /></AppLayout></RequireAuth>} />
-        <Route path="/internships"  element={<RequireAuth><AppLayout><Internships /></AppLayout></RequireAuth>} />
-        <Route path="/companies"    element={<RequireAuth><AppLayout><Companies /></AppLayout></RequireAuth>} />
-        <Route path="/courses"      element={<RequireAuth><AppLayout><Courses /></AppLayout></RequireAuth>} />
-        <Route path="/career"       element={<RequireAuth><AppLayout><Career /></AppLayout></RequireAuth>} />
-        <Route path="/about"        element={<About />} />
-        <Route path="/pricing"      element={<Pricing />} />
-        <Route path="/contact"      element={<Contact />} />
-        <Route path="/privacy"      element={<Privacy />} />
-        <Route path="/terms"        element={<Terms />} />
+        <Route path="/walk-in" element={<RequireAuth><AppLayout><WalkIn /></AppLayout></RequireAuth>} />
+        <Route path="/internships" element={<RequireAuth><AppLayout><Internships /></AppLayout></RequireAuth>} />
+        <Route path="/companies" element={<RequireAuth><AppLayout><Companies /></AppLayout></RequireAuth>} />
+        <Route path="/courses" element={<RequireAuth><AppLayout><Courses /></AppLayout></RequireAuth>} />
+        <Route path="/career" element={<RequireAuth><AppLayout><Career /></AppLayout></RequireAuth>} />
+        <Route path="/about" element={<About />} />
+        <Route path="/pricing" element={<Pricing />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/terms" element={<Terms />} />
 
         {/* ── Auth pages (guest only — authenticated → /jobs) ── */}
-        <Route path="/login"           element={<GuestOnly><Login /></GuestOnly>} />
-        <Route path="/register"        element={<GuestOnly><Register /></GuestOnly>} />
-        <Route path="/otp"             element={<GuestOnly><OTP /></GuestOnly>} />
+        <Route path="/login" element={<GuestOnly><Login /></GuestOnly>} />
+        <Route path="/register" element={<GuestOnly><Register /></GuestOnly>} />
+        <Route path="/otp" element={<GuestOnly><OTP /></GuestOnly>} />
         <Route path="/forgot-password" element={<GuestOnly><ForgotPassword /></GuestOnly>} />
-        <Route path="/reset-password"  element={<GuestOnly><ResetPassword /></GuestOnly>} />
+        <Route path="/reset-password" element={<GuestOnly><ResetPassword /></GuestOnly>} />
 
         {/* ── Dashboard (optional secondary feature, requires auth) ── */}
-        <Route path="/dashboard"         element={<RequireAuth><AppLayout><Dashboard /></AppLayout></RequireAuth>} />
+        <Route path="/dashboard" element={<RequireAuth><AppLayout><Dashboard /></AppLayout></RequireAuth>} />
         <Route path="/dashboard/profile" element={<RequireAuth><AppLayout><Profile /></AppLayout></RequireAuth>} />
-        <Route path="/dashboard/users"   element={<RequireAuth><RequireRole minRole="admin"><AppLayout><ComingSoon title="User Management" /></AppLayout></RequireRole></RequireAuth>} />
+        <Route path="/dashboard/users" element={<RequireAuth><RequireRole minRole="admin"><AppLayout><UserManagement /></AppLayout></RequireRole></RequireAuth>} />
         <Route path="/dashboard/analytics" element={<RequireAuth><RequireRole minRole="admin"><AppLayout><ComingSoon title="Analytics" /></AppLayout></RequireRole></RequireAuth>} />
-        <Route path="/dashboard/billing"   element={<RequireAuth><RequireRole minRole="super_admin"><AppLayout><ComingSoon title="Billing" /></AppLayout></RequireRole></RequireAuth>} />
-        <Route path="/dashboard/tenants"   element={<RequireAuth><RequireRole minRole="super_admin"><AppLayout><ComingSoon title="All Tenants" /></AppLayout></RequireRole></RequireAuth>} />
+        <Route path="/dashboard/billing" element={<RequireAuth><RequireRole minRole="super_admin"><AppLayout><ComingSoon title="Billing" /></AppLayout></RequireRole></RequireAuth>} />
+        <Route path="/dashboard/tenants" element={<RequireAuth><RequireRole minRole="super_admin"><AppLayout><ComingSoon title="All Tenants" /></AppLayout></RequireRole></RequireAuth>} />
         <Route path="/dashboard/system-settings" element={<RequireAuth><RequireRole minRole="super_admin"><AppLayout><ComingSoon title="System Settings" /></AppLayout></RequireRole></RequireAuth>} />
 
         {/* ── Catch-all ── */}

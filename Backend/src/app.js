@@ -3,6 +3,9 @@ import cors from 'cors'
 import morgan from 'morgan'
 import authRoutes from './modules/auth/auth.routes.js'
 import jobsRoutes from './modules/jobs/jobs.routes.js'
+import adminRoutes from './modules/admin/admin.routes.js'
+import walkinRoutes from './modules/walkin/walkin.routes.js'
+import internshipRoutes from './modules/internship/internship.routes.js'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 
 const app = express()
@@ -15,6 +18,9 @@ app.get('/api/health', (req, res) => res.json({ status: 'ok' }))
 
 app.use('/auth', authRoutes)
 app.use('/api/jobs', jobsRoutes)
+app.use('/api/admin', adminRoutes)
+app.use('/api/walkin-jobs', walkinRoutes)
+app.use('/api/internship-jobs', internshipRoutes)
 
 app.use(notFound)
 app.use(errorHandler)
