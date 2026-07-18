@@ -27,6 +27,11 @@ export async function fetchAdminUsers({ page = 1, limit = 20, q, role, status } 
   return data
 }
 
+export async function fetchAdminUserStats() {
+  const { data } = await axiosInstance.get(`${ENDPOINTS.ADMIN_USERS}/stats`)
+  return data.stats
+}
+
 export async function updateAdminUserRole(id, role) {
   const { data } = await axiosInstance.patch(`${ENDPOINTS.ADMIN_USERS}/${id}/role`, { role })
   return data
@@ -39,6 +44,27 @@ export async function updateAdminUserStatus(id, isActive) {
 
 export async function deleteAdminUser(id) {
   const { data } = await axiosInstance.delete(`${ENDPOINTS.ADMIN_USERS}/${id}`)
+  return data
+}
+
+export async function sendAdminUserNotification(id, { message, type }) {
+  const { data } = await axiosInstance.post(`${ENDPOINTS.ADMIN_USERS}/${id}/notify`, { message, type })
+  return data
+}
+
+// ── Notifications (own inbox) ───────────────────────────────────────────────
+export async function fetchMyNotifications() {
+  const { data } = await axiosInstance.get(`${ENDPOINTS.NOTIFICATIONS}/me`)
+  return data
+}
+
+export async function markNotificationRead(id) {
+  const { data } = await axiosInstance.patch(`${ENDPOINTS.NOTIFICATIONS}/${id}/read`)
+  return data
+}
+
+export async function markAllNotificationsRead() {
+  const { data } = await axiosInstance.patch(`${ENDPOINTS.NOTIFICATIONS}/read-all`)
   return data
 }
 
@@ -56,5 +82,28 @@ export async function fetchInternshipJobs({ page = 1, limit = 20, q, keyword, co
     params: { page, limit, q, keyword, company, place, source },
     signal,
   })
+  return data
+}
+
+// ── Featured posts (admin-managed banners) ──────────────────────────────────
+export async function fetchFeaturedPosts(page) {
+  const { data } = await axiosInstance.get(ENDPOINTS.FEATURED_POSTS, { params: { page } })
+  return data.posts
+}
+
+export async function fetchAdminFeaturedPosts() {
+  const { data } = await axiosInstance.get(ENDPOINTS.FEATURED_POSTS_ADMIN)
+  return data.posts
+}
+
+export async function createFeaturedPost(formData) {
+  const { data } = await axiosInstance.post(ENDPOINTS.FEATURED_POSTS_ADMIN, formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  })
+  return data.post
+}
+
+export async function deleteFeaturedPost(id) {
+  const { data } = await axiosInstance.delete(`${ENDPOINTS.FEATURED_POSTS_ADMIN}/${id}`)
   return data
 }

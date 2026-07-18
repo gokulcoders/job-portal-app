@@ -17,6 +17,16 @@ const IconBilling = () => (
     <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/>
   </svg>
 )
+const IconSubscription = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 2l2.24 6.9H21l-5.88 4.27L17.36 20 12 15.73 6.64 20l2.24-6.83L3 8.9h6.76z"/>
+  </svg>
+)
+const IconMegaphone = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M3 11l18-5v12L3 13v-2z"/><path d="M11.6 16.8a3 3 0 0 1-5.8-1.6"/>
+  </svg>
+)
 const IconGlobe = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
@@ -91,6 +101,7 @@ function buildNavSections(role) {
       section: 'ACCOUNT',
       items: [
         { id: 'profile', label: 'Profile', icon: IconUserCircle, path: '/dashboard/profile' },
+        { id: 'subscription', label: 'Subscription', icon: IconSubscription, path: '/dashboard/subscription' },
       ],
     },
   ]
@@ -109,6 +120,7 @@ function buildNavSections(role) {
     sections.push({
       section: 'SYSTEM',
       items: [
+        { id: 'featured-posts', label: 'Featured Posts', icon: IconMegaphone, path: '/dashboard/featured-posts' },
         { id: 'billing',  label: 'Billing',       icon: IconBilling, path: '/dashboard/billing' },
         { id: 'tenants',  label: 'All Tenants',   icon: IconGlobe,   path: '/dashboard/tenants' },
         { id: 'sys-settings', label: 'System Settings', icon: IconShield, path: '/dashboard/system-settings' },

@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import JobList from '@components/jobs/JobList'
 import Pagination from '@components/jobs/Pagination'
-import { fetchJobs } from '@services/api'
+import FeaturedPostCard from '@components/jobs/FeaturedPostCard'
+import { fetchJobs, fetchFeaturedPosts } from '@services/api'
 import './Jobs.css'
 
 const SearchIcon = () => (
@@ -98,6 +99,11 @@ export default function Jobs() {
   const [pages, setPages]     = useState(0)
   const [loading, setLoading] = useState(true)
   const [error, setError]     = useState(null)
+  const [featured, setFeatured] = useState([])
+
+  useEffect(() => {
+    fetchFeaturedPosts('jobs').then(setFeatured).catch(() => {})
+  }, [])
 
   // Active filter count for reset badge
   const activeCount = [
@@ -270,6 +276,14 @@ export default function Jobs() {
 
         {/* ── Results ── */}
         <div className="jb-results">
+          {featured.length > 0 && (
+            <div className="jb-featured">
+              <div className="jb-results-head">Featured</div>
+              <div className="jb-featured-grid">
+                {featured.map(post => <FeaturedPostCard post={post} key={post._id} />)}
+              </div>
+            </div>
+          )}
           <div className="jb-results-head">
             <span className="jb-results-count">
               <span className="jb-results-count-badge">{total}</span>

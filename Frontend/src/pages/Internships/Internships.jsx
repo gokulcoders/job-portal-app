@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
-import { fetchInternshipJobs } from '@services/api'
+import { fetchInternshipJobs, fetchFeaturedPosts } from '@services/api'
 import JobList from '@components/jobs/JobList'
 import Pagination from '@components/jobs/Pagination'
+import FeaturedPostCard from '@components/jobs/FeaturedPostCard'
 import './Internships.css'
 
 const GradCapIcon = () => (
@@ -34,6 +35,11 @@ export default function Internships() {
   const [pages,    setPages]    = useState(0)
   const [loading,  setLoading]  = useState(true)
   const [error,    setError]    = useState(null)
+  const [featured, setFeatured] = useState([])
+
+  useEffect(() => {
+    fetchFeaturedPosts('internship').then(setFeatured).catch(() => {})
+  }, [])
 
   useEffect(() => {
     const controller = new AbortController()
@@ -91,6 +97,14 @@ export default function Internships() {
       </section>
 
       <section className="in-body">
+        {featured.length > 0 && (
+          <div className="in-featured">
+            <div className="in-results-head">Featured internships</div>
+            <div className="in-featured-grid">
+              {featured.map(post => <FeaturedPostCard post={post} key={post._id} />)}
+            </div>
+          </div>
+        )}
         {error ? (
           <div className="in-empty"><p>{error}</p></div>
         ) : (

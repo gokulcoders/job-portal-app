@@ -14,6 +14,11 @@ export const listUsers = asyncHandler(async (req, res) => {
   res.json(result)
 })
 
+export const getUserStats = asyncHandler(async (req, res) => {
+  const stats = await adminService.getUserStats()
+  res.json({ stats })
+})
+
 export const getUserById = asyncHandler(async (req, res) => {
   const user = await adminService.getUserById(req.params.id)
   res.json({ user })
@@ -29,6 +34,19 @@ export const updateUserStatus = asyncHandler(async (req, res) => {
   const { isActive } = req.body
   const user = await adminService.updateUserStatus(req.params.id, isActive)
   res.json({ user })
+})
+
+export const sendUserNotification = asyncHandler(async (req, res) => {
+  const { message, type } = req.body
+  if (!message?.trim()) {
+    return res.status(400).json({ message: 'Notification message is required' })
+  }
+  const notification = await adminService.sendNotification(
+    req.params.id,
+    { message: message.trim(), type },
+    req.user.id
+  )
+  res.status(201).json({ notification })
 })
 
 export const deleteUser = asyncHandler(async (req, res) => {

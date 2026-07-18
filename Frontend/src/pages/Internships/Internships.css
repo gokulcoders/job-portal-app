@@ -105,6 +105,14 @@
 .in-loc-label { color: var(--text-muted); font-size: 0.85rem; font-weight: 600; }
 .in-empty { text-align: center; padding: 5rem 2rem; color: var(--text-muted); border: 2px dashed #ddd6fe; border-radius: 20px; }
 
+.in-featured { margin-bottom: 2.5rem; }
+.in-featured-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 340px));
+  justify-content: start;
+  gap: 1.25rem;
+}
+
 @media (max-width: 768px) {
   .in-hero { padding: 2.5rem 1.25rem 2rem; margin: 1rem; border-radius: 20px; }
   .in-hero h1 { font-size: 1.8rem; }

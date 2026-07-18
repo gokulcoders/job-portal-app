@@ -26,6 +26,8 @@ const ForgotPassword = lazy(() => import('@pages/ForgotPassword/ForgotPassword')
 const ResetPassword = lazy(() => import('@pages/ResetPassword/ResetPassword'))
 const Dashboard = lazy(() => import('@pages/Dashboard/Dashboard'))
 const Profile = lazy(() => import('@pages/Dashboard/Profile'))
+const Subscription = lazy(() => import('@pages/Dashboard/Subscription'))
+const FeaturedPostsManager = lazy(() => import('@pages/Dashboard/FeaturedPostsManager'))
 const About = lazy(() => import('@pages/About/About'))
 const Pricing = lazy(() => import('@pages/Pricing/Pricing'))
 const Contact = lazy(() => import('@pages/Contact/Contact'))
@@ -107,8 +109,10 @@ export default function AppRoutes() {
         {/* ── Dashboard (optional secondary feature, requires auth) ── */}
         <Route path="/dashboard" element={<RequireAuth><AppLayout><Dashboard /></AppLayout></RequireAuth>} />
         <Route path="/dashboard/profile" element={<RequireAuth><AppLayout><Profile /></AppLayout></RequireAuth>} />
+        <Route path="/dashboard/subscription" element={<RequireAuth><AppLayout><Subscription /></AppLayout></RequireAuth>} />
         <Route path="/dashboard/users" element={<RequireAuth><RequireRole minRole="admin"><AppLayout><UserManagement /></AppLayout></RequireRole></RequireAuth>} />
         <Route path="/dashboard/analytics" element={<RequireAuth><RequireRole minRole="admin"><AppLayout><ComingSoon title="Analytics" /></AppLayout></RequireRole></RequireAuth>} />
+        <Route path="/dashboard/featured-posts" element={<RequireAuth><RequireRole minRole="super_admin"><AppLayout><FeaturedPostsManager /></AppLayout></RequireRole></RequireAuth>} />
         <Route path="/dashboard/billing" element={<RequireAuth><RequireRole minRole="super_admin"><AppLayout><ComingSoon title="Billing" /></AppLayout></RequireRole></RequireAuth>} />
         <Route path="/dashboard/tenants" element={<RequireAuth><RequireRole minRole="super_admin"><AppLayout><ComingSoon title="All Tenants" /></AppLayout></RequireRole></RequireAuth>} />
         <Route path="/dashboard/system-settings" element={<RequireAuth><RequireRole minRole="super_admin"><AppLayout><ComingSoon title="System Settings" /></AppLayout></RequireRole></RequireAuth>} />

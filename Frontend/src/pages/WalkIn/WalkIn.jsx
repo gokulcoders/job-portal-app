@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
-import { fetchWalkInJobs } from '@services/api'
+import { fetchWalkInJobs, fetchFeaturedPosts } from '@services/api'
 import JobList from '@components/jobs/JobList'
 import Pagination from '@components/jobs/Pagination'
+import FeaturedPostCard from '@components/jobs/FeaturedPostCard'
 import './WalkIn.css'
 
 const WalkIcon = () => (
@@ -37,6 +38,11 @@ export default function WalkIn() {
   const [pages,    setPages]    = useState(0)
   const [loading,  setLoading]  = useState(true)
   const [error,    setError]    = useState(null)
+  const [featured, setFeatured] = useState([])
+
+  useEffect(() => {
+    fetchFeaturedPosts('walkin').then(setFeatured).catch(() => {})
+  }, [])
 
   useEffect(() => {
     const controller = new AbortController()
@@ -94,6 +100,14 @@ export default function WalkIn() {
       </section>
 
       <section className="wi-body">
+        {featured.length > 0 && (
+          <div className="wi-featured">
+            <div className="wi-results-head">Featured walk-in drives</div>
+            <div className="wi-featured-grid">
+              {featured.map(post => <FeaturedPostCard post={post} key={post._id} />)}
+            </div>
+          </div>
+        )}
         {error ? (
           <div className="wi-empty"><p>{error}</p></div>
         ) : (

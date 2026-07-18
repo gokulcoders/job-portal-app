@@ -7,6 +7,18 @@ import {
   IconUserCircle, IconLogout,
 } from '@components/icons'
 
+const TYPE_DOT = { info: '#3b82f6', warning: '#f59e0b', success: '#10b981', error: '#ef4444' }
+
+function timeAgo(dateStr) {
+  const diffMs = Date.now() - new Date(dateStr).getTime()
+  const mins = Math.floor(diffMs / 60000)
+  if (mins < 1) return 'just now'
+  if (mins < 60) return `${mins}m ago`
+  const hrs = Math.floor(mins / 60)
+  if (hrs < 24) return `${hrs}h ago`
+  return `${Math.floor(hrs / 24)}d ago`
+}
+
 // ── User avatar dropdown ──────────────────────────────────────────────
 const UserMenu = observer(() => {
   const { authStore } = useStores()
@@ -96,15 +108,73 @@ function SearchBar() {
   )
 }
 
-// ── Notification badge ────────────────────────────────────────────────
-function NotificationBtn() {
+// ── Notification bell + dropdown ────────────────────────────────────────
+const NotificationBtn = observer(() => {
+  const { notificationStore } = useStores()
+  const [open, setOpen] = useState(false)
+  const ref = useRef(null)
+
+  useEffect(() => {
+    notificationStore.startPolling()
+    return () => notificationStore.stopPolling()
+  }, [notificationStore])
+
+  useEffect(() => {
+    const handler = (e) => { if (ref.current && !ref.current.contains(e.target)) setOpen(false) }
+    document.addEventListener('mousedown', handler)
+    return () => document.removeEventListener('mousedown', handler)
+  }, [])
+
+  const { notifications, unreadCount } = notificationStore
+
   return (
-    <button id="notif-btn" type="button" className="navbar-icon-btn" aria-label="Notifications">
-      <IconBell />
-      <span className="navbar-badge" />
-    </button>
+    <div className="notif-wrap" ref={ref}>
+      <button
+        id="notif-btn"
+        type="button"
+        className="navbar-icon-btn"
+        aria-label="Notifications"
+        onClick={() => setOpen(v => !v)}
+      >
+        <IconBell />
+        {unreadCount > 0 && <span className="navbar-badge" />}
+      </button>
+
+      {open && (
+        <div className="notif-panel" role="menu">
+          <div className="notif-panel-header">
+            <span>Notifications</span>
+            {unreadCount > 0 && (
+              <button type="button" className="notif-mark-all" onClick={() => notificationStore.markAllRead()}>
+                Mark all read
+              </button>
+            )}
+          </div>
+          <div className="notif-list">
+            {notifications.length === 0 ? (
+              <div className="notif-empty">No notifications yet</div>
+            ) : (
+              notifications.map(n => (
+                <button
+                  type="button"
+                  key={n._id}
+                  className={`notif-item ${n.isRead ? '' : 'notif-item--unread'}`}
+                  onClick={() => !n.isRead && notificationStore.markRead(n._id)}
+                >
+                  <span className="notif-dot" style={{ background: TYPE_DOT[n.type] || TYPE_DOT.info }} />
+                  <span className="notif-item-body">
+                    <span className="notif-item-msg">{n.message}</span>
+                    <span className="notif-item-time">{timeAgo(n.createdAt)}</span>
+                  </span>
+                </button>
+              ))
+            )}
+          </div>
+        </div>
+      )}
+    </div>
   )
-}
+})
 
 // ── Navbar ────────────────────────────────────────────────────────────
 const Navbar = observer(() => {

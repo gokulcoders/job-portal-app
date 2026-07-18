@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
-import { fetchJobs } from '@services/api'
+import { fetchJobs, fetchFeaturedPosts } from '@services/api'
 import JobList from '@components/jobs/JobList'
 import Pagination from '@components/jobs/Pagination'
+import FeaturedPostCard from '@components/jobs/FeaturedPostCard'
 import './UrgentHiring.css'
 
 const BoltIcon = () => (
@@ -34,6 +35,11 @@ export default function UrgentHiring() {
   const [pages,    setPages]    = useState(0)
   const [loading,  setLoading]  = useState(true)
   const [error,    setError]    = useState(null)
+  const [featured, setFeatured] = useState([])
+
+  useEffect(() => {
+    fetchFeaturedPosts('urgent').then(setFeatured).catch(() => {})
+  }, [])
 
   useEffect(() => {
     const controller = new AbortController()
@@ -92,6 +98,14 @@ export default function UrgentHiring() {
       </section>
 
       <section className="uh-body">
+        {featured.length > 0 && (
+          <div className="uh-featured">
+            <div className="uh-results-head">Featured urgent hires</div>
+            <div className="uh-featured-grid">
+              {featured.map(post => <FeaturedPostCard post={post} key={post._id} />)}
+            </div>
+          </div>
+        )}
         {error ? (
           <div className="uh-empty"><p>{error}</p></div>
         ) : (

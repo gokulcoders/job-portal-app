@@ -1,4 +1,5 @@
 import User from '../../models/User.js'
+import * as notificationsService from '../notifications/notifications.service.js'
 
 const SAFE_FIELDS = 'name email role isVerified isActive city country lastLoginAt createdAt'
 
@@ -17,6 +18,16 @@ export async function listUsers({ page = 1, limit = 20, q, role, status }) {
   const users = await User.find(filter).select(SAFE_FIELDS).sort({ createdAt: -1 }).skip(skip).limit(limit)
 
   return { users, total, page, pages: Math.ceil(total / limit) }
+}
+
+export async function getUserStats() {
+  const [total, active, admins, superAdmins] = await Promise.all([
+    User.countDocuments({}),
+    User.countDocuments({ isActive: true }),
+    User.countDocuments({ role: 'admin' }),
+    User.countDocuments({ role: 'super_admin' }),
+  ])
+  return { total, active, inactive: total - active, admins: admins + superAdmins }
 }
 
 export async function getUserById(id) {
@@ -43,6 +54,12 @@ export async function updateUserStatus(id, isActive) {
   const user = await User.findByIdAndUpdate(id, { isActive }, { new: true }).select(SAFE_FIELDS)
   if (!user) throw Object.assign(new Error('User not found'), { status: 404 })
   return user
+}
+
+export async function sendNotification(id, { message, type }, sentBy) {
+  const user = await User.findById(id).select('_id')
+  if (!user) throw Object.assign(new Error('User not found'), { status: 404 })
+  return notificationsService.createNotification({ recipient: id, message, type, sentBy })
 }
 
 export async function deleteUser(id, requestingUserId) {

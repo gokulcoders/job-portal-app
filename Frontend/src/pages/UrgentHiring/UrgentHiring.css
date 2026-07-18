@@ -147,6 +147,14 @@
 }
 .uh-loc-label { color: var(--text-muted); font-size: 0.85rem; font-weight: 600; }
 
+.uh-featured { margin-bottom: 3rem; }
+.uh-featured-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 360px));
+  justify-content: start;
+  gap: 1.5rem;
+}
+
 .uh-empty {
   text-align: center;
   padding: 5rem 2rem;

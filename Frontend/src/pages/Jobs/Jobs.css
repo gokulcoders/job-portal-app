@@ -282,6 +282,14 @@
   box-shadow: 0 2px 8px rgba(59, 130, 246, 0.25);
 }
 
+.jb-featured { margin-bottom: 2.5rem; }
+.jb-featured-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 340px));
+  justify-content: start;
+  gap: 1.25rem;
+}
+
 /* ── Empty state ───────────────────────────────────────────────── */
 .jb-empty {
   display: flex;

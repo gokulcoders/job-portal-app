@@ -18,4 +18,11 @@ export const ENDPOINTS = {
   // Separate collections
   WALKIN_JOBS:        '/api/walkin-jobs',
   INTERNSHIP_JOBS:    '/api/internship-jobs',
+
+  // Featured posts (admin-managed banners shown on the public opportunities pages)
+  FEATURED_POSTS:        '/api/featured-posts',
+  FEATURED_POSTS_ADMIN:  '/api/featured-posts/admin',
+
+  // Notifications
+  NOTIFICATIONS:          '/api/notifications',
 }
