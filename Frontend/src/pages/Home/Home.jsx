@@ -18,6 +18,38 @@ const ChevronDown = () => (
     <polyline points="6 9 12 15 18 9" />
   </svg>
 )
+const PlayIcon = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3" /></svg>
+)
+const CompassIcon = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="10" /><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
+  </svg>
+)
+const BellIcon = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" /><path d="M13.73 21a2 2 0 0 1-3.46 0" />
+  </svg>
+)
+const StarIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z" /></svg>
+)
+
+// ── Real platform features (kept in sync with the actual product) ─────────
+const FEATURES = [
+  { icon: '🔍', title: 'Live Job Aggregation', desc: 'Fresh listings pulled continuously from LinkedIn and Naukri, deduplicated into one feed.' },
+  { icon: '⚡', title: 'Urgent Hiring Alerts', desc: 'A dedicated feed for roles companies need to fill immediately.' },
+  { icon: '🚶', title: 'Walk-in Drive Finder', desc: 'Track walk-in interview drives by date, venue and company.' },
+  { icon: '🎓', title: 'Internship Listings', desc: 'Internship opportunities filtered separately from full-time roles.' },
+  { icon: '🏢', title: 'Company Directory', desc: 'Browse companies actively hiring and see what they\'re posting.' },
+  { icon: '📚', title: 'Skill-Building Courses', desc: 'Video lessons with automatic progress tracking, right inside your dashboard.' },
+  { icon: '🧭', title: 'Career Advice', desc: 'Curated articles on resumes, interviews and career roadmaps.' },
+  { icon: '🔔', title: 'Smart Notifications', desc: 'Get notified about new matches and reminders to finish what you started.' },
+  { icon: '📌', title: 'Featured Opportunities', desc: 'Hand-picked urgent hiring banners curated by our team.' },
+  { icon: '📊', title: 'Personalized Dashboard', desc: 'One place for your profile, plan, notifications and saved activity.' },
+  { icon: '💳', title: 'Flexible Plans', desc: 'Start free, upgrade to Pro or Teams as your needs grow.' },
+  { icon: '🎨', title: 'Theme Personalization', desc: 'Dark mode, accent colors and layout — tuned to how you like to work.' },
+]
 
 export default function Home() {
   const navigate = useNavigate()
@@ -297,24 +329,91 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ════════ SECTION 7: POWERFUL FEATURES ════════ */}
+      {/* ════════ SECTION 7: EVERYTHING YOU GET ════════ */}
       <section className="hp-section hp-features">
         <div className="hp-container">
-          <h2 className="hp-title-lg hp-text-center">Powerful Features</h2>
+          <div className="hp-badge" style={{ display: 'block', width: 'fit-content', margin: '0 auto 1rem' }}>Everything In One Place</div>
+          <h2 className="hp-title-lg hp-text-center">Everything you get with HireVerse</h2>
+          <p className="hp-features-sub">No separate tools for job search, learning and career advice — it's all one dashboard.</p>
           <div className="hp-features-grid">
-            {[
-              'AI Job Matching', 'Resume Analyzer', 'Walk-in Finder', 'Internship Finder',
-              'Remote Jobs', 'Fresher Jobs', 'Startup Jobs', 'Referral Jobs', 'Daily Alerts',
-              'Salary Insights', 'Skill Recommendation', 'Career Dashboard', 'Bookmark Jobs',
-              'Application Tracking', 'Interview Preparation', 'Resume Builder', 'Company Insights',
-              'Recruiter Profiles', 'Location Search', 'Experience Filters', 'Expected Salary Filters',
-              'One Click Apply', 'Dark Mode', 'Fast Search'
-            ].map(f => (
-              <div key={f} className="hp-feature-card">
-                <div className="hp-f-icon">✦</div>
-                <div className="hp-f-text">{f}</div>
+            {FEATURES.map(f => (
+              <div key={f.title} className="hp-feature-card">
+                <div className="hp-f-icon">{f.icon}</div>
+                <div className="hp-f-title">{f.title}</div>
+                <div className="hp-f-desc">{f.desc}</div>
               </div>
             ))}
+          </div>
+          <div className="hp-features-cta">
+            <span>Every one of these is free to start.</span>
+            <Link to="/register" className="hp-inline-link">Create your free account →</Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ════════ SECTION 7B: GROW YOUR CAREER ════════ */}
+      <section className="hp-section hp-career">
+        <div className="hp-container hp-split hp-reverse">
+          <div className="hp-career-left">
+            <div className="hp-badge hp-badge-green">Beyond The Job Offer</div>
+            <h2 className="hp-title-lg">Land the job. Then grow the career.</h2>
+            <p className="hp-solution-desc">
+              HireVerse doesn't stop once you're hired. Learn in-demand skills with built-in
+              video courses, pick up exactly where you left off, and read career advice written
+              for wherever you are right now — all from the same dashboard where you found your job.
+            </p>
+            <div className="hp-career-points">
+              <div className="hp-career-point">
+                <div className="hp-cp-icon"><PlayIcon /></div>
+                <div>
+                  <div className="hp-cp-title">Courses with real progress tracking</div>
+                  <div className="hp-cp-desc">Every lesson you watch is saved automatically, so you always know how far you've come.</div>
+                </div>
+              </div>
+              <div className="hp-career-point">
+                <div className="hp-cp-icon"><CompassIcon /></div>
+                <div>
+                  <div className="hp-cp-title">Career advice, curated</div>
+                  <div className="hp-cp-desc">Resume tips, interview prep and role roadmaps — practical, not generic.</div>
+                </div>
+              </div>
+              <div className="hp-career-point">
+                <div className="hp-cp-icon"><BellIcon /></div>
+                <div>
+                  <div className="hp-cp-title">A nudge when you go quiet</div>
+                  <div className="hp-cp-desc">Started a course and drifted off? We'll remind you to pick it back up.</div>
+                </div>
+              </div>
+            </div>
+            <div className="hp-career-cta">
+              <Link to="/courses" className="hp-btn-primary">Explore Courses</Link>
+              <Link to="/career" className="hp-btn-outline">Read Career Advice</Link>
+            </div>
+          </div>
+
+          <div className="hp-career-right">
+            <div className="hp-career-graphic">
+              <div className="hp-cg-glow" />
+              <div className="hp-cg-course-card">
+                <div className="hp-cg-thumb"><PlayIcon /></div>
+                <div className="hp-cg-course-info">
+                  <div className="hp-cg-course-title">React Fundamentals</div>
+                  <div className="hp-cg-progress-track"><div className="hp-cg-progress-fill" style={{ width: '72%' }} /></div>
+                  <div className="hp-cg-progress-label">72% complete</div>
+                </div>
+              </div>
+              <div className="hp-cg-badge hp-cg-badge-1"><CheckIcon /> Lesson completed</div>
+              <div className="hp-cg-badge hp-cg-badge-2"><StarIcon /> New: Interview prep guide</div>
+              <div className="hp-cg-ring">
+                <svg viewBox="0 0 80 80" width="80" height="80">
+                  <circle cx="40" cy="40" r="34" fill="none" stroke="var(--border-color)" strokeWidth="7" />
+                  <circle cx="40" cy="40" r="34" fill="none" stroke="#10b981" strokeWidth="7" strokeLinecap="round"
+                    strokeDasharray={`${2 * Math.PI * 34}`} strokeDashoffset={`${2 * Math.PI * 34 * (1 - 0.82)}`}
+                    transform="rotate(-90 40 40)" />
+                </svg>
+                <div className="hp-cg-ring-label"><strong>82%</strong><span>avg. finish rate</span></div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
