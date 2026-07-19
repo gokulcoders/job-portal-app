@@ -51,6 +51,11 @@ export const updateProfile = asyncHandler(async (req, res) => {
   res.json({ user })
 })
 
+export const updatePlan = asyncHandler(async (req, res) => {
+  const user = await authService.updatePlan(req.user, req.body.plan)
+  res.json({ user })
+})
+
 export const changePassword = asyncHandler(async (req, res) => {
   await authService.changePassword(req.user, req.body)
   res.json({ message: 'Password changed successfully' })

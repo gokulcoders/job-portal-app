@@ -121,6 +121,7 @@ function buildNavSections(role) {
       section: 'SYSTEM',
       items: [
         { id: 'featured-posts', label: 'Featured Posts', icon: IconMegaphone, path: '/dashboard/featured-posts' },
+        { id: 'courses-manager', label: 'Courses',        icon: IconCourse,    path: '/dashboard/courses-manager' },
         { id: 'billing',  label: 'Billing',       icon: IconBilling, path: '/dashboard/billing' },
         { id: 'tenants',  label: 'All Tenants',   icon: IconGlobe,   path: '/dashboard/tenants' },
         { id: 'sys-settings', label: 'System Settings', icon: IconShield, path: '/dashboard/system-settings' },
@@ -157,6 +158,7 @@ function SidebarLogo({ collapsed }) {
 
 // ── Nav item (leaf) ───────────────────────────────────────────────────────
 function NavItem({ item, collapsed }) {
+  const { themeStore } = useStores()
   const Icon = item.icon
   return (
     <NavLink
@@ -164,6 +166,7 @@ function NavItem({ item, collapsed }) {
       end={item.path === '/dashboard'}
       className={({ isActive }) => `nav-item ${isActive ? 'nav-item--active' : ''}`}
       title={collapsed ? item.label : undefined}
+      onClick={() => themeStore.closeMobileSidebar()}
     >
       <span className="nav-item-icon"><Icon /></span>
       {!collapsed && <span className="nav-item-label">{item.label}</span>}
@@ -173,6 +176,7 @@ function NavItem({ item, collapsed }) {
 
 // ── Nav group ─────────────────────────────────────────────────────────────
 function NavGroup({ item, collapsed }) {
+  const { themeStore } = useStores()
   const location = useLocation()
   const hasActiveChild = item.children?.some((c) => c.path && location.pathname.startsWith(c.path))
   const [open, setOpen] = useState(hasActiveChild)
@@ -203,6 +207,7 @@ function NavGroup({ item, collapsed }) {
           {item.children.map((child) => (
             <NavLink key={child.id} to={child.path}
               className={({ isActive }) => `nav-subitem ${isActive ? 'nav-subitem--active' : ''}`}
+              onClick={() => themeStore.closeMobileSidebar()}
             >
               <span className="nav-subitem-dot"><IconDot /></span>
               <span>{child.label}</span>

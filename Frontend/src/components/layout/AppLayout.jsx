@@ -14,8 +14,11 @@ const AppLayout = observer(({ children }) => {
   const { themeStore } = useStores()
 
   return (
-    <div className={`app-shell ${themeStore.sidebarCollapsed ? 'app-shell--collapsed' : ''}`}>
+    <div className={`app-shell ${themeStore.sidebarCollapsed ? 'app-shell--collapsed' : ''} ${themeStore.mobileSidebarOpen ? 'app-shell--mobile-open' : ''}`}>
       <Sidebar />
+      {themeStore.mobileSidebarOpen && (
+        <div className="sidebar-backdrop" onClick={() => themeStore.closeMobileSidebar()} />
+      )}
       <div className="app-content-area">
         <Navbar />
         <main className="app-main">

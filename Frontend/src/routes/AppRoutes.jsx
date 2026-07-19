@@ -28,6 +28,12 @@ const Dashboard = lazy(() => import('@pages/Dashboard/Dashboard'))
 const Profile = lazy(() => import('@pages/Dashboard/Profile'))
 const Subscription = lazy(() => import('@pages/Dashboard/Subscription'))
 const FeaturedPostsManager = lazy(() => import('@pages/Dashboard/FeaturedPostsManager'))
+const CoursesManager = lazy(() => import('@pages/Dashboard/CoursesManager'))
+const CourseWatch = lazy(() => import('@pages/Courses/CourseWatch'))
+const Billing = lazy(() => import('@pages/Dashboard/Billing'))
+const Tenants = lazy(() => import('@pages/Dashboard/Tenants'))
+const SystemSettings = lazy(() => import('@pages/Dashboard/SystemSettings'))
+const Analytics = lazy(() => import('@pages/Dashboard/Analytics'))
 const About = lazy(() => import('@pages/About/About'))
 const Pricing = lazy(() => import('@pages/Pricing/Pricing'))
 const Contact = lazy(() => import('@pages/Contact/Contact'))
@@ -92,6 +98,7 @@ export default function AppRoutes() {
         <Route path="/internships" element={<RequireAuth><AppLayout><Internships /></AppLayout></RequireAuth>} />
         <Route path="/companies" element={<RequireAuth><AppLayout><Companies /></AppLayout></RequireAuth>} />
         <Route path="/courses" element={<RequireAuth><AppLayout><Courses /></AppLayout></RequireAuth>} />
+        <Route path="/courses/:id" element={<RequireAuth><AppLayout><CourseWatch /></AppLayout></RequireAuth>} />
         <Route path="/career" element={<RequireAuth><AppLayout><Career /></AppLayout></RequireAuth>} />
         <Route path="/about" element={<About />} />
         <Route path="/pricing" element={<Pricing />} />
@@ -113,9 +120,10 @@ export default function AppRoutes() {
         <Route path="/dashboard/users" element={<RequireAuth><RequireRole minRole="admin"><AppLayout><UserManagement /></AppLayout></RequireRole></RequireAuth>} />
         <Route path="/dashboard/analytics" element={<RequireAuth><RequireRole minRole="admin"><AppLayout><ComingSoon title="Analytics" /></AppLayout></RequireRole></RequireAuth>} />
         <Route path="/dashboard/featured-posts" element={<RequireAuth><RequireRole minRole="super_admin"><AppLayout><FeaturedPostsManager /></AppLayout></RequireRole></RequireAuth>} />
-        <Route path="/dashboard/billing" element={<RequireAuth><RequireRole minRole="super_admin"><AppLayout><ComingSoon title="Billing" /></AppLayout></RequireRole></RequireAuth>} />
-        <Route path="/dashboard/tenants" element={<RequireAuth><RequireRole minRole="super_admin"><AppLayout><ComingSoon title="All Tenants" /></AppLayout></RequireRole></RequireAuth>} />
-        <Route path="/dashboard/system-settings" element={<RequireAuth><RequireRole minRole="super_admin"><AppLayout><ComingSoon title="System Settings" /></AppLayout></RequireRole></RequireAuth>} />
+        <Route path="/dashboard/courses-manager" element={<RequireAuth><RequireRole minRole="super_admin"><AppLayout><CoursesManager /></AppLayout></RequireRole></RequireAuth>} />
+        <Route path="/dashboard/billing" element={<RequireAuth><RequireRole minRole="super_admin"><AppLayout><Billing /></AppLayout></RequireRole></RequireAuth>} />
+        <Route path="/dashboard/tenants" element={<RequireAuth><RequireRole minRole="super_admin"><AppLayout><Tenants /></AppLayout></RequireRole></RequireAuth>} />
+        <Route path="/dashboard/system-settings" element={<RequireAuth><RequireRole minRole="super_admin"><AppLayout><SystemSettings /></AppLayout></RequireRole></RequireAuth>} />
 
         {/* ── Catch-all ── */}
         <Route path="*" element={<NotFound />} />

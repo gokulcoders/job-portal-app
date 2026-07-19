@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { observer } from 'mobx-react-lite'
 import { useStores } from '@hooks/useStores'
+import { updateMyPlan } from '@services/api'
 import './Subscription.css'
 
 // ── Icons ─────────────────────────────────────────────────────────────────
@@ -67,8 +68,6 @@ const PLANS = [
   },
 ]
 
-const STORAGE_KEY = 'subscriptionPlan'
-
 function addMonths(date, n) {
   const d = new Date(date)
   d.setMonth(d.getMonth() + n)
@@ -116,34 +115,47 @@ const Subscription = observer(() => {
   const { authStore } = useStores()
   const user = authStore.user || {}
 
-  const [planId, setPlanId] = useState(() => localStorage.getItem(STORAGE_KEY) || 'free')
+  const [planId, setPlanId] = useState(user.plan || 'free')
   const [renewsAt] = useState(() => addMonths(new Date(), 1))
   const [toast, setToast] = useState(null)
   const [pendingPlan, setPendingPlan] = useState(null) // plan being switched to, awaiting confirm
   const [cancelling, setCancelling] = useState(false)
   const [busy, setBusy] = useState(false)
 
+  useEffect(() => {
+    authStore.loadProfile().then(() => setPlanId(authStore.user?.plan || 'free'))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   const plan = PLANS.find(p => p.id === planId) || PLANS[0]
   const showToast = (msg, type = 'success') => setToast({ msg, type })
 
   const applyPlanChange = async (target) => {
     setBusy(true)
-    await new Promise(r => setTimeout(r, 700)) // simulate checkout round-trip
-    localStorage.setItem(STORAGE_KEY, target.id)
-    setPlanId(target.id)
-    setBusy(false)
-    setPendingPlan(null)
-    showToast(target.id === 'free' ? 'Subscription cancelled' : `You're now on the ${target.name} plan`)
+    try {
+      await updateMyPlan(target.id) // no real payment gateway — updates the account's plan directly
+      setPlanId(target.id)
+      showToast(target.id === 'free' ? 'Subscription cancelled' : `You're now on the ${target.name} plan`)
+    } catch {
+      showToast('Failed to update your plan', 'error')
+    } finally {
+      setBusy(false)
+      setPendingPlan(null)
+    }
   }
 
   const handleCancelConfirm = async () => {
     setBusy(true)
-    await new Promise(r => setTimeout(r, 700))
-    localStorage.setItem(STORAGE_KEY, 'free')
-    setPlanId('free')
-    setBusy(false)
-    setCancelling(false)
-    showToast('Subscription cancelled — you have been moved to the Free plan')
+    try {
+      await updateMyPlan('free')
+      setPlanId('free')
+      showToast('Subscription cancelled — you have been moved to the Free plan')
+    } catch {
+      showToast('Failed to cancel your plan', 'error')
+    } finally {
+      setBusy(false)
+      setCancelling(false)
+    }
   }
 
   const renewalLabel = plan.id === 'free'

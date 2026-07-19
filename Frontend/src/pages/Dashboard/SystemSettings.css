@@ -1,0 +1,85 @@
+.sys-root { max-width: 700px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+.sys-header { margin-bottom: 1.75rem; }
+.sys-title  { font-size: 1.5rem; font-weight: 800; color: var(--text-base); margin: 0 0 0.2rem; letter-spacing: -0.02em; }
+.sys-sub    { font-size: 0.85rem; color: var(--text-muted); margin: 0; }
+
+.sys-card {
+  background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px;
+  padding: 1.75rem; box-shadow: var(--shadow-sm);
+}
+
+.sys-section { margin-bottom: 2rem; }
+.sys-section:last-of-type { margin-bottom: 1.5rem; }
+.sys-section-title { font-size: 0.95rem; font-weight: 700; color: var(--text-base); margin: 0 0 1.1rem; }
+
+.sys-field { display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 1rem; }
+.sys-label {
+  font-size: 0.75rem; font-weight: 700; color: var(--text-muted);
+  text-transform: uppercase; letter-spacing: 0.04em;
+}
+.sys-optional { font-size: 0.68rem; color: var(--text-subtle); font-weight: 500; text-transform: none; letter-spacing: 0; }
+.sys-input {
+  padding: 0.65rem 0.85rem; border: 1.5px solid var(--border-color); border-radius: 10px;
+  font-size: 0.87rem; color: var(--text-base); background: var(--bg-page);
+  outline: none; transition: all 0.2s; font-family: inherit; width: 100%; box-sizing: border-box;
+}
+.sys-input:focus { border-color: var(--color-primary); background: var(--bg-card); box-shadow: 0 0 0 3px var(--color-primary-light); }
+
+/* Toggle rows */
+.sys-toggle-row {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: 0.9rem 0; border-bottom: 1px solid var(--border-color);
+}
+.sys-toggle-row:last-of-type { border-bottom: none; }
+.sys-toggle-label { font-size: 0.87rem; font-weight: 600; color: var(--text-base); margin: 0 0 0.15rem; }
+.sys-toggle-desc  { font-size: 0.78rem; color: var(--text-muted); margin: 0; }
+
+.sys-toggle {
+  width: 42px; height: 24px; border-radius: 99px; border: none; background: var(--border-color);
+  position: relative; cursor: pointer; flex-shrink: 0; transition: background 0.2s; padding: 0;
+}
+.sys-toggle--on { background: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover)); }
+.sys-toggle:disabled { opacity: 0.5; cursor: not-allowed; }
+.sys-toggle-knob {
+  position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 50%;
+  background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.3); transition: transform 0.2s;
+}
+.sys-toggle--on .sys-toggle-knob { transform: translateX(18px); }
+
+.sys-warning {
+  margin-top: 0.75rem; padding: 0.75rem 1rem; border-radius: 10px;
+  background: #fef3c7; color: #92400e; font-size: 0.82rem; font-weight: 600;
+}
+
+.sys-form-actions { padding-top: 0.5rem; }
+.sys-btn-primary {
+  padding: 0.7rem 1.6rem; border: none; border-radius: 10px;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover));
+  color: white; font-size: 0.9rem; font-weight: 700; cursor: pointer;
+  display: flex; align-items: center; gap: 0.45rem;
+  font-family: inherit; transition: opacity 0.2s, transform 0.15s;
+  box-shadow: 0 4px 12px rgba(37,99,235,.25);
+}
+.sys-btn-primary:hover:not(:disabled) { opacity: 0.9; transform: translateY(-1px); }
+.sys-btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.sys-spin {
+  width: 14px; height: 14px; border: 2px solid rgba(255,255,255,.4);
+  border-top-color: white; border-radius: 50%; animation: sys-spin 0.7s linear infinite; display: inline-block;
+}
+@keyframes sys-spin { to { transform: rotate(360deg); } }
+
+.sys-empty { padding: 4rem 2rem; text-align: center; color: var(--text-muted); font-size: 0.9rem; }
+
+.sys-toast {
+  position: fixed; top: 1.25rem; right: 1.25rem; z-index: 9999;
+  display: flex; align-items: center; gap: 0.75rem; justify-content: space-between;
+  padding: 0.85rem 1.25rem; border-radius: 12px; min-width: 260px;
+  font-size: 0.875rem; font-weight: 600; box-shadow: 0 8px 24px rgba(0,0,0,.12);
+  animation: sys-toast-in 0.3s cubic-bezier(.4,0,.2,1);
+}
+@keyframes sys-toast-in { from { opacity:0; transform: translateY(-12px); } to { opacity:1; transform: none; } }
+.sys-toast--success { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
+.sys-toast--error   { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+.sys-toast button    { background: none; border: none; cursor: pointer; color: inherit; font-size: 1rem; line-height: 1; padding: 0; }

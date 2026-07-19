@@ -1,9 +1,9 @@
 import User from '../../models/User.js'
 import * as notificationsService from '../notifications/notifications.service.js'
 
-const SAFE_FIELDS = 'name email role isVerified isActive city country lastLoginAt createdAt'
+const SAFE_FIELDS = 'name email role isVerified isActive city country lastLoginAt createdAt plan tenantId'
 
-export async function listUsers({ page = 1, limit = 20, q, role, status }) {
+export async function listUsers({ page = 1, limit = 20, q, role, status, plan }) {
   const filter = {}
   if (q) {
     const re = new RegExp(q.trim(), 'i')
@@ -12,6 +12,7 @@ export async function listUsers({ page = 1, limit = 20, q, role, status }) {
   if (role) filter.role = role
   if (status === 'active')   filter.isActive = true
   if (status === 'inactive') filter.isActive = false
+  if (plan) filter.plan = plan
 
   const skip  = (page - 1) * limit
   const total = await User.countDocuments(filter)
@@ -52,6 +53,20 @@ export async function updateUserRole(id, role, requestingRole) {
 
 export async function updateUserStatus(id, isActive) {
   const user = await User.findByIdAndUpdate(id, { isActive }, { new: true }).select(SAFE_FIELDS)
+  if (!user) throw Object.assign(new Error('User not found'), { status: 404 })
+  return user
+}
+
+export async function updateUserPlan(id, plan) {
+  const valid = ['free', 'pro', 'teams']
+  if (!valid.includes(plan)) throw Object.assign(new Error('Invalid plan'), { status: 400 })
+  const user = await User.findByIdAndUpdate(id, { plan }, { new: true }).select(SAFE_FIELDS)
+  if (!user) throw Object.assign(new Error('User not found'), { status: 404 })
+  return user
+}
+
+export async function updateUserTenant(id, tenantId) {
+  const user = await User.findByIdAndUpdate(id, { tenantId: tenantId || null }, { new: true }).select(SAFE_FIELDS)
   if (!user) throw Object.assign(new Error('User not found'), { status: 404 })
   return user
 }

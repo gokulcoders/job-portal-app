@@ -22,8 +22,8 @@ export async function deleteJob(id) {
 }
 
 // ── Admin ────────────────────────────────────────────────────────────────────
-export async function fetchAdminUsers({ page = 1, limit = 20, q, role, status } = {}) {
-  const { data } = await axiosInstance.get(ENDPOINTS.ADMIN_USERS, { params: { page, limit, q, role, status } })
+export async function fetchAdminUsers({ page = 1, limit = 20, q, role, status, plan } = {}) {
+  const { data } = await axiosInstance.get(ENDPOINTS.ADMIN_USERS, { params: { page, limit, q, role, status, plan } })
   return data
 }
 
@@ -52,6 +52,66 @@ export async function sendAdminUserNotification(id, { message, type }) {
   return data
 }
 
+export async function updateAdminUserPlan(id, plan) {
+  const { data } = await axiosInstance.patch(`${ENDPOINTS.ADMIN_USERS}/${id}/plan`, { plan })
+  return data
+}
+
+export async function updateAdminUserTenant(id, tenantId) {
+  const { data } = await axiosInstance.patch(`${ENDPOINTS.ADMIN_USERS}/${id}/tenant`, { tenantId })
+  return data
+}
+
+// ── Plan (self-service) ──────────────────────────────────────────────────────
+export async function updateMyPlan(plan) {
+  const { data } = await axiosInstance.patch(ENDPOINTS.UPDATE_PLAN, { plan })
+  return data.user
+}
+
+// ── System settings (super_admin) ───────────────────────────────────────────
+export async function fetchSettings() {
+  const { data } = await axiosInstance.get(ENDPOINTS.ADMIN_SETTINGS)
+  return data.settings
+}
+
+export async function updateSettings(payload) {
+  const { data } = await axiosInstance.patch(ENDPOINTS.ADMIN_SETTINGS, payload)
+  return data.settings
+}
+
+// ── Tenants (super_admin) ───────────────────────────────────────────────────
+export async function fetchTenants() {
+  const { data } = await axiosInstance.get(ENDPOINTS.ADMIN_TENANTS)
+  return data.tenants
+}
+
+export async function createTenant(payload) {
+  const { data } = await axiosInstance.post(ENDPOINTS.ADMIN_TENANTS, payload)
+  return data.tenant
+}
+
+export async function updateTenant(id, payload) {
+  const { data } = await axiosInstance.patch(`${ENDPOINTS.ADMIN_TENANTS}/${id}`, payload)
+  return data.tenant
+}
+
+export async function deleteTenant(id) {
+  const { data } = await axiosInstance.delete(`${ENDPOINTS.ADMIN_TENANTS}/${id}`)
+  return data
+}
+
+// ── Billing (super_admin) ───────────────────────────────────────────────────
+export async function fetchBillingStats() {
+  const { data } = await axiosInstance.get(ENDPOINTS.ADMIN_BILLING_STATS)
+  return data.stats
+}
+
+// ── Analytics (admin+) ───────────────────────────────────────────────────────
+export async function fetchAnalyticsOverview() {
+  const { data } = await axiosInstance.get(ENDPOINTS.ADMIN_ANALYTICS)
+  return data
+}
+
 // ── Notifications (own inbox) ───────────────────────────────────────────────
 export async function fetchMyNotifications() {
   const { data } = await axiosInstance.get(`${ENDPOINTS.NOTIFICATIONS}/me`)
@@ -65,6 +125,52 @@ export async function markNotificationRead(id) {
 
 export async function markAllNotificationsRead() {
   const { data } = await axiosInstance.patch(`${ENDPOINTS.NOTIFICATIONS}/read-all`)
+  return data
+}
+
+// ── Courses ──────────────────────────────────────────────────────────────────
+export async function fetchCourses({ q, category, level } = {}) {
+  const { data } = await axiosInstance.get(ENDPOINTS.COURSES, { params: { q, category, level } })
+  return data.courses
+}
+
+export async function fetchCourse(id) {
+  const { data } = await axiosInstance.get(`${ENDPOINTS.COURSES}/${id}`)
+  return data.course
+}
+
+export async function fetchMyCourseProgress(id) {
+  const { data } = await axiosInstance.get(`${ENDPOINTS.COURSES}/${id}/progress`)
+  return data.progress
+}
+
+export async function saveCourseProgress(id, { watchedSeconds, durationSeconds }) {
+  const { data } = await axiosInstance.post(`${ENDPOINTS.COURSES}/${id}/progress`, { watchedSeconds, durationSeconds })
+  return data.progress
+}
+
+export async function fetchMyCoursesInProgress() {
+  const { data } = await axiosInstance.get(`${ENDPOINTS.COURSES}/my-progress`)
+  return data.progress
+}
+
+export async function fetchAdminCourses() {
+  const { data } = await axiosInstance.get(`${ENDPOINTS.COURSES_ADMIN}/all`)
+  return data.courses
+}
+
+export async function createCourse(payload) {
+  const { data } = await axiosInstance.post(ENDPOINTS.COURSES_ADMIN, payload)
+  return data.course
+}
+
+export async function updateCourse(id, payload) {
+  const { data } = await axiosInstance.patch(`${ENDPOINTS.COURSES_ADMIN}/${id}`, payload)
+  return data.course
+}
+
+export async function deleteCourse(id) {
+  const { data } = await axiosInstance.delete(`${ENDPOINTS.COURSES_ADMIN}/${id}`)
   return data
 }
 

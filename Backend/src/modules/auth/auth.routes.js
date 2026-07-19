@@ -19,6 +19,7 @@ router.post('/reset-password', otpLimiter, authController.resetPassword)
 
 router.get('/me', requireAuth, authController.getMe)
 router.patch('/me', requireAuth, authController.updateProfile)
+router.patch('/plan', requireAuth, authController.updatePlan)
 router.post('/change-password', requireAuth, authController.changePassword)
 
 export default router

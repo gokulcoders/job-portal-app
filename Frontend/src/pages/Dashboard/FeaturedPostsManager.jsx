@@ -110,6 +110,10 @@ export default function FeaturedPostsManager() {
       showToast('Title and link are required', 'error')
       return
     }
+    if (!form.lastDate) {
+      showToast('Last date is required', 'error')
+      return
+    }
     setSubmitting(true)
     try {
       const fd = new FormData()
@@ -214,8 +218,16 @@ export default function FeaturedPostsManager() {
               <input className="uhm-input" value={form.link} onChange={e => setForm(f => ({ ...f, link: e.target.value }))} placeholder="https://…" type="url" />
             </div>
             <div className="uhm-field">
-              <label className="uhm-label">Last date <span className="uhm-optional">optional</span></label>
-              <input className="uhm-input" value={form.lastDate} onChange={e => setForm(f => ({ ...f, lastDate: e.target.value }))} placeholder="e.g. 30 Jul 2026" />
+              <label className="uhm-label">Last date *</label>
+              <input
+                className="uhm-input"
+                type="date"
+                value={form.lastDate}
+                min={new Date().toISOString().slice(0, 10)}
+                onChange={e => setForm(f => ({ ...f, lastDate: e.target.value }))}
+                required
+              />
+              <span className="uhm-field-hint">Post is auto-deleted (image included) the day after this date</span>
             </div>
           </div>
 
@@ -254,6 +266,7 @@ export default function FeaturedPostsManager() {
                     </div>
                     <p className="uhm-post-meta">
                       {[post.company, post.place].filter(Boolean).join(' · ') || '—'}
+                      {post.lastDate && ` · Expires ${new Date(post.lastDate).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}`}
                     </p>
                     <a className="uhm-post-link" href={post.link} target="_blank" rel="noopener noreferrer">
                       <LinkIcon /> {post.link}

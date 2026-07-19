@@ -782,14 +782,24 @@ body {
    ================================================================ */
 @media (max-width: 768px) {
   .sidebar {
+    width: var(--sidebar-width) !important;
     transform: translateX(-100%);
-    transition: transform 0.25s ease, width 0.25s ease;
+    transition: transform 0.25s ease;
+    z-index: 250;
   }
   .app-shell--mobile-open .sidebar {
     transform: translateX(0);
+    box-shadow: var(--shadow-lg);
   }
   .app-content-area {
     margin-left: 0 !important;
+  }
+  .sidebar-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 240;
+    animation: fade-in 0.2s ease;
   }
   .navbar-search { width: 150px; }
   .theme-panel { width: 100%; }

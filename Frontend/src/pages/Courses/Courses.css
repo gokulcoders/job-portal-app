@@ -7,20 +7,58 @@
 .crs-search { max-width: 480px; margin: 0 0 1.25rem; }
 .hv-page-hero .hv-popular { justify-content: flex-start; margin-top: 0; }
 
+/* Roadmap.sh referral banner */
+.crs-roadmap-banner {
+  display: flex; align-items: center; gap: 1rem;
+  background: linear-gradient(135deg, #f5f3ff, #fdf4ff);
+  border: 1px solid #e9d5ff; border-radius: 16px;
+  padding: 1rem 1.25rem; margin-bottom: 2rem;
+  text-decoration: none; color: inherit;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.crs-roadmap-banner:hover { border-color: #d8b4fe; box-shadow: 0 6px 20px rgba(147, 51, 234, 0.1); }
+.crs-roadmap-icon {
+  width: 42px; height: 42px; border-radius: 12px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: #fff; color: #9333ea; border: 1px solid #e9d5ff;
+}
+.crs-roadmap-text { display: flex; flex-direction: column; gap: 0.15rem; flex: 1; min-width: 0; }
+.crs-roadmap-text strong { font-size: 0.9rem; color: #18181b; }
+.crs-roadmap-text span { font-size: 0.8rem; color: #71717a; }
+.crs-roadmap-cta {
+  display: flex; align-items: center; gap: 0.4rem; flex-shrink: 0;
+  font-size: 0.85rem; font-weight: 700; color: #9333ea;
+  border: 1.5px solid #e9d5ff; background: #fff;
+  border-radius: 999px; padding: 0.5rem 1rem; white-space: nowrap;
+}
+.crs-roadmap-banner:hover .crs-roadmap-cta { background: #f5e9ff; }
+
+@media (max-width: 560px) {
+  .crs-roadmap-banner { flex-wrap: wrap; }
+  .crs-roadmap-cta { width: 100%; justify-content: center; }
+}
+
 .crs-grid {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem;
 }
 
 .crs-card {
   border: 1px solid #f1f0f4; border-radius: 18px; overflow: hidden;
-  display: flex; flex-direction: column;
-  transition: box-shadow 0.15s, border-color 0.15s;
+  display: flex; flex-direction: column; cursor: pointer;
+  transition: box-shadow 0.15s, border-color 0.15s, transform 0.15s;
 }
-.crs-card:hover { border-color: #e9d5ff; box-shadow: 0 8px 24px rgba(120, 60, 180, 0.08); }
+.crs-card:hover { border-color: #e9d5ff; box-shadow: 0 8px 24px rgba(120, 60, 180, 0.08); transform: translateY(-2px); }
+
+.crs-card-skeleton {
+  height: 280px; background: linear-gradient(90deg, #f4f4f5 25%, #ececef 37%, #f4f4f5 63%);
+  background-size: 400% 100%; animation: crs-shimmer 1.4s ease infinite; cursor: default;
+}
+@keyframes crs-shimmer { 0% { background-position: 100% 50%; } 100% { background-position: 0 50%; } }
 
 .crs-thumb {
-  height: 110px; position: relative;
-  display: flex; align-items: center; justify-content: center; color: #fff;
+  height: 150px; position: relative;
+  background-size: cover; background-position: center; background-color: #18181b;
+  display: flex; align-items: flex-start; justify-content: flex-end; color: #fff;
 }
 .crs-level {
   position: absolute; top: 0.75rem; right: 0.75rem;

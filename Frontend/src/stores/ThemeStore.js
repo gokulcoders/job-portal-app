@@ -14,6 +14,7 @@ class ThemeStore {
   themeColor     = 'blue'      // 'blue'|'black'|'green'|'purple'|'orange'
   layoutMode     = 'collapsible' // 'collapsible'|'stacked'|'top-bar'|'frameless'|'overlay'|'blank'
   sidebarCollapsed = false
+  mobileSidebarOpen = false
   themeConfigOpen  = false
 
   constructor() {
@@ -32,7 +33,14 @@ class ThemeStore {
   setDirection(d)       { this.direction = d }
   setThemeColor(c)      { this.themeColor = c }
   setLayoutMode(l)      { this.layoutMode = l }
-  toggleSidebar()       { this.sidebarCollapsed = !this.sidebarCollapsed }
+  toggleSidebar() {
+    if (typeof window !== 'undefined' && window.innerWidth <= 768) {
+      this.mobileSidebarOpen = !this.mobileSidebarOpen
+    } else {
+      this.sidebarCollapsed = !this.sidebarCollapsed
+    }
+  }
+  closeMobileSidebar()   { this.mobileSidebarOpen = false }
   openThemeConfig()     { this.themeConfigOpen = true }
   closeThemeConfig()    { this.themeConfigOpen = false }
 

@@ -5,6 +5,7 @@ import { setOtp, consumeOtp } from '../../utils/otp.js'
 import { sendOtpEmail } from '../../utils/sendEmail.js'
 import { geoLookup } from '../../utils/geoLookup.js'
 import { issueTokens, verifyRefreshToken, signAccessToken, signRefreshToken } from '../../utils/tokens.js'
+import { getSettings } from '../settings/settings.service.js'
 
 export function sanitizeUser(user) {
   return {
@@ -13,6 +14,7 @@ export function sanitizeUser(user) {
     email: user.email,
     role: user.role,
     tenantId: user.tenantId,
+    plan: user.plan,
     isVerified: user.isVerified,
     isActive: user.isActive,
     phone: user.phone,
@@ -27,6 +29,9 @@ export function sanitizeUser(user) {
 }
 
 export async function register({ name, email, password, ipAddress }) {
+  const settings = await getSettings()
+  if (!settings.allowRegistrations) throw new ApiError(403, 'New registrations are temporarily closed')
+
   const existing = await User.findOne({ email })
   if (existing?.isVerified) throw new ApiError(409, 'Email is already registered')
 
@@ -80,6 +85,11 @@ export async function login({ email, password }) {
 
   const matches = await bcrypt.compare(password, user.password)
   if (!matches) throw new ApiError(401, 'Invalid email or password')
+
+  if (user.role === 'user') {
+    const settings = await getSettings()
+    if (settings.maintenanceMode) throw new ApiError(503, 'The site is currently down for maintenance. Please check back soon.')
+  }
 
   user.lastLoginAt = new Date()
   const tokens = await issueTokens(user)
@@ -150,6 +160,13 @@ export async function updateProfile({ id }, updates) {
   }
 
   const user = await User.findByIdAndUpdate(id, patch, { new: true, runValidators: true })
+  if (!user) throw new ApiError(404, 'User not found')
+  return sanitizeUser(user)
+}
+
+export async function updatePlan({ id }, plan) {
+  if (!['free', 'pro', 'teams'].includes(plan)) throw new ApiError(400, 'Invalid plan')
+  const user = await User.findByIdAndUpdate(id, { plan }, { new: true })
   if (!user) throw new ApiError(404, 'User not found')
   return sanitizeUser(user)
 }

@@ -18,6 +18,7 @@ const userSchema = new mongoose.Schema(
 
     role: { type: String, enum: ['user', 'admin', 'super_admin'], default: 'user' },
     tenantId: { type: String, default: null },
+    plan: { type: String, enum: ['free', 'pro', 'teams'], default: 'free' },
 
     isVerified: { type: Boolean, default: false },
     isActive: { type: Boolean, default: true },

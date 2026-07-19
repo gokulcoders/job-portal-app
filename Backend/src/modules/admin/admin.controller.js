@@ -5,11 +5,11 @@ function asyncHandler(fn) {
 }
 
 export const listUsers = asyncHandler(async (req, res) => {
-  const { page, limit, q, role, status } = req.query
+  const { page, limit, q, role, status, plan } = req.query
   const result = await adminService.listUsers({
     page:   parseInt(page)  || 1,
     limit:  parseInt(limit) || 20,
-    q, role, status,
+    q, role, status, plan,
   })
   res.json(result)
 })
@@ -33,6 +33,16 @@ export const updateUserRole = asyncHandler(async (req, res) => {
 export const updateUserStatus = asyncHandler(async (req, res) => {
   const { isActive } = req.body
   const user = await adminService.updateUserStatus(req.params.id, isActive)
+  res.json({ user })
+})
+
+export const updateUserPlan = asyncHandler(async (req, res) => {
+  const user = await adminService.updateUserPlan(req.params.id, req.body.plan)
+  res.json({ user })
+})
+
+export const updateUserTenant = asyncHandler(async (req, res) => {
+  const user = await adminService.updateUserTenant(req.params.id, req.body.tenantId)
   res.json({ user })
 })
 

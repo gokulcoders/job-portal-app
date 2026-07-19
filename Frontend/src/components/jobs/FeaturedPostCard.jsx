@@ -49,7 +49,11 @@ export default function FeaturedPostCard({ post }) {
         {(post.place || post.lastDate) && (
           <div className="fp-meta">
             {post.place && <span className="fp-meta-item"><PinIcon />{post.place}</span>}
-            {post.lastDate && <span className="fp-meta-item"><ClockIcon />{post.lastDate}</span>}
+            {post.lastDate && (
+              <span className="fp-meta-item">
+                <ClockIcon /> Apply by {new Date(post.lastDate).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
+              </span>
+            )}
           </div>
         )}
 

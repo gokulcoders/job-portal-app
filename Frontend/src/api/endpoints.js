@@ -25,4 +25,17 @@ export const ENDPOINTS = {
 
   // Notifications
   NOTIFICATIONS:          '/api/notifications',
+
+  // Courses
+  COURSES:                '/api/courses',
+  COURSES_ADMIN:          '/api/courses/admin',
+
+  // Plan (self-service)
+  UPDATE_PLAN:            '/auth/plan',
+
+  // Super-admin: settings, tenants, billing
+  ADMIN_SETTINGS:         '/api/admin/settings',
+  ADMIN_TENANTS:          '/api/admin/tenants',
+  ADMIN_BILLING_STATS:    '/api/admin/billing/stats',
+  ADMIN_ANALYTICS:        '/api/admin/analytics/overview',
 }
