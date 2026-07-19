@@ -112,6 +112,22 @@ export async function fetchAnalyticsOverview() {
   return data
 }
 
+// ── System health (super_admin) ─────────────────────────────────────────────
+export async function fetchSystemHealth() {
+  const { data } = await axiosInstance.get(ENDPOINTS.ADMIN_SYSTEM_HEALTH)
+  return data
+}
+
+export async function flushSystemCache() {
+  const { data } = await axiosInstance.post(ENDPOINTS.ADMIN_SYSTEM_FLUSH_CACHE)
+  return data
+}
+
+export async function runSystemCleanup() {
+  const { data } = await axiosInstance.post(ENDPOINTS.ADMIN_SYSTEM_RUN_CLEANUP)
+  return data
+}
+
 // ── Notifications (own inbox) ───────────────────────────────────────────────
 export async function fetchMyNotifications() {
   const { data } = await axiosInstance.get(`${ENDPOINTS.NOTIFICATIONS}/me`)

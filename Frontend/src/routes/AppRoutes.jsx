@@ -33,6 +33,7 @@ const CourseWatch = lazy(() => import('@pages/Courses/CourseWatch'))
 const Billing = lazy(() => import('@pages/Dashboard/Billing'))
 const Tenants = lazy(() => import('@pages/Dashboard/Tenants'))
 const SystemSettings = lazy(() => import('@pages/Dashboard/SystemSettings'))
+const SystemHealth = lazy(() => import('@pages/Dashboard/SystemHealth'))
 const Analytics = lazy(() => import('@pages/Dashboard/Analytics'))
 const About = lazy(() => import('@pages/About/About'))
 const Pricing = lazy(() => import('@pages/Pricing/Pricing'))
@@ -66,16 +67,6 @@ const RequireRole = observer(({ minRole, children }) => {
     ? children
     : <Navigate to="/dashboard/profile" replace />
 })
-
-// ── Stub page for routes under construction ───────────────────────────
-function ComingSoon({ title }) {
-  return (
-    <div style={{ padding: '2rem', maxWidth: 600 }}>
-      <h1 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#0f172a', marginBottom: '0.5rem' }}>{title}</h1>
-      <p style={{ color: '#64748b', fontSize: '0.9rem' }}>This section is under construction. Check back soon.</p>
-    </div>
-  )
-}
 
 // ── Redirect logged-in users away from login page ────────────────────
 const GuestOnly = observer(({ children }) => {
@@ -118,12 +109,13 @@ export default function AppRoutes() {
         <Route path="/dashboard/profile" element={<RequireAuth><AppLayout><Profile /></AppLayout></RequireAuth>} />
         <Route path="/dashboard/subscription" element={<RequireAuth><AppLayout><Subscription /></AppLayout></RequireAuth>} />
         <Route path="/dashboard/users" element={<RequireAuth><RequireRole minRole="admin"><AppLayout><UserManagement /></AppLayout></RequireRole></RequireAuth>} />
-        <Route path="/dashboard/analytics" element={<RequireAuth><RequireRole minRole="admin"><AppLayout><ComingSoon title="Analytics" /></AppLayout></RequireRole></RequireAuth>} />
+        <Route path="/dashboard/analytics" element={<RequireAuth><RequireRole minRole="admin"><AppLayout><Analytics /></AppLayout></RequireRole></RequireAuth>} />
         <Route path="/dashboard/featured-posts" element={<RequireAuth><RequireRole minRole="super_admin"><AppLayout><FeaturedPostsManager /></AppLayout></RequireRole></RequireAuth>} />
         <Route path="/dashboard/courses-manager" element={<RequireAuth><RequireRole minRole="super_admin"><AppLayout><CoursesManager /></AppLayout></RequireRole></RequireAuth>} />
         <Route path="/dashboard/billing" element={<RequireAuth><RequireRole minRole="super_admin"><AppLayout><Billing /></AppLayout></RequireRole></RequireAuth>} />
         <Route path="/dashboard/tenants" element={<RequireAuth><RequireRole minRole="super_admin"><AppLayout><Tenants /></AppLayout></RequireRole></RequireAuth>} />
         <Route path="/dashboard/system-settings" element={<RequireAuth><RequireRole minRole="super_admin"><AppLayout><SystemSettings /></AppLayout></RequireRole></RequireAuth>} />
+        <Route path="/dashboard/system-health" element={<RequireAuth><RequireRole minRole="super_admin"><AppLayout><SystemHealth /></AppLayout></RequireRole></RequireAuth>} />
 
         {/* ── Catch-all ── */}
         <Route path="*" element={<NotFound />} />

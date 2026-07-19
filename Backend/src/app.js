@@ -13,6 +13,7 @@ import settingsRoutes from './modules/settings/settings.routes.js'
 import tenantsRoutes from './modules/tenants/tenants.routes.js'
 import billingRoutes from './modules/billing/billing.routes.js'
 import analyticsRoutes from './modules/analytics/analytics.routes.js'
+import systemRoutes from './modules/system/system.routes.js'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 
 const app = express()
@@ -35,6 +36,7 @@ app.use('/api/admin/settings', settingsRoutes)
 app.use('/api/admin/tenants', tenantsRoutes)
 app.use('/api/admin/billing', billingRoutes)
 app.use('/api/admin/analytics', analyticsRoutes)
+app.use('/api/admin/system', systemRoutes)
 
 app.use(notFound)
 app.use(errorHandler)

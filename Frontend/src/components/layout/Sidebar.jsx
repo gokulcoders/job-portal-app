@@ -71,6 +71,12 @@ const IconWalkIn = () => (
     <circle cx="12" cy="5" r="1"/><path d="M9 20l3-8 3 8"/><path d="M6 9l6 1 6-1"/>
   </svg>
 )
+const IconServer = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2" y="3" width="20" height="7" rx="1.5"/><rect x="2" y="14" width="20" height="7" rx="1.5"/>
+    <line x1="6" y1="6.5" x2="6.01" y2="6.5"/><line x1="6" y1="17.5" x2="6.01" y2="17.5"/>
+  </svg>
+)
 
 function buildNavSections(role) {
   const sections = [
@@ -125,6 +131,7 @@ function buildNavSections(role) {
         { id: 'billing',  label: 'Billing',       icon: IconBilling, path: '/dashboard/billing' },
         { id: 'tenants',  label: 'All Tenants',   icon: IconGlobe,   path: '/dashboard/tenants' },
         { id: 'sys-settings', label: 'System Settings', icon: IconShield, path: '/dashboard/system-settings' },
+        { id: 'sys-health', label: 'System Health', icon: IconServer, path: '/dashboard/system-health' },
       ],
     })
   }

@@ -38,4 +38,7 @@ export const ENDPOINTS = {
   ADMIN_TENANTS:          '/api/admin/tenants',
   ADMIN_BILLING_STATS:    '/api/admin/billing/stats',
   ADMIN_ANALYTICS:        '/api/admin/analytics/overview',
+  ADMIN_SYSTEM_HEALTH:         '/api/admin/system/health',
+  ADMIN_SYSTEM_FLUSH_CACHE:    '/api/admin/system/maintenance/flush-cache',
+  ADMIN_SYSTEM_RUN_CLEANUP:    '/api/admin/system/maintenance/run-cleanup',
 }

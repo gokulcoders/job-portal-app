@@ -1,0 +1,112 @@
+.sh-root { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+.sh-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 1.75rem; flex-wrap: wrap; }
+.sh-title  { font-size: 1.5rem; font-weight: 800; color: var(--text-base); margin: 0 0 0.2rem; letter-spacing: -0.02em; }
+.sh-sub    { font-size: 0.85rem; color: var(--text-muted); margin: 0; }
+
+.sh-refresh-btn {
+  display: flex; align-items: center; gap: 0.5rem;
+  padding: 0.55rem 1rem; border-radius: 10px; border: 1.5px solid var(--border-color);
+  background: var(--bg-card); color: var(--text-base); font-size: 0.85rem; font-weight: 600;
+  cursor: pointer; font-family: inherit; transition: all 0.2s;
+}
+.sh-refresh-btn:hover:not(:disabled) { border-color: var(--color-primary); color: var(--color-primary); }
+.sh-refresh-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+.sh-spin { display: inline-flex; animation: sh-rotate 0.8s linear infinite; }
+@keyframes sh-rotate { to { transform: rotate(360deg); } }
+
+.sh-grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.1rem; margin-bottom: 1.1rem; }
+
+.sh-card {
+  background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px;
+  padding: 1.5rem; box-shadow: var(--shadow-sm);
+}
+
+.sh-card-head { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.1rem; }
+.sh-card-icon {
+  width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.sh-card-title { font-size: 0.95rem; font-weight: 700; color: var(--text-base); margin: 0; }
+.sh-card-desc  { font-size: 0.75rem; color: var(--text-muted); }
+.sh-card-head > div:nth-child(2) { flex: 1; display: flex; flex-direction: column; gap: 0.1rem; min-width: 0; }
+
+.sh-status { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; flex-shrink: 0; }
+.sh-status-dot { width: 7px; height: 7px; border-radius: 50%; }
+.sh-status--up { color: #1baf7a; }
+.sh-status--up .sh-status-dot { background: #1baf7a; box-shadow: 0 0 0 3px #1baf7a22; }
+.sh-status--down { color: #dc2626; }
+.sh-status--down .sh-status-dot { background: #dc2626; box-shadow: 0 0 0 3px #dc262622; }
+
+.sh-card-error { font-size: 0.83rem; color: #dc2626; margin: 0; }
+
+.sh-info-list { display: flex; flex-direction: column; gap: 0.55rem; }
+.sh-info-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.sh-info-label { font-size: 0.8rem; color: var(--text-muted); }
+.sh-info-value { font-size: 0.82rem; font-weight: 700; color: var(--text-base); text-align: right; }
+.sh-info-block { display: flex; flex-direction: column; gap: 0.35rem; }
+
+.sh-progress-track { width: 100%; height: 6px; border-radius: 99px; background: var(--bg-page); overflow: hidden; }
+.sh-progress-fill { height: 100%; border-radius: 99px; background: linear-gradient(90deg, var(--color-primary), var(--color-primary-hover)); transition: width 0.3s; }
+.sh-progress-label { font-size: 0.72rem; color: var(--text-subtle); }
+
+.sh-maintenance { padding: 1.75rem; }
+.sh-maint-row {
+  display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
+  padding: 1rem 0; border-bottom: 1px solid var(--border-color);
+}
+.sh-maint-row:last-child { border-bottom: none; padding-bottom: 0; }
+.sh-maint-label { font-size: 0.87rem; font-weight: 600; color: var(--text-base); margin: 0 0 0.25rem; }
+.sh-maint-desc  { font-size: 0.78rem; color: var(--text-muted); margin: 0; max-width: 520px; line-height: 1.5; }
+
+.sh-btn {
+  display: flex; align-items: center; gap: 0.45rem; flex-shrink: 0;
+  padding: 0.65rem 1.3rem; border: none; border-radius: 10px;
+  font-size: 0.85rem; font-weight: 700; cursor: pointer; font-family: inherit;
+  transition: opacity 0.2s, transform 0.15s;
+}
+.sh-btn:hover:not(:disabled) { opacity: 0.9; transform: translateY(-1px); }
+.sh-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+.sh-btn-primary { background: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover)); color: #fff; box-shadow: 0 4px 12px rgba(37,99,235,.25); }
+.sh-btn-danger  { background: linear-gradient(135deg, #ef4444, #dc2626); color: #fff; box-shadow: 0 4px 12px rgba(220,38,38,.25); }
+.sh-btn-ghost   { background: var(--bg-page); color: var(--text-base); }
+
+.sh-btn-spin {
+  width: 13px; height: 13px; border: 2px solid rgba(255,255,255,.4);
+  border-top-color: white; border-radius: 50%; animation: sh-rotate 0.7s linear infinite; display: inline-block;
+}
+
+.sh-checked-at { text-align: center; font-size: 0.75rem; color: var(--text-subtle); margin-top: 1.25rem; }
+
+.sh-empty { padding: 4rem 2rem; text-align: center; color: var(--text-muted); font-size: 0.9rem; }
+
+/* ── Toast ── */
+.sh-toast {
+  position: fixed; top: 1.25rem; right: 1.25rem; z-index: 9999;
+  display: flex; align-items: center; gap: 0.75rem; justify-content: space-between;
+  padding: 0.85rem 1.25rem; border-radius: 12px; min-width: 260px; max-width: 420px;
+  font-size: 0.875rem; font-weight: 600; box-shadow: 0 8px 24px rgba(0,0,0,.12);
+  animation: sh-toast-in 0.3s cubic-bezier(.4,0,.2,1);
+}
+@keyframes sh-toast-in { from { opacity:0; transform: translateY(-12px); } to { opacity:1; transform: none; } }
+.sh-toast--success { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
+.sh-toast--error   { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+.sh-toast button    { background: none; border: none; cursor: pointer; color: inherit; font-size: 1rem; line-height: 1; padding: 0; }
+
+/* ── Confirm modal ── */
+.sh-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 9998;
+  display: flex; align-items: center; justify-content: center; padding: 1rem;
+}
+.sh-modal {
+  background: var(--bg-card); border-radius: 16px; padding: 1.75rem; max-width: 420px; width: 100%;
+  box-shadow: var(--shadow-lg);
+}
+.sh-modal-title { font-size: 1.05rem; font-weight: 700; color: var(--text-base); margin: 0 0 0.6rem; }
+.sh-modal-body  { font-size: 0.85rem; color: var(--text-muted); line-height: 1.55; margin: 0 0 1.5rem; }
+.sh-modal-actions { display: flex; justify-content: flex-end; gap: 0.75rem; }
+
+@media (max-width: 640px) {
+  .sh-maint-row { flex-direction: column; align-items: flex-start; }
+  .sh-btn { width: 100%; justify-content: center; }
+}
