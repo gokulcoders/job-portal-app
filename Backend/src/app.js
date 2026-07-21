@@ -9,6 +9,7 @@ import internshipRoutes from './modules/internship/internship.routes.js'
 import featuredPostsRoutes from './modules/featuredPosts/featuredPosts.routes.js'
 import notificationsRoutes from './modules/notifications/notifications.routes.js'
 import coursesRoutes from './modules/courses/courses.routes.js'
+import companiesRoutes from './modules/companies/companies.routes.js'
 import settingsRoutes from './modules/settings/settings.routes.js'
 import tenantsRoutes from './modules/tenants/tenants.routes.js'
 import billingRoutes from './modules/billing/billing.routes.js'
@@ -32,6 +33,7 @@ app.use('/api/internship-jobs', internshipRoutes)
 app.use('/api/featured-posts', featuredPostsRoutes)
 app.use('/api/notifications', notificationsRoutes)
 app.use('/api/courses', coursesRoutes)
+app.use('/api/companies', companiesRoutes)
 app.use('/api/admin/settings', settingsRoutes)
 app.use('/api/admin/tenants', tenantsRoutes)
 app.use('/api/admin/billing', billingRoutes)

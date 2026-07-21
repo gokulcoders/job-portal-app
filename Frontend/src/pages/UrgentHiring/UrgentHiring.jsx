@@ -108,7 +108,7 @@ export default function UrgentHiring() {
         )}
         {error ? (
           <div className="uh-empty"><p>{error}</p></div>
-        ) : (
+        ) : (!loading && total === 0 && featured.length > 0) ? null : (
           <>
             <div className="uh-results-head">
               <span className="uh-count-badge">{total}</span>

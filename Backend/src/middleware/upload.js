@@ -15,3 +15,17 @@ export const upload = multer({
   storage,
   limits: { fileSize: 5 * 1024 * 1024 },
 })
+
+const logoStorage = new CloudinaryStorage({
+  cloudinary,
+  params: {
+    folder: 'hireverse/companies',
+    allowed_formats: ['jpg', 'jpeg', 'png', 'webp'],
+    transformation: [{ width: 400, height: 400, crop: 'limit' }],
+  },
+})
+
+export const uploadCompanyLogo = multer({
+  storage: logoStorage,
+  limits: { fileSize: 5 * 1024 * 1024 },
+})

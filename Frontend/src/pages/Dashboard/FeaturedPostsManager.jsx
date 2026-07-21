@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
-import { fetchAdminFeaturedPosts, createFeaturedPost, deleteFeaturedPost } from '@services/api'
+import { fetchAdminFeaturedPosts, createFeaturedPost, deleteFeaturedPost, previewFeaturedPostLink } from '@services/api'
 import { PAGE_META } from '@components/jobs/FeaturedPostCard'
 import './FeaturedPostsManager.css'
 
@@ -74,7 +74,9 @@ export default function FeaturedPostsManager() {
   const [form,      setForm]      = useState(EMPTY_FORM)
   const [imageFile, setImageFile] = useState(null)
   const [preview,   setPreview]   = useState(null)
+  const [externalImageUrl, setExternalImageUrl] = useState(null)
   const [submitting, setSubmitting] = useState(false)
+  const [fetchingLink, setFetchingLink] = useState(false)
   const fileInputRef = useRef(null)
 
   const showToast = (msg, type = 'success') => setToast({ msg, type })
@@ -94,6 +96,7 @@ export default function FeaturedPostsManager() {
     const file = e.target.files?.[0]
     if (!file) return
     setImageFile(file)
+    setExternalImageUrl(null)
     setPreview(URL.createObjectURL(file))
   }
 
@@ -101,7 +104,39 @@ export default function FeaturedPostsManager() {
     setForm(f => ({ ...EMPTY_FORM, page: f.page }))
     setImageFile(null)
     setPreview(null)
+    setExternalImageUrl(null)
     if (fileInputRef.current) fileInputRef.current.value = ''
+  }
+
+  async function handleFetchLink() {
+    if (!form.link.trim()) {
+      showToast('Enter a link first', 'error')
+      return
+    }
+    setFetchingLink(true)
+    try {
+      const data = await previewFeaturedPostLink(form.link.trim())
+      setForm(f => ({
+        ...f,
+        title: data.title || f.title,
+        content: data.content || f.content,
+      }))
+      if (data.imageUrl) {
+        setImageFile(null)
+        if (fileInputRef.current) fileInputRef.current.value = ''
+        setExternalImageUrl(data.imageUrl)
+        setPreview(data.imageUrl)
+      }
+      if (!data.title && !data.content && !data.imageUrl) {
+        showToast("Couldn't find any details on that page — fill them in manually", 'error')
+      } else {
+        showToast('Fetched details from link')
+      }
+    } catch (err) {
+      showToast(err.response?.data?.message || "Couldn't fetch details from this link — please fill manually", 'error')
+    } finally {
+      setFetchingLink(false)
+    }
   }
 
   async function handleSubmit(e) {
@@ -119,6 +154,7 @@ export default function FeaturedPostsManager() {
       const fd = new FormData()
       Object.entries(form).forEach(([k, v]) => fd.append(k, v))
       if (imageFile) fd.append('image', imageFile)
+      else if (externalImageUrl) fd.append('externalImageUrl', externalImageUrl)
 
       const post = await createFeaturedPost(fd)
       setPosts(prev => [post, ...prev])
@@ -178,7 +214,10 @@ export default function FeaturedPostsManager() {
 
           <label className="uhm-dropzone" htmlFor="uhm-image-input">
             {preview ? (
-              <img src={preview} alt="Preview" className="uhm-dropzone-preview" />
+              <>
+                <img src={preview} alt="Preview" className="uhm-dropzone-preview" />
+                {externalImageUrl && <span className="uhm-dropzone-tag">Fetched from link</span>}
+              </>
             ) : (
               <div className="uhm-dropzone-empty">
                 <UploadIcon />
@@ -215,7 +254,13 @@ export default function FeaturedPostsManager() {
           <div className="uhm-field-row">
             <div className="uhm-field">
               <label className="uhm-label">Apply link *</label>
-              <input className="uhm-input" value={form.link} onChange={e => setForm(f => ({ ...f, link: e.target.value }))} placeholder="https://…" type="url" />
+              <div className="uhm-link-row">
+                <input className="uhm-input" value={form.link} onChange={e => setForm(f => ({ ...f, link: e.target.value }))} placeholder="https://…" type="url" />
+                <button type="button" className="uhm-btn uhm-btn-ghost uhm-btn-fetch" onClick={handleFetchLink} disabled={fetchingLink || !form.link.trim()}>
+                  {fetchingLink ? <span className="uhm-spin uhm-spin-dark" /> : 'Fetch'}
+                </button>
+              </div>
+              <span className="uhm-field-hint">Tries to auto-fill title/content/image from the link — works for most sites, but not LinkedIn</span>
             </div>
             <div className="uhm-field">
               <label className="uhm-label">Last date *</label>

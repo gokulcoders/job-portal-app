@@ -284,30 +284,33 @@ export default function Jobs() {
               </div>
             </div>
           )}
-          <div className="jb-results-head">
-            <span className="jb-results-count">
-              <span className="jb-results-count-badge">{total}</span>
-              position{total === 1 ? '' : 's'} found
-              {locationPill && <span className="jb-results-location"> in {LOCATIONS.find(l => l.value === locationPill)?.label}</span>}
-              {jobTypeFilter && <span className="jb-results-location"> · {JOB_TYPES.find(t => t.value === jobTypeFilter)?.label}</span>}
-            </span>
-          </div>
-
-          {error ? (
-            <div className="jb-empty">
-              <div className="jb-empty-icon">
-                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
-                </svg>
-              </div>
-              <p>{error}</p>
-            </div>
-          ) : (
+          {error || loading || total > 0 || featured.length === 0 ? (
             <>
-              <JobList jobs={jobs} loading={loading} />
-              {!loading && <Pagination page={page} pages={pages} onPageChange={setPage} />}
+              <div className="jb-results-head">
+                <span className="jb-results-count">
+                  <span className="jb-results-count-badge">{total}</span>
+                  position{total === 1 ? '' : 's'} found
+                  {locationPill && <span className="jb-results-location"> in {LOCATIONS.find(l => l.value === locationPill)?.label}</span>}
+                  {jobTypeFilter && <span className="jb-results-location"> · {JOB_TYPES.find(t => t.value === jobTypeFilter)?.label}</span>}
+                </span>
+              </div>
+              {error ? (
+                <div className="jb-empty">
+                  <div className="jb-empty-icon">
+                    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+                    </svg>
+                  </div>
+                  <p>{error}</p>
+                </div>
+              ) : (
+                <>
+                  <JobList jobs={jobs} loading={loading} />
+                  {!loading && <Pagination page={page} pages={pages} onPageChange={setPage} />}
+                </>
+              )}
             </>
-          )}
+          ) : null}
         </div>
       </section>
 

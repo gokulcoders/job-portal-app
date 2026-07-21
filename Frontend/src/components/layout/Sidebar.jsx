@@ -128,6 +128,7 @@ function buildNavSections(role) {
       items: [
         { id: 'featured-posts', label: 'Featured Posts', icon: IconMegaphone, path: '/dashboard/featured-posts' },
         { id: 'courses-manager', label: 'Courses',        icon: IconCourse,    path: '/dashboard/courses-manager' },
+        { id: 'companies-manager', label: 'Companies',    icon: IconCompany,   path: '/dashboard/companies-manager' },
         { id: 'billing',  label: 'Billing',       icon: IconBilling, path: '/dashboard/billing' },
         { id: 'tenants',  label: 'All Tenants',   icon: IconGlobe,   path: '/dashboard/tenants' },
         { id: 'sys-settings', label: 'System Settings', icon: IconShield, path: '/dashboard/system-settings' },

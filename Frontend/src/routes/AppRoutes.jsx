@@ -29,6 +29,7 @@ const Profile = lazy(() => import('@pages/Dashboard/Profile'))
 const Subscription = lazy(() => import('@pages/Dashboard/Subscription'))
 const FeaturedPostsManager = lazy(() => import('@pages/Dashboard/FeaturedPostsManager'))
 const CoursesManager = lazy(() => import('@pages/Dashboard/CoursesManager'))
+const CompaniesManager = lazy(() => import('@pages/Dashboard/CompaniesManager'))
 const CourseWatch = lazy(() => import('@pages/Courses/CourseWatch'))
 const Billing = lazy(() => import('@pages/Dashboard/Billing'))
 const Tenants = lazy(() => import('@pages/Dashboard/Tenants'))
@@ -112,6 +113,7 @@ export default function AppRoutes() {
         <Route path="/dashboard/analytics" element={<RequireAuth><RequireRole minRole="admin"><AppLayout><Analytics /></AppLayout></RequireRole></RequireAuth>} />
         <Route path="/dashboard/featured-posts" element={<RequireAuth><RequireRole minRole="super_admin"><AppLayout><FeaturedPostsManager /></AppLayout></RequireRole></RequireAuth>} />
         <Route path="/dashboard/courses-manager" element={<RequireAuth><RequireRole minRole="super_admin"><AppLayout><CoursesManager /></AppLayout></RequireRole></RequireAuth>} />
+        <Route path="/dashboard/companies-manager" element={<RequireAuth><RequireRole minRole="super_admin"><AppLayout><CompaniesManager /></AppLayout></RequireRole></RequireAuth>} />
         <Route path="/dashboard/billing" element={<RequireAuth><RequireRole minRole="super_admin"><AppLayout><Billing /></AppLayout></RequireRole></RequireAuth>} />
         <Route path="/dashboard/tenants" element={<RequireAuth><RequireRole minRole="super_admin"><AppLayout><Tenants /></AppLayout></RequireRole></RequireAuth>} />
         <Route path="/dashboard/system-settings" element={<RequireAuth><RequireRole minRole="super_admin"><AppLayout><SystemSettings /></AppLayout></RequireRole></RequireAuth>} />

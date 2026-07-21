@@ -30,6 +30,10 @@ export const ENDPOINTS = {
   COURSES:                '/api/courses',
   COURSES_ADMIN:          '/api/courses/admin',
 
+  // Companies
+  COMPANIES:              '/api/companies',
+  COMPANIES_ADMIN:        '/api/companies/admin',
+
   // Plan (self-service)
   UPDATE_PLAN:            '/auth/plan',
 

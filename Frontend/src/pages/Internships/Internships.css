@@ -110,6 +110,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 340px));
   justify-content: start;
+  align-items: start;
   gap: 1.25rem;
 }
 

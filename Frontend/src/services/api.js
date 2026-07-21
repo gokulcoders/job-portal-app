@@ -218,6 +218,11 @@ export async function fetchAdminFeaturedPosts() {
   return data.posts
 }
 
+export async function previewFeaturedPostLink(link) {
+  const { data } = await axiosInstance.post(`${ENDPOINTS.FEATURED_POSTS_ADMIN}/preview-link`, { link })
+  return data
+}
+
 export async function createFeaturedPost(formData) {
   const { data } = await axiosInstance.post(ENDPOINTS.FEATURED_POSTS_ADMIN, formData, {
     headers: { 'Content-Type': 'multipart/form-data' },
@@ -227,5 +232,45 @@ export async function createFeaturedPost(formData) {
 
 export async function deleteFeaturedPost(id) {
   const { data } = await axiosInstance.delete(`${ENDPOINTS.FEATURED_POSTS_ADMIN}/${id}`)
+  return data
+}
+
+// ── Companies (admin-managed directory) ─────────────────────────────────────
+export async function fetchCompanies(params) {
+  const { data } = await axiosInstance.get(ENDPOINTS.COMPANIES, { params })
+  return data.companies
+}
+
+export async function fetchAdminCompanies() {
+  const { data } = await axiosInstance.get(ENDPOINTS.COMPANIES_ADMIN)
+  return data.companies
+}
+
+export async function createCompany(formData) {
+  const { data } = await axiosInstance.post(ENDPOINTS.COMPANIES_ADMIN, formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  })
+  return data.company
+}
+
+export async function updateCompany(id, formData) {
+  const { data } = await axiosInstance.patch(`${ENDPOINTS.COMPANIES_ADMIN}/${id}`, formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  })
+  return data.company
+}
+
+export async function deleteCompany(id) {
+  const { data } = await axiosInstance.delete(`${ENDPOINTS.COMPANIES_ADMIN}/${id}`)
+  return data
+}
+
+export async function importCompanies(file, defaultIndustry) {
+  const fd = new FormData()
+  fd.append('file', file)
+  if (defaultIndustry) fd.append('defaultIndustry', defaultIndustry)
+  const { data } = await axiosInstance.post(`${ENDPOINTS.COMPANIES_ADMIN}/import`, fd, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  })
   return data
 }

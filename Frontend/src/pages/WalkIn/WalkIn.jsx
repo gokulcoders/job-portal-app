@@ -110,7 +110,7 @@ export default function WalkIn() {
         )}
         {error ? (
           <div className="wi-empty"><p>{error}</p></div>
-        ) : (
+        ) : (!loading && total === 0 && featured.length > 0) ? null : (
           <>
             <div className="wi-results-head">
               <span className="wi-count-badge">{total}</span>

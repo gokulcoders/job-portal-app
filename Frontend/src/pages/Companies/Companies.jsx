@@ -1,11 +1,7 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import { fetchCompanies } from '@services/api'
 import './Companies.css'
 
-const StarIcon = () => (
-  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M12 2l2.9 6.3 6.9.7-5.2 4.7 1.5 6.8L12 17l-6.1 3.5 1.5-6.8-5.2-4.7 6.9-.7z" />
-  </svg>
-)
 const PinIcon = () => (
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" />
@@ -21,34 +17,44 @@ const BuildingIcon = () => (
     <rect x="4" y="2" width="16" height="20" rx="1" /><line x1="9" y1="8" x2="9" y2="8" /><line x1="15" y1="8" x2="15" y2="8" /><line x1="9" y1="12" x2="9" y2="12" /><line x1="15" y1="12" x2="15" y2="12" /><line x1="9" y1="16" x2="15" y2="16" />
   </svg>
 )
-
-const INDUSTRIES = ['All', 'Tech', 'Finance', 'Healthcare', 'Retail', 'Media']
-
-const COMPANIES = [
-  { id: 1, name: 'Notion', industry: 'Tech', hq: 'San Francisco, US', size: '500-1000', rating: 4.7, openRoles: 24, remoteFriendly: true },
-  { id: 2, name: 'Stripe', industry: 'Finance', hq: 'Dublin, IE', size: '1000-5000', rating: 4.6, openRoles: 41, remoteFriendly: true },
-  { id: 3, name: 'Airbnb', industry: 'Tech', hq: 'San Francisco, US', size: '5000+', rating: 4.5, openRoles: 18, remoteFriendly: true },
-  { id: 4, name: 'Canva', industry: 'Tech', hq: 'Sydney, AU', size: '1000-5000', rating: 4.8, openRoles: 12, remoteFriendly: false },
-  { id: 5, name: 'Mayo Clinic', industry: 'Healthcare', hq: 'Rochester, US', size: '5000+', rating: 4.4, openRoles: 33, remoteFriendly: false },
-  { id: 6, name: 'Shopify', industry: 'Retail', hq: 'Ottawa, CA', size: '5000+', rating: 4.6, openRoles: 27, remoteFriendly: true },
-  { id: 7, name: 'Duolingo', industry: 'Media', hq: 'Pittsburgh, US', size: '500-1000', rating: 4.7, openRoles: 9, remoteFriendly: true },
-  { id: 8, name: 'Figma', industry: 'Tech', hq: 'San Francisco, US', size: '500-1000', rating: 4.9, openRoles: 15, remoteFriendly: true },
-]
+const ExternalIcon = () => (
+  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+    <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+  </svg>
+)
 
 export default function Companies() {
-  const [keyword, setKeyword] = useState('')
-  const [industry, setIndustry] = useState('All')
+  const [companies, setCompanies] = useState([])
+  const [loading,   setLoading]   = useState(true)
+  const [error,     setError]     = useState(null)
+  const [keyword,   setKeyword]   = useState('')
+  const [industry,  setIndustry]  = useState('All')
   const [remoteOnly, setRemoteOnly] = useState(false)
+
+  useEffect(() => {
+    setLoading(true)
+    setError(null)
+    fetchCompanies()
+      .then(setCompanies)
+      .catch(() => setError('Could not load companies.'))
+      .finally(() => setLoading(false))
+  }, [])
+
+  const industries = useMemo(() => {
+    const unique = [...new Set(companies.map(c => c.industry).filter(Boolean))].sort()
+    return ['All', ...unique]
+  }, [companies])
 
   const filtered = useMemo(() => {
     const kw = keyword.trim().toLowerCase()
-    return COMPANIES.filter((c) => {
+    return companies.filter((c) => {
       const matchesIndustry = industry === 'All' || c.industry === industry
-      const matchesKeyword = !kw || c.name.toLowerCase().includes(kw) || c.hq.toLowerCase().includes(kw)
+      const matchesKeyword = !kw || c.name.toLowerCase().includes(kw) || c.location?.toLowerCase().includes(kw)
       const matchesRemote = !remoteOnly || c.remoteFriendly
       return matchesIndustry && matchesKeyword && matchesRemote
     })
-  }, [keyword, industry, remoteOnly])
+  }, [companies, keyword, industry, remoteOnly])
 
   return (
     <div className="hv-root">
@@ -56,7 +62,7 @@ export default function Companies() {
       <section className="hv-page-hero">
         <div className="hv-page-hero-inner">
           <h1>Discover companies hiring right now.</h1>
-          <p>{COMPANIES.length}+ world-class companies with open roles on HireVerse.</p>
+          <p>{companies.length}+ companies with open roles on HireVerse.</p>
 
           <form className="hv-search cmp-search" onSubmit={(e) => e.preventDefault()}>
             <div className="hv-search-field">
@@ -67,18 +73,20 @@ export default function Companies() {
             </div>
           </form>
 
-          <div className="hv-popular">
-            {INDUSTRIES.map((i) => (
-              <button
-                key={i}
-                type="button"
-                className={industry === i ? 'hv-popular-active' : ''}
-                onClick={() => setIndustry(i)}
-              >
-                {i}
-              </button>
-            ))}
-          </div>
+          {industries.length > 1 && (
+            <div className="hv-popular">
+              {industries.map((i) => (
+                <button
+                  key={i}
+                  type="button"
+                  className={industry === i ? 'hv-popular-active' : ''}
+                  onClick={() => setIndustry(i)}
+                >
+                  {i}
+                </button>
+              ))}
+            </div>
+          )}
           <label className="cmp-remote-check">
             <input type="checkbox" checked={remoteOnly} onChange={(e) => setRemoteOnly(e.target.checked)} />
             Remote-friendly only
@@ -94,7 +102,16 @@ export default function Companies() {
           </div>
         </div>
 
-        {filtered.length === 0 ? (
+        {error ? (
+          <div className="cmp-empty">
+            <BuildingIcon />
+            <p>{error}</p>
+          </div>
+        ) : loading ? (
+          <div className="cmp-empty">
+            <p>Loading companies…</p>
+          </div>
+        ) : filtered.length === 0 ? (
           <div className="cmp-empty">
             <BuildingIcon />
             <p>No companies match your filters. Try widening your search.</p>
@@ -102,21 +119,34 @@ export default function Companies() {
         ) : (
           <div className="cmp-grid">
             {filtered.map((c) => (
-              <div className="cmp-card" key={c.id}>
+              <div className="cmp-card" key={c._id}>
                 <div className="cmp-top">
-                  <span className="cmp-avatar">{c.name[0]}</span>
+                  {c.logo ? (
+                    <img className="cmp-logo" src={c.logo} alt={c.name} />
+                  ) : (
+                    <span className="cmp-avatar">{c.name[0]}</span>
+                  )}
                   <div>
                     <h3>{c.name}</h3>
-                    <p className="cmp-meta"><PinIcon /> {c.hq}</p>
+                    {c.location && <p className="cmp-meta"><PinIcon /> {c.location}</p>}
                   </div>
                 </div>
+                {c.description && <p className="cmp-desc">{c.description}</p>}
                 <div className="cmp-info-row">
-                  <span><UsersIcon /> {c.size} employees</span>
-                  <span className="cmp-rating"><StarIcon /> {c.rating}</span>
+                  {c.size ? <span><UsersIcon /> {c.size} employees</span> : <span />}
+                  {c.remoteFriendly && <span className="cmp-remote-badge">Remote-friendly</span>}
                 </div>
                 <div className="cmp-footer">
-                  <span className="cmp-roles">{c.openRoles} open roles</span>
-                  <button type="button">View jobs</button>
+                  <span className="cmp-roles">{c.openRoles} open role{c.openRoles === 1 ? '' : 's'}</span>
+                  {c.website ? (
+                    <a className="cmp-visit-btn" href={c.website} target="_blank" rel="noopener noreferrer">
+                      Visit site <ExternalIcon />
+                    </a>
+                  ) : (
+                    <a className="cmp-visit-btn" href={`/jobs?q=${encodeURIComponent(c.name)}`}>
+                      View jobs
+                    </a>
+                  )}
                 </div>
               </div>
             ))}

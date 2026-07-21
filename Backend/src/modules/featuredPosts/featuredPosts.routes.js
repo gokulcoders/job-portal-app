@@ -11,6 +11,7 @@ router.get('/', featuredPostsController.listPublic)
 // Admin management — super_admin only
 router.get('/admin', requireAuth, requireRole('super_admin'), featuredPostsController.listAll)
 router.post('/admin', requireAuth, requireRole('super_admin'), upload.single('image'), featuredPostsController.create)
+router.post('/admin/preview-link', requireAuth, requireRole('super_admin'), featuredPostsController.previewLink)
 router.delete('/admin/:id', requireAuth, requireRole('super_admin'), featuredPostsController.remove)
 
 export default router

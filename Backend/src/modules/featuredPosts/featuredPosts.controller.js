@@ -2,6 +2,7 @@ import { asyncHandler } from '../../utils/asyncHandler.js'
 import { ApiError } from '../../utils/ApiError.js'
 import { FEATURED_PAGES } from '../../models/FeaturedPost.js'
 import * as featuredPostsService from './featuredPosts.service.js'
+import { fetchLinkPreview } from './linkPreview.js'
 
 export const listPublic = asyncHandler(async (req, res) => {
   const { page } = req.query
@@ -14,8 +15,17 @@ export const listAll = asyncHandler(async (req, res) => {
   res.json({ posts })
 })
 
+export const previewLink = asyncHandler(async (req, res) => {
+  const { link } = req.body
+  if (!link?.trim()) {
+    throw new ApiError(400, 'Link is required')
+  }
+  const preview = await fetchLinkPreview(link.trim())
+  res.json(preview)
+})
+
 export const create = asyncHandler(async (req, res) => {
-  const { page, title, company, place, lastDate, link, content } = req.body
+  const { page, title, company, place, lastDate, link, content, externalImageUrl } = req.body
   if (!title?.trim() || !link?.trim()) {
     throw new ApiError(400, 'Title and link are required')
   }
@@ -37,6 +47,7 @@ export const create = asyncHandler(async (req, res) => {
     content: content?.trim() || '',
     image: req.file?.path || '',
     imagePublicId: req.file?.filename || '',
+    externalImageUrl: !req.file ? externalImageUrl?.trim() || '' : '',
     createdBy: req.user.id,
   })
   res.status(201).json({ post })

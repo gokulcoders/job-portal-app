@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import './FeaturedPostCard.css'
 
 const BoltIcon = () => (
@@ -29,21 +30,33 @@ export const PAGE_META = {
   jobs:       { label: 'Featured',      from: '#2563eb', to: '#4f8ef7' },
 }
 
+// Content pulled from a fetched link can be arbitrarily long (hashtag blobs, full
+// post text) — clamp title/content by default so every card in the grid stays the
+// same height, and let the admin's actual text be read in full via "Read more"
+// without affecting the size of neighboring cards.
+const CONTENT_EXPAND_THRESHOLD = 140
+const TITLE_EXPAND_THRESHOLD = 70
+
 export default function FeaturedPostCard({ post }) {
   const meta = PAGE_META[post.page] || PAGE_META.jobs
   const gradient = `linear-gradient(135deg, ${meta.from}, ${meta.to})`
+  const [expanded, setExpanded] = useState(false)
+  const [imageFailed, setImageFailed] = useState(false)
+  const showImage = post.image && !imageFailed
+
+  const canExpand = (post.content?.length || 0) > CONTENT_EXPAND_THRESHOLD || (post.title?.length || 0) > TITLE_EXPAND_THRESHOLD
 
   return (
-    <article className="fp-card" style={{ '--fp-from': meta.from, '--fp-to': meta.to }}>
-      {post.image && (
+    <article className={`fp-card ${expanded ? 'fp-card--expanded' : ''}`} style={{ '--fp-from': meta.from, '--fp-to': meta.to }}>
+      {showImage && (
         <div className="fp-image-wrap">
-          <img className="fp-image" src={post.image} alt={post.title} />
+          <img className="fp-image" src={post.image} alt={post.title} onError={() => setImageFailed(true)} />
           <span className="fp-ribbon" style={{ background: gradient }}><BoltIcon /> {meta.label}</span>
         </div>
       )}
       <div className="fp-body">
-        {!post.image && <span className="fp-ribbon fp-ribbon-inline" style={{ background: gradient }}><BoltIcon /> {meta.label}</span>}
-        <h3 className="fp-title">{post.title}</h3>
+        {!showImage && <span className="fp-ribbon fp-ribbon-inline" style={{ background: gradient }}><BoltIcon /> {meta.label}</span>}
+        <h3 className={`fp-title ${expanded ? '' : 'fp-clamp-2'}`}>{post.title}</h3>
         {post.company && <p className="fp-company">{post.company}</p>}
 
         {(post.place || post.lastDate) && (
@@ -57,7 +70,13 @@ export default function FeaturedPostCard({ post }) {
           </div>
         )}
 
-        {post.content && <p className="fp-content">{post.content}</p>}
+        {post.content && <p className={`fp-content ${expanded ? '' : 'fp-clamp-3'}`}>{post.content}</p>}
+
+        {canExpand && (
+          <button type="button" className="fp-toggle" onClick={() => setExpanded(v => !v)}>
+            {expanded ? 'Show less' : 'Read more'}
+          </button>
+        )}
 
         <a className="fp-apply-btn" href={post.link} target="_blank" rel="noopener noreferrer" style={{ background: gradient }}>
           View / Apply <ExternalIcon />

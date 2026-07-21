@@ -21,7 +21,19 @@ export async function listAllPosts() {
   return FeaturedPost.find().sort({ createdAt: -1 }).lean()
 }
 
-export async function createPost({ page, title, company, place, lastDate, link, content, image, imagePublicId, createdBy }) {
+export async function createPost({ page, title, company, place, lastDate, link, content, image, imagePublicId, externalImageUrl, createdBy }) {
+  if (!image && externalImageUrl) {
+    try {
+      const uploaded = await cloudinary.uploader.upload(externalImageUrl, {
+        folder: 'hireverse/featured-posts',
+        transformation: [{ width: 1200, height: 630, crop: 'limit' }],
+      })
+      image = uploaded.secure_url
+      imagePublicId = uploaded.public_id
+    } catch (err) {
+      console.error('Failed to persist externally fetched image:', err.message)
+    }
+  }
   return FeaturedPost.create({ page, title, company, place, lastDate, link, content, image, imagePublicId, createdBy })
 }
 

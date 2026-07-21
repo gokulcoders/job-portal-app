@@ -107,7 +107,7 @@ export default function Internships() {
         )}
         {error ? (
           <div className="in-empty"><p>{error}</p></div>
-        ) : (
+        ) : (!loading && total === 0 && featured.length > 0) ? null : (
           <>
             <div className="in-results-head">
               <span className="in-count-badge">{total}</span>

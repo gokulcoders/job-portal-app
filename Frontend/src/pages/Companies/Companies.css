@@ -30,8 +30,14 @@
   display: flex; align-items: center; justify-content: center;
   background: linear-gradient(135deg, #a855f7, #ec4899); color: #fff; font-weight: 700; font-size: 1.2rem;
 }
+.cmp-logo { width: 48px; height: 48px; border-radius: 12px; flex-shrink: 0; object-fit: cover; background: #f5f4f7; }
 .cmp-top h3 { font-size: 1rem; font-weight: 700; margin: 0; }
 .cmp-meta { display: flex; align-items: center; gap: 0.3rem; font-size: 0.8rem; color: #9ca3af; margin: 0.2rem 0 0; }
+
+.cmp-desc {
+  font-size: 0.82rem; color: #6b7280; line-height: 1.5; margin: 0;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
 
 .cmp-info-row {
   display: flex; align-items: center; justify-content: space-between;
@@ -39,16 +45,20 @@
   padding: 0.9rem 0; border-top: 1px solid #f5f4f7; border-bottom: 1px solid #f5f4f7;
 }
 .cmp-info-row span { display: flex; align-items: center; gap: 0.35rem; }
-.cmp-rating { color: #18181b; font-weight: 700; }
-.cmp-rating svg { color: #f59e0b; }
+.cmp-remote-badge {
+  font-size: 0.7rem; font-weight: 700; color: #16a34a; background: #f0fdf4;
+  padding: 0.2rem 0.6rem; border-radius: 999px;
+}
 
 .cmp-footer { display: flex; align-items: center; justify-content: space-between; }
 .cmp-roles { font-size: 0.85rem; font-weight: 700; color: #18181b; }
-.cmp-footer button {
+.cmp-visit-btn {
+  display: inline-flex; align-items: center; gap: 0.35rem;
   border: 1px solid #e9d5ff; background: #fff; color: #9333ea;
   border-radius: 999px; padding: 0.4rem 1rem; font-size: 0.8rem; font-weight: 600;
+  text-decoration: none;
 }
-.cmp-footer button:hover { background: #f5e9ff; }
+.cmp-visit-btn:hover { background: #f5e9ff; }
 
 .cmp-empty {
   display: flex; flex-direction: column; align-items: center; justify-content: center;

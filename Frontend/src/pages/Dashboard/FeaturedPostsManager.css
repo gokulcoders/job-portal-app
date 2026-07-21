@@ -39,12 +39,16 @@
 
 /* Dropzone */
 .uhm-dropzone {
-  display: block; border: 1.5px dashed var(--border-color); border-radius: 12px;
+  display: block; position: relative; border: 1.5px dashed var(--border-color); border-radius: 12px;
   cursor: pointer; overflow: hidden; margin-bottom: 1.1rem; background: var(--bg-page);
   transition: border-color 0.15s;
 }
 .uhm-dropzone:hover { border-color: var(--color-primary); }
 .uhm-dropzone-preview { display: block; width: 100%; height: 160px; object-fit: cover; }
+.uhm-dropzone-tag {
+  position: absolute; bottom: 0.5rem; left: 0.5rem; background: rgba(0,0,0,0.65); color: #fff;
+  font-size: 0.68rem; font-weight: 700; padding: 0.2rem 0.55rem; border-radius: 99px;
+}
 .uhm-dropzone-empty {
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   gap: 0.4rem; padding: 2rem 1rem; color: var(--text-muted); font-size: 0.82rem; font-weight: 600;
@@ -83,10 +87,16 @@
 .uhm-btn-danger { background: #ef4444; color: #fff; }
 .uhm-btn-danger:hover { background: #dc2626; }
 
+.uhm-link-row { display: flex; gap: 0.5rem; }
+.uhm-link-row .uhm-input { flex: 1; }
+.uhm-btn-fetch { padding: 0.6rem 0.9rem; white-space: nowrap; flex-shrink: 0; }
+.uhm-btn-fetch:disabled { opacity: 0.6; cursor: not-allowed; }
+
 .uhm-spin {
   width: 14px; height: 14px; border: 2px solid rgba(255,255,255,.4);
   border-top-color: white; border-radius: 50%; animation: uhm-spin 0.7s linear infinite; display: inline-block;
 }
+.uhm-spin-dark { border-color: rgba(0,0,0,.2); border-top-color: var(--text-base); }
 @keyframes uhm-spin { to { transform: rotate(360deg); } }
 
 /* Post list */
