@@ -6,7 +6,7 @@ import { z } from 'zod'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { useStores } from '@hooks/useStores'
 import { toast } from 'sonner'
-import loginArt from '@/assets/images/login-art.png'
+import jobRoleLogo from '@/assets/images/jobrole_logo.png'
 import './Login.css'
 
 // ── Validation schema ────────────────────────────────────────────────
@@ -17,18 +17,7 @@ const schema = z.object({
 
 // ── SVG icons (inline, no extra dep) ─────────────────────────────────
 const LogoIcon = () => (
-  <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect width="44" height="44" rx="10" fill="#1a1a2e" />
-    <path
-      d="M22 10L30.66 15V25L22 30L13.34 25V15L22 10Z"
-      fill="white"
-      fillOpacity="0.15"
-      stroke="white"
-      strokeWidth="1.5"
-    />
-    <path d="M18 20L22 17L26 20L22 23L18 20Z" fill="white" />
-    <path d="M22 23V28" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-  </svg>
+  <img src={jobRoleLogo} alt="JobRole Logo" style={{ height: '60px', mixBlendMode: 'multiply', objectFit: 'contain' }} />
 )
 
 const EyeIcon = () => (
@@ -217,7 +206,7 @@ const Login = observer(() => {
       {/* ── Right panel ── */}
       <div className="login-right">
         <div className="login-art-card">
-          <img src={loginArt} alt="Abstract blue waves" className="login-art-img" />
+          <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1200&auto=format&fit=crop" alt="Professional working" className="login-art-img" />
         </div>
       </div>
     </div>

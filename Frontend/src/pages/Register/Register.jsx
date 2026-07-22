@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { Link, useNavigate } from 'react-router-dom'
 import { useStores } from '@hooks/useStores'
-import signupArt from '@/assets/images/signup-art.png'
+import jobRoleLogo from '@/assets/images/jobrole_logo.png'
 import './Register.css'
 
 const schema = z.object({
@@ -19,12 +19,7 @@ const schema = z.object({
 })
 
 const LogoIcon = () => (
-  <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
-    <rect width="44" height="44" rx="10" fill="#1a1a2e" />
-    <path d="M22 10L30.66 15V25L22 30L13.34 25V15L22 10Z" fill="white" fillOpacity="0.15" stroke="white" strokeWidth="1.5" />
-    <path d="M18 20L22 17L26 20L22 23L18 20Z" fill="white" />
-    <path d="M22 23V28" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-  </svg>
+  <img src={jobRoleLogo} alt="JobRole Logo" style={{ height: '60px', mixBlendMode: 'multiply', objectFit: 'contain' }} />
 )
 
 const EyeIcon = () => (
@@ -70,11 +65,11 @@ const Register = observer(() => {
       <div className="register-left">
         <div className="register-art-card">
           <div className="register-art-image-container">
-            <img src={signupArt} alt="Dashboard mockup" className="register-art-img" />
+            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1200&auto=format&fit=crop" alt="Team collaboration" className="register-art-img" />
           </div>
           <div className="register-art-content">
-            <h2>Professional Email Validation</h2>
-            <p>Validate millions of emails with industry-leading accuracy. Get started free with 100 credits.</p>
+            <h2>Find the Best Talent</h2>
+            <p>Discover top-tier candidates, manage your hiring pipeline, and accelerate your recruitment process with ease.</p>
           </div>
         </div>
       </div>
@@ -84,7 +79,7 @@ const Register = observer(() => {
         <div className="register-form-wrap">
           <div className="register-logo"><LogoIcon /></div>
           <h1 className="register-title">Create Account</h1>
-          <p className="register-subtitle">Start your free trial — 100 credits included</p>
+          <p className="register-subtitle">Join the ultimate job portal platform today.</p>
 
           {authStore.error && (
             <div className="login-error" role="alert">{authStore.error}</div>

@@ -119,3 +119,27 @@
   .in-hero h1 { font-size: 1.8rem; }
   .in-body { padding: 2rem 1rem 3rem; }
 }
+
+[data-mode="dark"] .in-hero {
+  background: linear-gradient(135deg, rgba(124,58,237,0.14) 0%, rgba(168,85,247,0.08) 100%);
+  border-color: rgba(139,92,246,0.35);
+}
+[data-mode="dark"] .in-hero::before {
+  background: radial-gradient(ellipse at 30% 20%, rgba(139,92,246,0.18) 0%, transparent 55%);
+}
+[data-mode="dark"] .in-badge {
+  background: rgba(139,92,246,0.15);
+  color: #a78bfa;
+  border-color: rgba(139,92,246,0.35);
+}
+[data-mode="dark"] .in-search-bar {
+  background: var(--bg-card);
+  border-color: rgba(139,92,246,0.35);
+}
+[data-mode="dark"] .in-search-field input::placeholder { color: var(--text-subtle); }
+[data-mode="dark"] .in-loc-pill {
+  background: var(--bg-card);
+  border-color: rgba(139,92,246,0.3);
+}
+[data-mode="dark"] .in-loc-pill:hover { border-color: #a78bfa; color: #a78bfa; }
+[data-mode="dark"] .in-empty { border-color: rgba(139,92,246,0.3); }

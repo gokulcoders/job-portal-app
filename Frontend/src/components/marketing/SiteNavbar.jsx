@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 import { useStores } from '@hooks/useStores'
 import { toast } from 'sonner'
+import jobRoleLogo from '../../assets/images/jobrole_logo.png'
 import './site.css'
 
 const NAV_LINKS = [
@@ -58,12 +59,8 @@ const SiteNavbar = observer(({ active }) => {
     <header className="hv-nav">
       <div className="hv-nav-inner">
         {/* Logo */}
-        <Link to="/" className="hv-logo" style={{ display: 'flex', alignItems: 'center', gap: '6px', textDecoration: 'none' }}>
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2a10 10 0 1 0 10 10H12V2z" fill="#111" />
-            <circle cx="8" cy="8" r="2" fill="#fff" />
-          </svg>
-          <span style={{ color: '#111', fontWeight: 800, fontSize: '1.3rem', letterSpacing: '-0.02em' }}>Quiety</span>
+        <Link to="/" className="hv-logo" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none' }}>
+          <img src={jobRoleLogo} alt="JobRole Logo" style={{ height: '44px', mixBlendMode: 'multiply', objectFit: 'contain' }} />
         </Link>
 
         {/* Desktop nav links */}

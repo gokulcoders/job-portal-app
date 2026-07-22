@@ -5,6 +5,7 @@ import { useStores } from '@hooks/useStores'
 import {
   IconUsers, IconBarChart, IconUserCircle, IconChevronDown, IconDot, IconLayoutGrid,
 } from '@components/icons'
+import jobRoleLogo from '../../assets/images/jobrole_logo.png'
 
 // ── Role-based nav config ─────────────────────────────────────────────────
 const IconShield = () => (
@@ -150,16 +151,11 @@ const ROLE_STYLE = {
 // ── Logo ──────────────────────────────────────────────────────────────────
 function SidebarLogo({ collapsed }) {
   return (
-    <div className="sidebar-logo">
-      <div className="sidebar-logo-icon">
-        <svg width="32" height="32" viewBox="0 0 44 44" fill="none">
-          <rect width="44" height="44" rx="10" fill="#1a1a2e" />
-          <path d="M22 10L30.66 15V25L22 30L13.34 25V15Z" fill="white" fillOpacity="0.15" stroke="white" strokeWidth="1.5" />
-          <path d="M18 20L22 17L26 20L22 23Z" fill="white" />
-          <path d="M22 23V28" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-        </svg>
+    <div className="sidebar-logo" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+      <div style={{ background: 'white', height: '36px', width: '36px', borderRadius: '6px', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <img src={jobRoleLogo} alt="JobRole Logo" style={{ height: '40px', mixBlendMode: 'multiply', objectFit: 'contain' }} />
       </div>
-      {!collapsed && <span className="sidebar-logo-text">HireVerse</span>}
+      {!collapsed && <span className="sidebar-logo-text" style={{ fontSize: '1.25rem', fontWeight: '800', letterSpacing: '-0.02em', color: '#fff' }}>JobRole</span>}
     </div>
   )
 }

@@ -169,3 +169,27 @@
   .uh-hero h1 { font-size: 1.8rem; }
   .uh-body { padding: 2rem 1rem 3rem; }
 }
+
+[data-mode="dark"] .uh-hero {
+  background: linear-gradient(135deg, rgba(239,68,68,0.14) 0%, rgba(249,115,22,0.08) 100%);
+  border-color: rgba(239,68,68,0.35);
+}
+[data-mode="dark"] .uh-hero::before {
+  background: radial-gradient(ellipse at 70% 30%, rgba(239,68,68,0.18) 0%, transparent 55%);
+}
+[data-mode="dark"] .uh-badge {
+  background: rgba(239,68,68,0.15);
+  color: #f87171;
+  border-color: rgba(239,68,68,0.35);
+}
+[data-mode="dark"] .uh-search-bar {
+  background: var(--bg-card);
+  border-color: rgba(239,68,68,0.35);
+}
+[data-mode="dark"] .uh-search-field input::placeholder { color: var(--text-subtle); }
+[data-mode="dark"] .uh-loc-pill {
+  background: var(--bg-card);
+  border-color: rgba(239,68,68,0.3);
+}
+[data-mode="dark"] .uh-loc-pill:hover { border-color: #f87171; color: #f87171; }
+[data-mode="dark"] .uh-empty { border-color: rgba(239,68,68,0.3); }

@@ -119,3 +119,27 @@
   .wi-hero h1 { font-size: 1.8rem; }
   .wi-body { padding: 2rem 1rem 3rem; }
 }
+
+[data-mode="dark"] .wi-hero {
+  background: linear-gradient(135deg, rgba(5,150,105,0.14) 0%, rgba(8,145,178,0.08) 100%);
+  border-color: rgba(16,185,129,0.35);
+}
+[data-mode="dark"] .wi-hero::before {
+  background: radial-gradient(ellipse at 80% 20%, rgba(16,185,129,0.18) 0%, transparent 55%);
+}
+[data-mode="dark"] .wi-badge {
+  background: rgba(16,185,129,0.15);
+  color: #34d399;
+  border-color: rgba(16,185,129,0.35);
+}
+[data-mode="dark"] .wi-search-bar {
+  background: var(--bg-card);
+  border-color: rgba(16,185,129,0.35);
+}
+[data-mode="dark"] .wi-search-field input::placeholder { color: var(--text-subtle); }
+[data-mode="dark"] .wi-loc-pill {
+  background: var(--bg-card);
+  border-color: rgba(16,185,129,0.3);
+}
+[data-mode="dark"] .wi-loc-pill:hover { border-color: #34d399; color: #34d399; }
+[data-mode="dark"] .wi-empty { border-color: rgba(16,185,129,0.3); }

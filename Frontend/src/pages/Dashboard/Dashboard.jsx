@@ -145,7 +145,7 @@ const Dashboard = observer(() => {
         <div className="dash-banner-text">
           <h1 className="dash-banner-title">{greeting}, {name}!</h1>
           <p className="dash-banner-sub">
-            Welcome to HireVerse — your launchpad for every career opportunity.
+            Welcome to JobRole — your launchpad for every career opportunity.
           </p>
         </div>
         <div className="dash-banner-art" aria-hidden="true">
