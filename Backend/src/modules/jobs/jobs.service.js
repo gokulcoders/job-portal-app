@@ -1,4 +1,10 @@
+import { exec } from 'child_process'
+import path from 'path'
+import { fileURLToPath } from 'url'
 import Job from '../../models/Job.js'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 function buildFilter({ q, keyword, company, place, jobType, source }) {
   const filter = {}
@@ -103,4 +109,51 @@ export async function cleanupOldJobs(hoursOld = 24) {
   const cutoff = new Date(Date.now() - hoursOld * 60 * 60 * 1000)
   const result = await Job.deleteMany({ updatedAt: { $lt: cutoff } })
   return result.deletedCount
+}
+
+export async function getScraperStats() {
+  const stats = await Job.aggregate([
+    { $group: { _id: "$source", count: { $sum: 1 } } }
+  ])
+
+  let formattedStats = { total: 0, linkedin: 0, naukri: 0, other: 0 }
+  stats.forEach(stat => {
+    formattedStats.total += stat.count;
+    if (stat._id === 'linkedin') formattedStats.linkedin = stat.count;
+    else if (stat._id === 'naukri') formattedStats.naukri = stat.count;
+    else formattedStats.other += stat.count;
+  })
+
+  return formattedStats
+}
+
+export async function clearScraperData(source) {
+  const filter = source && source !== 'all' ? { source } : {}
+  const result = await Job.deleteMany(filter)
+  return result.deletedCount
+}
+
+
+export async function triggerScraper(source) {
+  const backendRoot = path.resolve(__dirname, '../../../')
+  let scriptName = ''
+
+  if (source === 'linkedin') {
+    scriptName = 'scraper' // maps to `npm run scraper`
+  } else if (source === 'naukri') {
+    scriptName = 'naukri' // maps to `npm run naukri`
+  } else if (source === 'walkin') {
+    scriptName = 'walkin'
+  } else {
+    throw new Error('Invalid source')
+  }
+
+  // Run asynchronously without waiting
+  exec(`npm run ${scriptName}`, { cwd: backendRoot }, (error, stdout, stderr) => {
+    if (error) {
+      console.error(`Error running ${scriptName} scraper:`, error)
+    }
+  })
+
+  return { message: `Started scraping for ${source}` }
 }

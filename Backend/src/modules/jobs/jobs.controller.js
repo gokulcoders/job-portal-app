@@ -28,3 +28,17 @@ export const deleteJob = asyncHandler(async (req, res) => {
   if (!job) throw new ApiError(404, 'Job not found')
   res.json({ message: 'Job deleted successfully' })
 })
+
+export const getScraperStats = asyncHandler(async (req, res) => {
+  const stats = await jobsService.getScraperStats()
+  res.json(stats)
+})
+
+export const clearScraperData = asyncHandler(async (req, res) => {
+  const deletedCount = await jobsService.clearScraperData(req.query.source)
+  res.json({ message: `Successfully cleared ${deletedCount} jobs`, deletedCount })
+})
+export const triggerScraper = asyncHandler(async (req, res) => {
+  const result = await jobsService.triggerScraper(req.body.source)
+  res.json(result)
+})

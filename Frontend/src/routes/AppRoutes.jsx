@@ -35,6 +35,7 @@ const Billing = lazy(() => import('@pages/Dashboard/Billing'))
 const Tenants = lazy(() => import('@pages/Dashboard/Tenants'))
 const SystemSettings = lazy(() => import('@pages/Dashboard/SystemSettings'))
 const SystemHealth = lazy(() => import('@pages/Dashboard/SystemHealth'))
+const ScraperMonitor = lazy(() => import('@pages/Dashboard/ScraperMonitor'))
 const Analytics = lazy(() => import('@pages/Dashboard/Analytics'))
 const About = lazy(() => import('@pages/About/About'))
 const Pricing = lazy(() => import('@pages/Pricing/Pricing'))
@@ -118,6 +119,7 @@ export default function AppRoutes() {
         <Route path="/dashboard/tenants" element={<RequireAuth><RequireRole minRole="super_admin"><AppLayout><Tenants /></AppLayout></RequireRole></RequireAuth>} />
         <Route path="/dashboard/system-settings" element={<RequireAuth><RequireRole minRole="super_admin"><AppLayout><SystemSettings /></AppLayout></RequireRole></RequireAuth>} />
         <Route path="/dashboard/system-health" element={<RequireAuth><RequireRole minRole="super_admin"><AppLayout><SystemHealth /></AppLayout></RequireRole></RequireAuth>} />
+        <Route path="/dashboard/scraper" element={<RequireAuth><RequireRole minRole="super_admin"><AppLayout><ScraperMonitor /></AppLayout></RequireRole></RequireAuth>} />
 
         {/* ── Catch-all ── */}
         <Route path="*" element={<NotFound />} />
