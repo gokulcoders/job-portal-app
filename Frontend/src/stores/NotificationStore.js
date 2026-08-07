@@ -1,12 +1,12 @@
 import { makeAutoObservable, runInAction } from 'mobx'
 import { fetchMyNotifications, markNotificationRead, markAllNotificationsRead } from '@services/api'
 
-const POLL_INTERVAL_MS = 30000
+const POLL_INTERVAL_MS = 5 * 60 * 60 * 1000 // 5 hours
 
 class NotificationStore {
   notifications = []
-  unreadCount   = 0
-  loading       = false
+  unreadCount = 0
+  loading = false
 
   constructor() {
     makeAutoObservable(this)
@@ -29,7 +29,7 @@ class NotificationStore {
       const { notifications, unreadCount } = await fetchMyNotifications()
       runInAction(() => {
         this.notifications = notifications
-        this.unreadCount   = unreadCount
+        this.unreadCount = unreadCount
       })
     } catch { /* ignore — keep last known state */ } finally {
       runInAction(() => { this.loading = false })

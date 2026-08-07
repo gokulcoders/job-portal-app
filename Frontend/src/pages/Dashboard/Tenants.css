@@ -102,3 +102,12 @@
 @media (max-width: 700px) {
   .tn-table th:nth-child(5), .tn-table td:nth-child(5) { display: none; }
 }
+
+@media (max-width: 600px) {
+  .tn-root { padding: 1.5rem 1rem 3rem !important; }
+}
+
+@media (max-width: 600px) {
+  .tn-field-row { grid-template-columns: 1fr !important; }
+  .tn-grid { grid-template-columns: 1fr !important; }
+}

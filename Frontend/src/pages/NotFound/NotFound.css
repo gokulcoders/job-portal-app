@@ -221,3 +221,13 @@
     font-size: 2.8rem;
   }
 }
+
+@media (max-width: 600px) {
+  .notfound-root, .notfound-body, .notfound-container, .notfound-layout {
+    padding: 1.5rem 1rem 3rem !important;
+    grid-template-columns: 1fr !important;
+  }
+  .notfound-grid, .notfound-form-grid, .notfound-layout-grid {
+    grid-template-columns: 1fr !important;
+  }
+}

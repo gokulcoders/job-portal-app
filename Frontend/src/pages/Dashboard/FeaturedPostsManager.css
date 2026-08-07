@@ -153,3 +153,12 @@
 .uhm-toast--success { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
 .uhm-toast--error   { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
 .uhm-toast button    { background: none; border: none; cursor: pointer; color: inherit; font-size: 1rem; line-height: 1; padding: 0; }
+
+@media (max-width: 600px) {
+  .uhm-root { padding: 1.5rem 1rem 3rem !important; }
+}
+
+@media (max-width: 600px) {
+  .uhm-field-row { grid-template-columns: 1fr !important; }
+  .uhm-grid { grid-template-columns: 1fr !important; }
+}

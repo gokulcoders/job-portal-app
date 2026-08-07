@@ -120,3 +120,12 @@
 .crm-toast--success { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
 .crm-toast--error   { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
 .crm-toast button    { background: none; border: none; cursor: pointer; color: inherit; font-size: 1rem; line-height: 1; padding: 0; }
+
+@media (max-width: 600px) {
+  .crm-root { padding: 1.5rem 1rem 3rem !important; }
+}
+
+@media (max-width: 600px) {
+  .crm-field-row { grid-template-columns: 1fr !important; }
+  .crm-grid { grid-template-columns: 1fr !important; }
+}

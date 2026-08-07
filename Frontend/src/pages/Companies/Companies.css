@@ -74,3 +74,13 @@
 @media (max-width: 600px) {
   .cmp-grid { grid-template-columns: 1fr; }
 }
+
+@media (max-width: 600px) {
+  .hv-page-root, .hv-page-body, .hv-page-container, .hv-page-layout {
+    padding: 1.5rem 1rem 3rem !important;
+    grid-template-columns: 1fr !important;
+  }
+  .hv-page-grid, .hv-page-form-grid, .hv-page-layout-grid {
+    grid-template-columns: 1fr !important;
+  }
+}

@@ -193,3 +193,13 @@
 }
 [data-mode="dark"] .uh-loc-pill:hover { border-color: #f87171; color: #f87171; }
 [data-mode="dark"] .uh-empty { border-color: rgba(239,68,68,0.3); }
+
+@media (max-width: 600px) {
+  .uh-root, .uh-body, .uh-container, .uh-layout {
+    padding: 1.5rem 1rem 3rem !important;
+    grid-template-columns: 1fr !important;
+  }
+  .uh-grid, .uh-form-grid, .uh-layout-grid {
+    grid-template-columns: 1fr !important;
+  }
+}

@@ -110,3 +110,12 @@
   .sh-maint-row { flex-direction: column; align-items: flex-start; }
   .sh-btn { width: 100%; justify-content: center; }
 }
+
+@media (max-width: 600px) {
+  .sh-root { padding: 1.5rem 1rem 3rem !important; }
+}
+
+@media (max-width: 600px) {
+  .sh-field-row { grid-template-columns: 1fr !important; }
+  .sh-grid { grid-template-columns: 1fr !important; }
+}

@@ -62,3 +62,18 @@
 @keyframes bl-toast-in { from { opacity:0; transform: translateY(-12px); } to { opacity:1; transform: none; } }
 .bl-toast--success { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
 .bl-toast--error   { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+
+@media (max-width: 600px) {
+  .bl-root { padding: 1.5rem 1rem 3rem; }
+  .bl-table th:nth-child(3),
+  .bl-table td:nth-child(3) { display: none; }
+}
+
+@media (max-width: 600px) {
+  .bl-root { padding: 1.5rem 1rem 3rem !important; }
+}
+
+@media (max-width: 600px) {
+  .bl-field-row { grid-template-columns: 1fr !important; }
+  .bl-grid { grid-template-columns: 1fr !important; }
+}

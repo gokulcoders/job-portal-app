@@ -144,3 +144,12 @@
 .cpm-toast--success { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
 .cpm-toast--error   { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
 .cpm-toast button    { background: none; border: none; cursor: pointer; color: inherit; font-size: 1rem; line-height: 1; padding: 0; }
+
+@media (max-width: 600px) {
+  .cpm-root { padding: 1.5rem 1rem 3rem !important; }
+}
+
+@media (max-width: 600px) {
+  .cpm-field-row { grid-template-columns: 1fr !important; }
+  .cpm-grid { grid-template-columns: 1fr !important; }
+}

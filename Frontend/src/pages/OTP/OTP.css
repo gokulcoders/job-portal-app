@@ -277,3 +277,13 @@
     font-size: 1.25rem;
   }
 }
+
+@media (max-width: 600px) {
+  .otp-root, .otp-body, .otp-container, .otp-layout {
+    padding: 1.5rem 1rem 3rem !important;
+    grid-template-columns: 1fr !important;
+  }
+  .otp-grid, .otp-form-grid, .otp-layout-grid {
+    grid-template-columns: 1fr !important;
+  }
+}

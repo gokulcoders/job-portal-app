@@ -15,12 +15,12 @@ const LayersIcon = () => (
 )
 const CompassIcon = () => (
   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+    <circle cx="12" cy="12" r="10" /><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
   </svg>
 )
 const ArrowRightIcon = () => (
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-    <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+    <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
   </svg>
 )
 
@@ -36,11 +36,11 @@ function formatDuration(mins) {
 
 export default function Courses() {
   const navigate = useNavigate()
-  const [keyword, setKeyword]   = useState('')
+  const [keyword, setKeyword] = useState('')
   const [category, setCategory] = useState('All')
-  const [courses, setCourses]   = useState([])
-  const [loading, setLoading]   = useState(true)
-  const [error, setError]       = useState(null)
+  const [courses, setCourses] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
 
   useEffect(() => {
     setLoading(true)
@@ -129,7 +129,10 @@ export default function Courses() {
           <div className="crs-grid">
             {filtered.map((c) => (
               <div className="crs-card" key={c._id} onClick={() => navigate(`/courses/${c._id}`)}>
-                <div className="crs-thumb" style={{ backgroundImage: `url(https://img.youtube.com/vi/${c.youtubeId}/hqdefault.jpg)` }}>
+                <div className="crs-thumb" style={{
+                  backgroundImage: c.youtubeId ? `url(https://img.youtube.com/vi/${c.youtubeId}/hqdefault.jpg)` : 'none',
+                  background: !c.youtubeId ? 'linear-gradient(135deg, #a855f7, #ec4899)' : undefined
+                }}>
                   <span className="crs-level">{c.level}</span>
                 </div>
                 <div className="crs-body">

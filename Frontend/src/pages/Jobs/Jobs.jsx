@@ -8,101 +8,101 @@ import './Jobs.css'
 
 const SearchIcon = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+    <circle cx="11" cy="11" r="7" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
   </svg>
 )
 const PinIcon = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" />
   </svg>
 )
 const FilterIcon = () => (
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-    <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
+    <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
   </svg>
 )
 const SparkleIcon = () => (
   <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/>
+    <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z" />
   </svg>
 )
 const BriefcaseIcon = () => (
   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
+    <rect x="2" y="7" width="20" height="14" rx="2" /><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
   </svg>
 )
 const MapPinIcon = () => (
   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" />
   </svg>
 )
 const ResetIcon = () => (
   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/>
+    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" /><path d="M3 3v5h5" />
   </svg>
 )
 
-const SOURCES   = ['All', 'LinkedIn', 'Naukri']
-const KEYWORDS  = ['All', 'node', 'java', 'javascript', 'python', 'react', 'devops', 'android']
+const SOURCES = ['All', 'LinkedIn', 'Naukri']
+const KEYWORDS = ['All', 'node', 'java', 'javascript', 'python', 'react', 'devops', 'android']
 const JOB_TYPES = [
-  { label: 'All Jobs',       value: '' },
-  { label: 'Full-time',      value: 'fulltime' },
-  { label: 'Urgent Hiring',  value: 'urgent' },
-  { label: 'Walk-in',        value: 'walk-in' },
-  { label: 'Internship',     value: 'internship' },
+  { label: 'All Jobs', value: '' },
+  { label: 'Full-time', value: 'fulltime' },
+  { label: 'Urgent Hiring', value: 'urgent' },
+  { label: 'Walk-in', value: 'walk-in' },
+  { label: 'Internship', value: 'internship' },
 ]
 const LOCATIONS = [
   // Tamil Nadu
-  { label: 'Chennai',      value: 'chennai' },
-  { label: 'Coimbatore',   value: 'coimbatore' },
-  { label: 'Madurai',      value: 'madurai' },
-  { label: 'Trichy',       value: 'trichy' },
-  { label: 'Salem',        value: 'salem' },
+  { label: 'Chennai', value: 'chennai' },
+  { label: 'Coimbatore', value: 'coimbatore' },
+  { label: 'Madurai', value: 'madurai' },
+  { label: 'Trichy', value: 'trichy' },
+  { label: 'Salem', value: 'salem' },
   { label: 'Tirunelveli', value: 'tirunelveli' },
-  { label: 'Vellore',      value: 'vellore' },
-  { label: 'Erode',        value: 'erode' },
-  { label: 'Tiruppur',     value: 'tiruppur' },
-  { label: 'Pondicherry',  value: 'pondicherry' },
+  { label: 'Vellore', value: 'vellore' },
+  { label: 'Erode', value: 'erode' },
+  { label: 'Tiruppur', value: 'tiruppur' },
+  { label: 'Pondicherry', value: 'pondicherry' },
   // Karnataka
-  { label: 'Bangalore',    value: 'bangalore' },
-  { label: 'Mysore',       value: 'mysore' },
+  { label: 'Bangalore', value: 'bangalore' },
+  { label: 'Mysore', value: 'mysore' },
   // Andhra / Telangana
-  { label: 'Hyderabad',    value: 'hyderabad' },
+  { label: 'Hyderabad', value: 'hyderabad' },
   { label: 'Visakhapatnam', value: 'visakhapatnam' },
   // Maharashtra
-  { label: 'Mumbai',       value: 'mumbai' },
-  { label: 'Pune',         value: 'pune' },
+  { label: 'Mumbai', value: 'mumbai' },
+  { label: 'Pune', value: 'pune' },
   // Delhi NCR
-  { label: 'Delhi',        value: 'delhi' },
-  { label: 'Noida',        value: 'noida' },
-  { label: 'Gurgaon',      value: 'gurgaon' },
+  { label: 'Delhi', value: 'delhi' },
+  { label: 'Noida', value: 'noida' },
+  { label: 'Gurgaon', value: 'gurgaon' },
   // Others
-  { label: 'Kolkata',      value: 'kolkata' },
-  { label: 'Ahmedabad',    value: 'ahmedabad' },
-  { label: 'Kochi',        value: 'kochi' },
-  { label: 'Remote',       value: 'remote' },
+  { label: 'Kolkata', value: 'kolkata' },
+  { label: 'Ahmedabad', value: 'ahmedabad' },
+  { label: 'Kochi', value: 'kochi' },
+  { label: 'Remote', value: 'remote' },
 ]
 
 export default function Jobs() {
   const [searchParams] = useSearchParams()
 
-  const [keyword, setKeyword]           = useState(searchParams.get('q') || '')
-  const [location, setLocation]         = useState(searchParams.get('location') || '')
+  const [keyword, setKeyword] = useState(searchParams.get('q') || '')
+  const [location, setLocation] = useState(searchParams.get('location') || '')
   const [keywordFilter, setKeywordFilter] = useState('All')
-  const [sourceFilter, setSourceFilter]   = useState('All')
+  const [sourceFilter, setSourceFilter] = useState('All')
   const [jobTypeFilter, setJobTypeFilter] = useState('')
-  const [locationPill, setLocationPill]   = useState('')
-  const [page, setPage]                 = useState(Number(searchParams.get('page')) || 1)
+  const [locationPill, setLocationPill] = useState('')
+  const [page, setPage] = useState(Number(searchParams.get('page')) || 1)
 
-  const [jobs, setJobs]       = useState([])
-  const [total, setTotal]     = useState(0)
-  const [pages, setPages]     = useState(0)
+  const [jobs, setJobs] = useState([])
+  const [total, setTotal] = useState(0)
+  const [pages, setPages] = useState(0)
   const [loading, setLoading] = useState(true)
-  const [error, setError]     = useState(null)
+  const [error, setError] = useState(null)
   const [featured, setFeatured] = useState([])
 
   useEffect(() => {
-    fetchFeaturedPosts('jobs').then(setFeatured).catch(() => {})
+    fetchFeaturedPosts('jobs').then(setFeatured).catch(() => { })
   }, [])
 
   // Active filter count for reset badge
@@ -132,13 +132,13 @@ export default function Jobs() {
       setError(null)
       try {
         const params = { page, limit: 20, signal: controller.signal }
-        if (keyword)                    params.q       = keyword
-        if (keywordFilter !== 'All')    params.keyword = keywordFilter
-        if (sourceFilter !== 'All')     params.source  = sourceFilter.toLowerCase()
-        if (jobTypeFilter)              params.jobType = jobTypeFilter
+        if (keyword) params.q = keyword
+        if (keywordFilter !== 'All') params.keyword = keywordFilter
+        if (sourceFilter !== 'All') params.source = sourceFilter.toLowerCase()
+        if (jobTypeFilter) params.jobType = jobTypeFilter
         // location pill overrides the text input
-        if (locationPill)               params.place   = locationPill
-        else if (location)              params.place   = location
+        if (locationPill) params.place = locationPill
+        else if (location) params.place = location
         const data = await fetchJobs(params)
         setJobs(data.jobs)
         setTotal(data.total)
@@ -164,7 +164,7 @@ export default function Jobs() {
           </div>
           <h1>Find your <span>next role</span></h1>
           <p className="jb-hero-sub">
-            <strong>{total}</strong> position{total === 1 ? '' : 's'} updated daily from LinkedIn &amp; Naukri
+            <strong>{total + featured.length}</strong> position{(total + featured.length) === 1 ? '' : 's'} updated daily from LinkedIn &amp; Naukri
           </p>
 
           <div className="jb-search-wrap">
@@ -288,8 +288,8 @@ export default function Jobs() {
             <>
               <div className="jb-results-head">
                 <span className="jb-results-count">
-                  <span className="jb-results-count-badge">{total}</span>
-                  position{total === 1 ? '' : 's'} found
+                  <span className="jb-results-count-badge">{total + featured.length}</span>
+                  position{(total + featured.length) === 1 ? '' : 's'} found
                   {locationPill && <span className="jb-results-location"> in {LOCATIONS.find(l => l.value === locationPill)?.label}</span>}
                   {jobTypeFilter && <span className="jb-results-location"> · {JOB_TYPES.find(t => t.value === jobTypeFilter)?.label}</span>}
                 </span>
@@ -298,7 +298,7 @@ export default function Jobs() {
                 <div className="jb-empty">
                   <div className="jb-empty-icon">
                     <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+                      <circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" />
                     </svg>
                   </div>
                   <p>{error}</p>

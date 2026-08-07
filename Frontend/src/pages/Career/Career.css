@@ -31,3 +31,13 @@
   .crr-steps { grid-template-columns: 1fr; }
   .hv-why .crr-paths { grid-template-columns: 1fr; }
 }
+
+@media (max-width: 600px) {
+  .crr-path-root, .crr-path-body, .crr-path-container, .crr-path-layout {
+    padding: 1.5rem 1rem 3rem !important;
+    grid-template-columns: 1fr !important;
+  }
+  .crr-path-grid, .crr-path-form-grid, .crr-path-layout-grid {
+    grid-template-columns: 1fr !important;
+  }
+}

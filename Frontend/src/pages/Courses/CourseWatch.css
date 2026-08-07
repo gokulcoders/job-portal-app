@@ -47,3 +47,13 @@
   font-family: inherit; transition: all 0.15s;
 }
 .cw-side-btn:hover { border-color: var(--color-primary); color: var(--color-primary); }
+
+@media (max-width: 600px) {
+  .cw-root, .cw-body, .cw-container, .cw-layout {
+    padding: 1.5rem 1rem 3rem !important;
+    grid-template-columns: 1fr !important;
+  }
+  .cw-grid, .cw-form-grid, .cw-layout-grid {
+    grid-template-columns: 1fr !important;
+  }
+}

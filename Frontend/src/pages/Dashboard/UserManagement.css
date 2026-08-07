@@ -282,3 +282,12 @@
   .um-table td:nth-child(5) { display: none; }
   .um-root { padding: 1.5rem 1rem 3rem; }
 }
+
+@media (max-width: 600px) {
+  .um-root { padding: 1.5rem 1rem 3rem !important; }
+}
+
+@media (max-width: 600px) {
+  .um-field-row { grid-template-columns: 1fr !important; }
+  .um-grid { grid-template-columns: 1fr !important; }
+}

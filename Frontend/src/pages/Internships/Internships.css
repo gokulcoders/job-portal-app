@@ -143,3 +143,21 @@
 }
 [data-mode="dark"] .in-loc-pill:hover { border-color: #a78bfa; color: #a78bfa; }
 [data-mode="dark"] .in-empty { border-color: rgba(139,92,246,0.3); }
+
+@media (max-width: 600px) {
+  .in-root, .in-body, .in-container, .in-layout {
+    padding: 1.5rem 1rem 3rem !important;
+    grid-template-columns: 1fr !important;
+  }
+  .in-grid, .in-form-grid, .in-layout-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .in-featured-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0.65rem !important;
+    justify-content: stretch !important;
+  }
+}

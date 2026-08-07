@@ -231,3 +231,13 @@
     padding: 2rem 1.25rem;
   }
 }
+
+@media (max-width: 600px) {
+  .register-root, .register-body, .register-container, .register-layout {
+    padding: 1.5rem 1rem 3rem !important;
+    grid-template-columns: 1fr !important;
+  }
+  .register-grid, .register-form-grid, .register-layout-grid {
+    grid-template-columns: 1fr !important;
+  }
+}

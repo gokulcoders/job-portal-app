@@ -329,3 +329,21 @@
   .jb-search-btn { width: 100%; justify-content: center; padding: 1rem; }
 }
 
+
+@media (max-width: 600px) {
+  .jb-root, .jb-body, .jb-container, .jb-layout {
+    padding: 1.5rem 1rem 3rem !important;
+    grid-template-columns: 1fr !important;
+  }
+  .jb-grid, .jb-form-grid, .jb-layout-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .jb-featured-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0.65rem !important;
+    justify-content: stretch !important;
+  }
+}
